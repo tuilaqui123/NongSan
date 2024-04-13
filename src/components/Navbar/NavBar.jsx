@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import clsx from "clsx";
 import Button from "../ButtonComponent/NavButon";
 import logo from '../../assets/logo.png'
 import RouterButton from "../ButtonComponent/RouterButton";
+import { AppContext } from "../../Context/AppContext";
 
 const NavBar = () => {
+    const { setBreadcrumb } = useContext(AppContext)
     const [sideBar, setSideBar] = useState(true)
     function showSideBar() {
         setSideBar(!sideBar);
@@ -69,10 +71,10 @@ const NavBar = () => {
                                     <p className="text-lg font-normal text-white py-1 hover:text-[#7dc642]">Trang trại</p>
                                 </li>
                             </Button>
-                            <Button path={"/kien-thuc"} onClick={showSideBar}>
+                            <Button path={"/blog"} onClick={showSideBar}>
                                 <li className="flex items-center gap-3">
                                     <i class="fa-solid fa-book text-xl text-white py-1 group-hover:text-[#7dc642]"></i>
-                                    <p className="text-lg font-normal text-white py-1 hover:text-[#7dc642]">Kiến thức</p>
+                                    <p className="text-lg font-normal text-white py-1 hover:text-[#7dc642]">Blog</p>
                                 </li>
                             </Button>
                             <Button path={"/lien-he"} onClick={showSideBar}>
@@ -152,32 +154,32 @@ const NavBar = () => {
                     <ul className="w-full lg:w-8/12 md:w-10/12 flex justify-between">
                         <Button path={"/"}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 hover:text-[#7dc642]">Trang chủ</p>
+                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Trang chủ</p>
                             </li>
                         </Button>
                         <Button path={"/gioi-thieu"}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 hover:text-[#7dc642]">Giới thiệu</p>
+                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Giới thiệu</p>
                             </li>
                         </Button>
-                        <Button path={"/cua-hang"}>
+                        <Button path={"/cua-hang"} onClick={() => setBreadcrumb("")}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 hover:text-[#7dc642]">Cửa hàng</p>
+                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Cửa hàng</p>
                             </li>
                         </Button>
                         <Button path={"/trang-trai"}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 hover:text-[#7dc642]">Trang trại</p>
+                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Trang trại</p>
                             </li>
                         </Button>
-                        <Button path={"/kien-thuc"}>
+                        <Button path={"/blog"}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 hover:text-[#7dc642]">Kiến thức</p>
+                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Blog</p>
                             </li>
                         </Button>
                         <Button path={"/lien-he"}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 hover:text-[#7dc642]">Liên hệ</p>
+                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Liên hệ</p>
                             </li>
                         </Button>
                     </ul>

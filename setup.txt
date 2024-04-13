@@ -1,2 +1,9 @@
 [#7dc642]
 Motion Blur Portfolio Showcase
+form validate (quantity, input, selection)
+roll up button
+chatbox icon
+category responsive -> grid row 2 col 3 md
+tại sao chọn chúng tôi -> router giới thiệu
+
+text size and substring adjust bigblog

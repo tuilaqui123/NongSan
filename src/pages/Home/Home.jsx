@@ -14,10 +14,34 @@ const Home = () => {
             <HotDeal />
             <Category />
             <CategoryDisplay
+                mainColor={"red-500"}
+                themeColor={"red-100"}
+                itemColor={"red-800"}
+                title={"Thịt tươi"}
+            />
+            <CategoryDisplay
+                mainColor={"blue-500"}
+                themeColor={"blue-100"}
+                itemColor={"blue-800"}
+                title={"Hải sản"}
+            />
+            <CategoryDisplay
                 mainColor={"green-500"}
                 themeColor={"green-100"}
                 itemColor={"green-800"}
                 title={"Rau củ"}
+            />
+            <CategoryDisplay
+                mainColor={"orange-500"}
+                themeColor={"yellow-100"}
+                itemColor={"orange-800"}
+                title={"Trái cây"}
+            />
+            <CategoryDisplay
+                mainColor={"slate-500"}
+                themeColor={"gray-100"}
+                itemColor={"gray-800"}
+                title={"Gói nguyên liệu"}
             />
             <FarmContent />
             <RegisterRecomment />

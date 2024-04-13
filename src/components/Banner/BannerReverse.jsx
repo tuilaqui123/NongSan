@@ -1,30 +1,38 @@
 import React from "react";
 import cam from '../../assets/banner/cam.png'
 import bg1 from '../../assets/bg/bg1.jpg'
-import BigRouterButton from '../ButtonComponent/BigRouterButton'
+import StyleRouterButton from '../ButtonComponent/StyleRouterButton'
 
 const BannerReverse = () => {
     return (
         <div>
             <div
                 style={{ backgroundImage: `url(${bg1})`, backgroundSize: "cover" }}
-                className="w-full h-screen bg-black m-0 flex items-center"
+                className="w-full sm:h-screen h-[85vh] bg-black m-0 flex items-center "
             >
-                <div className="w-full h-auto flex flex-row-reverse items-center justify-evenly">
-                    <div className="w-2/5 h-full flex flex-col justify-center relative">
+                <div className="w-full sm:h-auto h-4/5 flex flex-row-reverse items-center sm:justify-evenly justify-start ">
+                    <div className="xl:w-2/5 lg:w-1/2 w-10/12 h-full flex flex-col justify-center relative ">
                         <div className=" p-5">
-                            <p className="text-2xl text-black font-medium pl-5 border-l-4 border-orange-500">Trái cây</p>
-                            <p className="text-[90px] font-bold my-5"><span className="block text-[60px] font-medium mb-[-30px]">Cam tươi</span> Hà Giang</p>
-                            <BigRouterButton>
-                                <p>XEM NGAY</p>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </BigRouterButton>
+                            <p className="md:text-2xl text-3xl text-black font-medium pl-5 border-l-4 border-orange-500">Trái cây</p>
+                            <p className="sm:text-[90px] text-[60px] font-bold my-5"><span className="block sm:text-[60px] text-[40px] font-medium mb-[-30px]">Cam tươi</span> Hà Giang</p>
+                            <StyleRouterButton
+                                px={4}
+                                py={5}
+                                width={"2/5"}
+                                topColor={"orange-500"}
+                                bottomColor={"[#7dc642]"}
+                                responsive={"sm:w-4/12 md:w-3/12 w-1/2"}
+                            >
+                                <div className="w-full flex flex-row items-center justify-evenly">
+                                    <p className="text-white md:text-sm lg:text-base font-medium pl-3">XEM NGAY</p>
+                                </div>
+                            </StyleRouterButton>
                         </div>
                     </div>
                     <img
                         src={cam}
                         alt="banner"
-                        className="w-2/5"
+                        className="w-2/5 hidden lg:block"
                     />
                 </div>
             </div>

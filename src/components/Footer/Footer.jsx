@@ -4,13 +4,13 @@ import Button from '../ButtonComponent/NavButon'
 
 const Footer = () => {
     return (
-        <div className="w-full h-auto bg-[#3e3e3e] flex flex-row p-3 gap-10 pb-24">
-            <div className="w-1/4">
+        <div className="w-full h-auto bg-[#3e3e3e] grid lg:grid-cols-6 lg:grid-rows-1 p-3 md:grid-rows-2 md:grid-cols-4 sm:grid-cols-2 grid-cols-2 grid-rows-3 gap-5 sm:gap-10 pb-24">
+            <div className="w-full col-span-2">
                 <div className="w-full h-1/3 mb-5 flex items-end">
                     <img
                         src={logo}
                         alt="logo"
-                        className="w-3/5"
+                        className="md:w-3/5 sm:w-1/3 w-1/2"
                     />
                 </div>
                 <ul className="flex flex-col gap-3">
@@ -34,8 +34,8 @@ const Footer = () => {
                     </Button>
                 </ul>
             </div>
-            <div className="w-1/5">
-                <div className="w-full h-1/3 mb-5 flex items-end">
+            <div className="w-full">
+                <div className="w-full sm:h-1/3 mb-5 flex items-end">
                     <p className="text-white text-2xl font-bold">Sản phẩm</p>
                 </div>
                 <ul className="flex flex-col gap-3">
@@ -74,8 +74,8 @@ const Footer = () => {
                     </Button>
                 </ul>
             </div>
-            <div className="w-1/5">
-                <div className="w-full h-1/3 mb-5 flex items-end">
+            <div className="w-full">
+                <div className="w-full sm:h-1/3 mb-5 flex items-end">
                     <p className="text-white text-2xl font-bold">Danh mục</p>
                 </div>
                 <ul className="flex flex-col gap-3">
@@ -123,7 +123,7 @@ const Footer = () => {
                     </Button>
                 </ul>
             </div>
-            <div className="w-1/4">
+            <div className="w-full col-span-2 ">
                 <div className="w-full h-1/3 mb-5 flex items-end">
                     <p className="text-white text-2xl font-bold">Đăng ký</p>
                 </div>
@@ -134,7 +134,7 @@ const Footer = () => {
                         placeholder="Email.."
                         className="w-3/5 h-9 rounded-lg pl-3 focus:ring-2 focus:outline-none focus:border-[#7dc642] focus:ring-[#7dc642]"
                     />
-                    <button className="relative w-1/3 h-9 flex items-center justify-start bg-[#3e3e3e] rounded-lg cursor-pointer border border-white group hover:border-none duration-700 ease-linear">
+                    <button className="relative md:w-1/3 w-1/5 h-9 flex items-center justify-start bg-[#3e3e3e] rounded-lg cursor-pointer border border-white group hover:border-none duration-700 ease-linear">
                         <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-300"></div>
                         <p className="text-sm text-center w-full text-white font-medium z-10">ĐĂNG KÝ</p>
                     </button>

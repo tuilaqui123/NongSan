@@ -12,6 +12,7 @@ const BigRouterButton = ({ onClick, children, path }) => {
                 <div className="absolute w-3/4 h-full bg-orange-500 rounded-[50px]  group-hover:w-full duration-200 "></div>
                 <div className="py-5 px-4  flex flex-row items-center justify-center gap-5 z-20 relative">
                     {children}
+                    <i class="fa-solid fa-arrow-right text-white"></i>
                 </div>
             </button>
         </Link>

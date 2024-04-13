@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const RouterButton = ({ onClick, children, path }) => {
+const RouterButton = ({ onclick, children, path }) => {
     return (
-        <Link to={path}>
+        <Link to={path} onClick={onclick = { onclick }}>
             <button
                 type="button"
-                onClick={onClick}
             >
                 {children}
             </button>
