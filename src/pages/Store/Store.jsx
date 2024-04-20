@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Item from '../../components/Item/Item';
 import CategorySelect from "./CategorySelect";
@@ -6,30 +6,41 @@ import AdvanceSelect from "./AdvanceSelect";
 import RecommentSelect from "./RecommentSelect";
 import PagePagination from "../../components/PagePagination/PagePagination";
 import { AppContext } from "../../Context/AppContext";
+import ResponsiveSelect from "./ResponsiveSelect";
 
 const Store = () => {
-
+    const [showSelect, setShowSelect] = useState(false)
     const { breadcrumb } = useContext(AppContext)
 
     return (
-        <div className="w-full h-auto flex flex-col items-center py-5 mb-20">
+        <div className="relative w-full h-auto flex flex-col items-center py-5 mb-20 ">
+            {showSelect && (
+                <ResponsiveSelect
+                    onclick={() => setShowSelect(!showSelect)}
+                />
+            )}
             <div className="w-11/12">
-                <div className="w-1/3 mb-5">
+                <div className="w-full mb-5 flex flex-row items-center justify-between">
                     <Breadcrumb
                         location={"Cửa hàng"}
                     />
-                </div>
-                <div className="w-full flex justify-end gap-5 mb-3">
-                    <div className="w-1/5"></div>
-                    <p className="text-lg font-bold w-4/5" >Kết quả tìm kiếm của <span className="text-[#7dc642]">"{breadcrumb}"</span></p>
+                    <button
+                        onClick={() => setShowSelect(!showSelect)}
+                        className="relative overflow-hidden h-[40px] lg:hidden  flex items-center justify-start border border-[#3e3e3e] hover:border-[#7dc642] rounded-xl cursor-pointer  group  "
+                    >
+                        <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-200"></div>
+                        <p className=" w-full group-hover:text-white font-medium z-10 mx-5">
+                            Lọc sản phẩm
+                        </p>
+                    </button>
                 </div>
                 <div className="w-full flex flex-row justify-between gap-5">
-                    <div className="w-1/5 flex flex-col gap-5">
+                    <div className="w-1/5 hidden lg:flex flex-col gap-5">
                         <CategorySelect />
                         <AdvanceSelect />
                         <RecommentSelect />
                     </div>
-                    <div className="w-4/5  grid grid-cols-4 gap-5 ">
+                    <div className="w-full lg:w-4/5 grid-cols-2 sm:grid-cols-3 grid md:grid-cols-4 gap-5 ">
                         <Item
                             itemColor={"green-800"}
                         />
@@ -80,7 +91,7 @@ const Store = () => {
                         />
                     </div>
                 </div>
-                <div className="w-full flex justify-end mt-10 px-10">
+                <div className="w-full flex justify-end mt-10">
                     <PagePagination />
                 </div>
             </div>

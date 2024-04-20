@@ -2,7 +2,7 @@ import React from "react";
 
 const CategoryOption = ({ img1, img2, content }) => {
     return (
-        <div className="w-full h-auto py-2 sm:py-5  md:px-0 flex flex-col items-center cursor-pointer rounded-lg group hover:bg-[#3e3e3e] sm:mt-15 md:mt-20 duration-200">
+        <div className="w-full h-auto py-2 sm:py-5 md:px-0 flex flex-col items-center cursor-pointer rounded-lg group hover:bg-[#3e3e3e] sm:mt-15 duration-200">
             <div className="md:w-1/2 sm:w-3/4 relative m-5">
                 <img
                     src={img1}

@@ -15,11 +15,13 @@ import Account from './pages/Account/Account';
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 import OrderReceived from './pages/OrderReceived/OrderReceived';
+import RollToTopButton from './components/ButtonComponent/RollToTopButton';
 function App() {
 
   return (
     <div className="relative">
       <AppProvider>
+        <RollToTopButton />
         <BrowserRouter>
           <NavBar />
           <Routes>
