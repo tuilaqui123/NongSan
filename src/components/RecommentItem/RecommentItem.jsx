@@ -11,7 +11,18 @@ const RecommentItem = () => {
             <p className="font-bold text-3xl">SẢN PHẨM LIÊN QUAN</p>
             <div className="mt-5">
                 <Swiper
-                    slidesPerView={5}
+                    slidesPerView={2}
+                    breakpoints={{
+                        640: {
+                            slidesPerView: 3,
+                        },
+                        768: {
+                            slidesPerView: 4,
+                        },
+                        1024: {
+                            slidesPerView: 5,
+                        },
+                    }}
                     spaceBetween={10}
                     loop={true}
                     className="mySwiper"
