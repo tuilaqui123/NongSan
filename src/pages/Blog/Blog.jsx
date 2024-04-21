@@ -6,7 +6,7 @@ import logo from '../../assets/logo.png'
 
 const Blog = () => {
     return (
-        <div className="w-full h-auto flex flex-col items-center py-5 mb-20 lg:bg-green-500 md:bg-red-500 sm:bg-blue-500 bg-purple-400">
+        <div className="w-full h-auto flex flex-col items-center py-5 mb-20">
             <div className="w-11/12">
                 <div className="w-2/3 mb-5">
                     <Breadcrumb
