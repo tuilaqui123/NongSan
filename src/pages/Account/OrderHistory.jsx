@@ -1,10 +1,17 @@
 import React from "react";
+import clsx from "clsx";
 import OrderBox from "./OrderBox";
 import '../../hiddenScroll.css'
 
-const OrderHistory = () => {
+const OrderHistory = ({ position, select }) => {
     return (
-        <div className="w-11/12">
+        <div
+            // className="w-11/12"
+            className={clsx({
+                "w-full lg:w-11/12": position == select,
+                "hidden": position !== select,
+            })}
+        >
             <p className="text-4xl font-bold">Lịch sử đơn hàng</p>
             <div className="relative h-[50px] w-full flex flex-row items-center mt-5">
                 <input
@@ -16,10 +23,10 @@ const OrderHistory = () => {
             </div>
             <div className="mt-5 h-full flex flex-col gap-3 ">
                 <div className="w-full grid grid-cols-4 pb-3  border-b border-gray-300">
-                    <p className="text-base font-bold justify-self-start">Mã đơn hàng</p>
-                    <p className="text-base font-bold justify-self-center">Ngày đặt hàng</p>
-                    <p className="text-base font-bold justify-self-center">Tổng tiền</p>
-                    <p className="text-base font-bold justify-self-end">Trạng thái</p>
+                    <p className="text-sm sm:text-base font-bold justify-self-start">Mã đơn hàng</p>
+                    <p className="text-sm sm:text-base font-bold justify-self-center">Ngày đặt hàng</p>
+                    <p className="text-sm sm:text-base font-bold justify-self-center">Tổng tiền</p>
+                    <p className="text-sm sm:text-base font-bold justify-self-end">Trạng thái</p>
                 </div>
                 <div className="w-full h-[50vh] flex flex-col gap-3 overflow-y-scroll scrollable-div">
                     <OrderBox />
