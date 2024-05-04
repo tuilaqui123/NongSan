@@ -38,7 +38,6 @@ const ItemComment = () => {
                         <i className="fa-solid fa-camera text-green-600 text-xl"></i>
                         <p className="text-green-600 font-medium">Thêm hình ảnh</p>
                     </label>
-
                 </div>
                 <div className="mt-2 flex flex-row w-full gap-5">
                     {images.map((image, index) => (

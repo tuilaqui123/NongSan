@@ -16,6 +16,10 @@ import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 import OrderReceived from './pages/OrderReceived/OrderReceived';
 import RollToTopButton from './components/ButtonComponent/RollToTopButton';
+import Login from './pages/Login/Login';
+import SignIn from './pages/Login/SignIn';
+import SignUp from './pages/Login/SignUp';
+import ForgotPassword from './pages/Login/ForgotPassword';
 function App() {
 
   return (
@@ -40,6 +44,11 @@ function App() {
               <Route path="/trang-trai" element={<Farm />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:name" element={<Blog />} />
+              <Route path='/dang-nhap' element={<Login />}>
+                <Route index element={<SignIn />} />
+                <Route path='dang-ky' element={<SignUp />} />
+                <Route path='quen-mat-khau' element={<ForgotPassword />} />
+              </Route>
             </Route>
           </Routes>
           <Footer />

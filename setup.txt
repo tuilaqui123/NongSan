@@ -9,3 +9,14 @@ text size and substring adjust bigblog
 redesign account 
 
 lg:bg-green-500 md:bg-red-500 sm:bg-blue-500 bg-purple-400
+
+use em for text ?
+
+////////////// !important
+set breadcrumb (use context)
+
+remake button 
+
+seperate page and component
+
+re-router (app.jsx)

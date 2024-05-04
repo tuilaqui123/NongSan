@@ -13,7 +13,7 @@ const NavBar = () => {
     }
     return (
         <div className="w-full relative">
-            <div className={clsx("fixed w-full h-screen z-30 flex flex-row", { 'hidden': sideBar })}>
+            <div className={clsx("fixed sm:hidden w-full h-screen z-30 flex flex-row", { 'hidden': sideBar })}>
                 <div className="w-3/5 bg-[#3e3e3e] h-full p-3 z-30 flex flex-row-reverse gap-5">
                     <div onClick={showSideBar}>
                         <i class="fa-solid fa-square-xmark h-auto text-4xl text-white cursor-pointer hover:text-[#ff0000] duration-200"></i>
