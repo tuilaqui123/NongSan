@@ -1,18 +1,13 @@
 [#7dc642]
-Motion Blur Portfolio Showcase
-form validate (quantity, input, selection)
-chatbox icon
 tại sao chọn chúng tôi -> router giới thiệu
 
 text size and substring adjust bigblog
-
-redesign account 
 
 lg:bg-green-500 md:bg-red-500 sm:bg-blue-500 bg-purple-400
 
 use em for text ?
 
-////////////// !important
+=========== !important ===========
 set breadcrumb (use context)
 
 remake button 
@@ -20,3 +15,13 @@ remake button
 seperate page and component
 
 re-router (app.jsx)
+
+Motion Blur Portfolio Showcase - banner
+
+redesign account 
+
+chatbox icon
+
+skeleto loading / lazy loading
+
+form validate (quantity, input, selection)

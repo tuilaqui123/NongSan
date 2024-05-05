@@ -69,7 +69,7 @@ const ItemDetails = () => {
                                     <p className="text-lg w-full text-[#3e3e3e] group-hover:text-white duration-150 font-bold z-10">Thêm vào giỏ</p>
                                 </button>
 
-                                <div className="w-1/3 h[60px] flex items-center relative">
+                                <div className="w-1/3 h[60px] flex items-center relative hidden">
                                     <i class="fa-regular fa-heart text-3xl cursor-pointer hover:text-[#fc0307]"></i>
                                     <i class="fa-solid fa-heart absolute text-3xl cursor-pointer text-[#fc0307] hidden"></i>
                                 </div>

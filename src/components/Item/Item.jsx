@@ -34,7 +34,7 @@ const Item = ({ itemColor }) => {
                             <p className="text-xl font-bold text-[#3e3e3e] group-hover:text-white duration-100">40.000đ</p>
                             <p className="line-through text-gray-400 text-base font-medium group-hover:text-white">100.000đ</p>
                         </div>
-                        <div className="relative flex flex-row items-center justify-center cursor-pointer">
+                        <div className="relative flex flex-row items-center justify-center cursor-pointer hidden">
                             <i class="fa-regular fa-heart text-2xl text-[#ff0000]"></i>
                             <i class="fa-solid fa-heart absolute text-2xl text-[#ff0000] hidden"></i>
                         </div>
