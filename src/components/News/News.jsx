@@ -1,6 +1,7 @@
 import React from "react";
 import NewsBox from "./NewsBox";
 import StyleRouterButton from "../ButtonComponent/StyleRouterButton";
+import BigBlog from "../../pages/Blog/BigBlog";
 
 const News = () => {
     return (
@@ -27,24 +28,10 @@ const News = () => {
                     </div>
                 </div>
                 <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-7">
-                    <NewsBox
-                        title={"Chả cốm ăn với gì ngon?"}
-                        date={"16/05/2021"}
-                        author={"Nguyễn Thiện Nhân"}
-                        preText={"Lorem ipsum dolor sit amet, Lor r sit amet,  r sit amet,  r sit amet,  r sit amet,  r sit amet,  em ipsum dolor sit amet, ing elit ..."}
-                    />
-                    <NewsBox
-                        title={"Chả cốm ăn với gì ngon?"}
-                        date={"16/05/2021"}
-                        author={"Nguyễn Thiện Nhân"}
-                        preText={"Lorem ipsum dolor sit amet, Lor r sit amet,  r sit amet,  r sit amet,  r sit amet,  r sit amet,  em ipsum dolor sit amet, ing elit ..."}
-                    />
-                    <NewsBox
-                        title={"Chả cốm ăn với gì ngon?"}
-                        date={"16/05/2021"}
-                        author={"Nguyễn Thiện Nhân"}
-                        preText={"Lorem ipsum dolor sit amet, Lor r sit amet,  r sit amet,  r sit amet,  r sit amet,  r sit amet,  em ipsum dolor sit amet, ing elit ..."}
-                    />
+                    <BigBlog />
+                    <BigBlog />
+                    <BigBlog />
+
                 </div>
 
             </div>

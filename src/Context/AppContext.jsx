@@ -1,10 +1,18 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export const AppContext = createContext({});
 
 export const AppProvider = ({ children }) => {
 
-    const [breadcrumb, setBreadcrumb] = useState("")
+    const params = useParams()
+
+    const [breadcrumb, setBreadcrumb] = useState({
+        main: "",
+        second: "",
+        child: 0,
+    })
+
 
 
     return <AppContext.Provider value={{

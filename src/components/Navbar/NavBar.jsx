@@ -4,18 +4,32 @@ import Button from "../ButtonComponent/NavButon";
 import logo from '../../assets/logo.png'
 import RouterButton from "../ButtonComponent/RouterButton";
 import { AppContext } from "../../Context/AppContext";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
-    const { setBreadcrumb } = useContext(AppContext)
+    const { breadcrumb, setBreadcrumb } = useContext(AppContext)
     const [sideBar, setSideBar] = useState(true)
-    function showSideBar() {
+    function showSideBar(main, child) {
+        const temp = {
+            main: main,
+            child: child
+        }
+        setBreadcrumb(temp)
         setSideBar(!sideBar);
+    }
+    function updateBreadcrumb(main, second, child) {
+        const temp = {
+            main: main,
+            second: second,
+            child: child
+        }
+        setBreadcrumb(temp)
     }
     return (
         <div className="w-full relative">
             <div className={clsx("fixed sm:hidden w-full h-screen z-30 flex flex-row", { 'hidden': sideBar })}>
                 <div className="w-3/5 bg-[#3e3e3e] h-full p-3 z-30 flex flex-row-reverse gap-5">
-                    <div onClick={showSideBar}>
+                    <div onClick={() => setSideBar(true)}>
                         <i class="fa-solid fa-square-xmark h-auto text-4xl text-white cursor-pointer hover:text-[#ff0000] duration-200"></i>
                     </div>
                     <div className="w-full h-full flex flex-col items-start gap-5">
@@ -47,40 +61,112 @@ const NavBar = () => {
                         </div>
 
                         <ul className="w-full gap-5 lg:w-8/12 md:w-10/12 flex flex-col justify-between">
-                            <Button path={"/"} onClick={showSideBar}>
+                            <Button path={"/"} onClick={() => showSideBar("Trang chủ", 1)}>
                                 <li className="flex items-center gap-3">
-                                    <i class="fa-solid fa-house text-xl text-white py-1 group-hover:text-[#7dc642]"></i>
-                                    <p className="text-lg font-normal text-white py-1 hover:text-[#7dc642]">Trang chủ</p>
+                                    <i
+                                        // class="fa-solid fa-house text-xl text-white py-1 group-hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "fa-solid fa-house text-xl text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 1,
+                                            "fa-solid fa-house text-xl py-1 text-[#7dc642]": breadcrumb.child == 1,
+                                        })}
+                                    ></i>
+                                    <p
+                                        // className="text-lg font-normal text-white py-1 hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 1,
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 1
+                                        })}
+                                    >Trang chủ</p>
                                 </li>
                             </Button>
-                            <Button path={"/gioi-thieu"} onClick={showSideBar}>
+                            <Button path={"/gioi-thieu"} onClick={() => showSideBar("Giới thiệu", 2)}>
                                 <li className="flex items-center gap-3">
-                                    <i class="fa-solid fa-comment text-xl text-white py-1 group-hover:text-[#7dc642]"></i>
-                                    <p className="text-lg font-normal text-white py-1 hover:text-[#7dc642]">Giới thiệu</p>
+                                    <i
+                                        // class="fa-solid fa-house text-xl text-white py-1 group-hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "fa-solid fa-comment text-xl text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 2,
+                                            "fa-solid fa-comment text-xl py-1 text-[#7dc642]": breadcrumb.child == 2,
+                                        })}
+                                    ></i>
+                                    <p
+                                        // className="text-lg font-normal text-white py-1 hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 2,
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 2
+                                        })}
+                                    >Giới thiệu</p>
                                 </li>
                             </Button>
-                            <Button path={"/cua-hang"} onClick={showSideBar}>
+                            <Button path={"/cua-hang"} onClick={() => showSideBar("Cửa hàng", 1)}>
                                 <li className="flex items-center gap-3">
-                                    <i class="fa-solid fa-store text-xl text-white py-1 group-hover:text-[#7dc642]"></i>
-                                    <p className="text-lg font-normal text-white py-1 hover:text-[#7dc642]">Cửa hàng</p>
+                                    <i
+                                        // class="fa-solid fa-house text-xl text-white py-1 group-hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "fa-solid fa-store text-xl text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 3,
+                                            "fa-solid fa-store text-xl py-1 text-[#7dc642]": breadcrumb.child == 3,
+                                        })}
+                                    ></i>
+                                    <p
+                                        // className="text-lg font-normal text-white py-1 hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 3,
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 3
+                                        })}
+                                    >Cửa hàng</p>
                                 </li>
                             </Button>
-                            <Button path={"/trang-trai"} onClick={showSideBar}>
+                            <Button path={"/trang-trai"} onClick={() => showSideBar("Trang trại", 4)}>
                                 <li className="flex items-center gap-3">
-                                    <i class="fa-solid fa-tractor text-xl text-white py-1 group-hover:text-[#7dc642]"></i>
-                                    <p className="text-lg font-normal text-white py-1 hover:text-[#7dc642]">Trang trại</p>
+                                    <i
+                                        // class="fa-solid fa-house text-xl text-white py-1 group-hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "fa-solid fa-tractor text-xl text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 4,
+                                            "fa-solid fa-tractor text-xl py-1 text-[#7dc642]": breadcrumb.child == 4,
+                                        })}
+                                    ></i>
+                                    <p
+                                        // className="text-lg font-normal text-white py-1 hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 4,
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 4
+                                        })}
+                                    >Trang trại</p>
                                 </li>
                             </Button>
-                            <Button path={"/blog"} onClick={showSideBar}>
+                            <Button path={"/blog"} onClick={() => showSideBar("Blog", 5)}>
                                 <li className="flex items-center gap-3">
-                                    <i class="fa-solid fa-book text-xl text-white py-1 group-hover:text-[#7dc642]"></i>
-                                    <p className="text-lg font-normal text-white py-1 hover:text-[#7dc642]">Blog</p>
+                                    <i
+                                        // class="fa-solid fa-house text-xl text-white py-1 group-hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "fa-solid fa-book text-xl text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 5,
+                                            "fa-solid fa-book text-xl py-1 text-[#7dc642]": breadcrumb.child == 5,
+                                        })}
+                                    ></i>
+                                    <p
+                                        // className="text-lg font-normal text-white py-1 hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 5,
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 5
+                                        })}
+                                    >Blog</p>
                                 </li>
                             </Button>
-                            <Button path={"/lien-he"} onClick={showSideBar}>
+                            <Button path={"/lien-he"} onClick={() => showSideBar("Liên hệ", 6)}>
                                 <li className="flex items-center gap-3">
-                                    <i class="fa-solid fa-phone text-xl text-white py-1 group-hover:text-[#7dc642]"></i>
-                                    <p className="text-lg font-normal text-white py-1 hover:text-[#7dc642]">Liên hệ</p>
+                                    <i
+                                        // class="fa-solid fa-house text-xl text-white py-1 group-hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "fa-solid fa-phone text-xl text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 6,
+                                            "fa-solid fa-phone text-xl py-1 text-[#7dc642]": breadcrumb.child == 6,
+                                        })}
+                                    ></i>
+                                    <p
+                                        // className="text-lg font-normal text-white py-1 hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 6,
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 6
+                                        })}
+                                    >Liên hệ</p>
                                 </li>
                             </Button>
                         </ul>
@@ -91,7 +177,7 @@ const NavBar = () => {
 
             <div className="w-full py-3 pt-5 px-3 sm:px-5 flex flex-col md:flex-row  items-center justify-between bg-[#3e3e3e]">
                 <div className="w-full sm:w-2/5 md:w-1/5 flex items-center justify-between sm:justify-center">
-                    <i class="fa-solid fa-bars text-white text-3xl sm:hidden cursor-pointer" onClick={showSideBar}></i>
+                    <i class="fa-solid fa-bars text-white text-3xl sm:hidden cursor-pointer" onClick={() => setSideBar(!sideBar)}></i>
                     <img
                         src={logo}
                         alt="logo"
@@ -151,35 +237,100 @@ const NavBar = () => {
                             </RouterButton>
                         </div>
                     </div>
-                    <ul className="w-full lg:w-8/12 md:w-10/12 flex justify-between">
-                        <Button path={"/"}>
+                    <ul className="w-full lg:w-8/12 md:w-10/12 flex items-center justify-between">
+                        <Button path={"/trang-chu"} onClick={() => updateBreadcrumb("Trang chủ", "", 1)}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Trang chủ</p>
+                                <p
+                                    // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
+                                    className={clsx({
+                                        "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 1,
+                                        "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 1
+                                    })}
+                                >Trang chủ</p>
                             </li>
                         </Button>
-                        <Button path={"/gioi-thieu"}>
+                        <Button path={"/gioi-thieu"} onClick={() => updateBreadcrumb("Giới thiệu", "", 2)}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Giới thiệu</p>
+                                <p
+                                    // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
+                                    className={clsx({
+                                        "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 2,
+                                        "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 2
+                                    })}
+                                >Giới thiệu</p>
                             </li>
                         </Button>
-                        <Button path={"/cua-hang"} onClick={() => setBreadcrumb("")}>
+                        <div className="relative group duration-150">
+                            <Button path={"/cua-hang"} onClick={() => updateBreadcrumb("Cửa hàng", "", 3)}>
+                                <li>
+                                    <p
+                                        // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
+                                        className={clsx({
+                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 3,
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 3
+                                        })}
+                                    >Cửa hàng</p>
+                                </li>
+                            </Button>
+                            <div className="absolute hidden duration-200 group-hover:flex flex-col rounded-lg gap-3 w-[230px] px-3 z-10 bg-[#3e3e3e] pb-3 pt-5 shadow-xl">
+                                <Link
+                                    to={"/cua-hang/thit-tuoi"} onClick={() => updateBreadcrumb("Cửa hàng", "Thịt tươi", 3)}
+                                >
+                                    <p className="w-full border border-transparent rounded-md hover:border-[#7dc642] px-1 text-center text-lg py-2 font-bold text-white hover:text-[#7dc642] duration-150 cursor-pointer">Thịt tươi</p>
+                                </Link>
+                                <Link
+                                    to={"/cua-hang/hai-san"} onClick={() => updateBreadcrumb("Cửa hàng", "Hải sản", 3)}
+                                >
+                                    <p className="w-full border border-transparent rounded-md hover:border-[#7dc642] px-1 text-center text-lg py-2 font-bold text-white hover:text-[#7dc642] duration-150 cursor-pointer">Hải sản</p>
+                                </Link>
+                                <Link
+                                    to={"/cua-hang/rau-cu"} onClick={() => updateBreadcrumb("Cửa hàng", "Rau củ", 3)}
+                                >
+                                    <p className="w-full border border-transparent rounded-md hover:border-[#7dc642] px-1 text-center text-lg py-2 font-bold text-white hover:text-[#7dc642] duration-150 cursor-pointer">Rau củ</p>
+                                </Link>
+                                <Link
+                                    to={"/cua-hang/trai-cay"} onClick={() => updateBreadcrumb("Cửa hàng", "Trái cây", 3)}
+                                >
+                                    <p className="w-full border border-transparent rounded-md hover:border-[#7dc642] px-1 text-center text-lg py-2 font-bold text-white hover:text-[#7dc642] duration-150 cursor-pointer">Trái cây</p>
+                                </Link>
+                                <Link
+                                    to={"/cua-hang/goi-nguyen-lieu"} onClick={() => updateBreadcrumb("Cửa hàng", "Gói nguyên liệu", 3)}
+                                >
+                                    <p className="w-full border border-transparent rounded-md hover:border-[#7dc642] px-1 text-center text-lg py-2 font-bold text-white hover:text-[#7dc642] duration-150 cursor-pointer">Gói nguyên liệu</p>
+                                </Link>
+                            </div>
+                        </div>
+                        <Button path={"/trang-trai"} onClick={() => updateBreadcrumb("Trang trại", "", 4)}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Cửa hàng</p>
+                                <p
+                                    // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
+                                    className={clsx({
+                                        "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 4,
+                                        "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 4
+                                    })}
+                                >Trang trại</p>
                             </li>
                         </Button>
-                        <Button path={"/trang-trai"}>
+                        <Button path={"/blog"} onClick={() => updateBreadcrumb("Blog", "", 5)}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Trang trại</p>
+                                <p
+                                    // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
+                                    className={clsx({
+                                        "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 5,
+                                        "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 5
+                                    })}
+                                >Blog</p>
                             </li>
                         </Button>
-                        <Button path={"/blog"}>
+                        <Button path={"/lien-he"} onClick={() => updateBreadcrumb("Liên hệ", "", 6)}>
                             <li>
-                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Blog</p>
-                            </li>
-                        </Button>
-                        <Button path={"/lien-he"}>
-                            <li>
-                                <p className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]">Liên hệ</p>
+                                <p
+                                    // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
+                                    className={clsx({
+                                        "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 6,
+                                        "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 6
+                                    })}
+                                >Liên hệ</p>
                             </li>
                         </Button>
                     </ul>

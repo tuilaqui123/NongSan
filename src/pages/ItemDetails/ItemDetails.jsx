@@ -16,7 +16,7 @@ const ItemDetails = () => {
             <div className="w-11/12">
                 <div className="w-2/3 mb-10">
                     <Breadcrumb
-                        location={"Cửa hàng"}
+                        location={"ok"}
                     />
                 </div>
                 <div className="w-11/12 flex flex-row gap-10">
@@ -68,11 +68,6 @@ const ItemDetails = () => {
                                     <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-200"></div>
                                     <p className="text-lg w-full text-[#3e3e3e] group-hover:text-white duration-150 font-bold z-10">Thêm vào giỏ</p>
                                 </button>
-
-                                <div className="w-1/3 h[60px] flex items-center relative hidden">
-                                    <i class="fa-regular fa-heart text-3xl cursor-pointer hover:text-[#fc0307]"></i>
-                                    <i class="fa-solid fa-heart absolute text-3xl cursor-pointer text-[#fc0307] hidden"></i>
-                                </div>
                             </div>
                         </div>
                     </div>

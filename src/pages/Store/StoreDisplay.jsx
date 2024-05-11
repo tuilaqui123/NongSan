@@ -8,7 +8,7 @@ import PagePagination from "../../components/PagePagination/PagePagination";
 import { AppContext } from "../../Context/AppContext";
 import ResponsiveSelect from "./ResponsiveSelect";
 
-const Store = () => {
+const StoreDisplay = () => {
     const [showSelect, setShowSelect] = useState(false)
     const [location, setLocation] = useState("")
     return (
@@ -21,6 +21,7 @@ const Store = () => {
             <div className="w-11/12">
                 <div className="w-full mb-5 flex flex-row items-center justify-between">
                     <Breadcrumb
+                        location={location}
                     />
                     <button
                         onClick={() => setShowSelect(!showSelect)}
@@ -98,4 +99,4 @@ const Store = () => {
     );
 }
 
-export default Store;
+export default StoreDisplay;

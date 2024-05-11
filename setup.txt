@@ -8,7 +8,8 @@ lg:bg-green-500 md:bg-red-500 sm:bg-blue-500 bg-purple-400
 use em for text ?
 
 =========== !important ===========
-set breadcrumb (use context)
+
+search page
 
 remake button 
 

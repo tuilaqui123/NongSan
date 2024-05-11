@@ -40,7 +40,6 @@ const Farm = () => {
             <div className="w-11/12">
                 <div className="w-2/3 mb-5">
                     <Breadcrumb
-                        location={"Trang trại"}
                     />
                 </div>
                 <div className="w-full flex flex-col items-center">

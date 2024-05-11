@@ -20,6 +20,8 @@ import Login from './pages/Login/Login';
 import SignIn from './pages/Login/SignIn';
 import SignUp from './pages/Login/SignUp';
 import ForgotPassword from './pages/Login/ForgotPassword';
+import Breadcrumb from './components/Breadcrumb/Breadcrumb';
+import StoreDisplay from './pages/Store/StoreDisplay';
 function App() {
 
   return (
@@ -30,25 +32,36 @@ function App() {
           <NavBar />
           <Routes>
             <Route>
+
               <Route path="/" element={<Home />} />
+              <Route path="/trang-chu" element={<Home />} />
+
               <Route path="/gioi-thieu" element={<Introduce />} />
+
               <Route path="/cua-hang" element={<Store />} />
-              <Route path="/cua-hang/:page" element={<Store />} />
-              <Route path="/danh-muc/:tag" element={<Store />} />
+              <Route path="/cua-hang/:tag" element={<Store />} />
               <Route path="/cua-hang/:tag/:name" element={<ItemDetails />} />
+
               <Route path="/lien-he" element={<Contact />} />
+
               <Route path="/tai-khoan" element={<Account />} />
+
               <Route path="/gio-hang" element={<Cart />} />
               <Route path="/thanh-toan" element={<Checkout />} />
               <Route path="/hoa-don" element={<OrderReceived />} />
+
               <Route path="/trang-trai" element={<Farm />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:name" element={<Blog />} />
+
+              <Route path="/blog" element={<Blog />}>
+                <Route path=":name" element={<Blog />} />
+              </Route>
+
               <Route path='/dang-nhap' element={<Login />}>
                 <Route index element={<SignIn />} />
                 <Route path='dang-ky' element={<SignUp />} />
                 <Route path='quen-mat-khau' element={<ForgotPassword />} />
               </Route>
+
             </Route>
           </Routes>
           <Footer />

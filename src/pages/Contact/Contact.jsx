@@ -9,7 +9,6 @@ const Contact = () => {
             <div className="w-11/12">
                 <div className="w-2/3 mb-5">
                     <Breadcrumb
-                        location={"Liên hệ"}
                     />
                 </div>
                 <div className="relative w-full h-auto bg-white lg:bg-transparent rounded-xl lg:h-screen flex flex-col lg:flex-row  justify-end items-center">

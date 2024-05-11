@@ -10,7 +10,6 @@ const Blog = () => {
             <div className="w-11/12">
                 <div className="w-2/3 mb-5">
                     <Breadcrumb
-                        location={"Blog"}
                     />
                 </div>
                 <div>
