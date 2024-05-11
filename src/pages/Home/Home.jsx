@@ -15,13 +15,13 @@ const Home = () => {
             <Category />
             <CategoryDisplay
                 mainColor={"red-500"}
-                themeColor={"red-100"}
+                themeColor={"green-100"}
                 itemColor={"red-800"}
                 title={"Thịt tươi"}
             />
             <CategoryDisplay
                 mainColor={"blue-500"}
-                themeColor={"blue-100"}
+                themeColor={"white"}
                 itemColor={"blue-800"}
                 title={"Hải sản"}
             />
@@ -33,13 +33,13 @@ const Home = () => {
             />
             <CategoryDisplay
                 mainColor={"orange-500"}
-                themeColor={"yellow-100"}
+                themeColor={"white"}
                 itemColor={"orange-800"}
                 title={"Trái cây"}
             />
             <CategoryDisplay
                 mainColor={"slate-500"}
-                themeColor={"gray-100"}
+                themeColor={"green-100"}
                 itemColor={"gray-800"}
                 title={"Gói nguyên liệu"}
             />

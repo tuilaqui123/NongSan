@@ -9,13 +9,9 @@ use em for text ?
 
 =========== !important ===========
 
-search page
+remake button ? 
 
-remake button 
-
-seperate page and component
-
-re-router (app.jsx)
+seperate page and component ~
 
 Motion Blur Portfolio Showcase - banner
 

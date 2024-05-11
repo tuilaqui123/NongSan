@@ -22,6 +22,7 @@ import SignUp from './pages/Login/SignUp';
 import ForgotPassword from './pages/Login/ForgotPassword';
 import Breadcrumb from './components/Breadcrumb/Breadcrumb';
 import StoreDisplay from './pages/Store/StoreDisplay';
+import Search from './pages/Search/Search';
 function App() {
 
   return (
@@ -61,6 +62,8 @@ function App() {
                 <Route path='dang-ky' element={<SignUp />} />
                 <Route path='quen-mat-khau' element={<ForgotPassword />} />
               </Route>
+
+              <Route path='/tim-kiem/:search' element={<Search />} />
 
             </Route>
           </Routes>
