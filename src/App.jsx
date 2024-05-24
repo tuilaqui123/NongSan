@@ -23,11 +23,13 @@ import ForgotPassword from './pages/Login/ForgotPassword';
 import Breadcrumb from './components/Breadcrumb/Breadcrumb';
 import StoreDisplay from './pages/Store/StoreDisplay';
 import Search from './pages/Search/Search';
+import ChatBox from './pages/ChatBot/ChatBox';
 function App() {
 
   return (
     <div className="relative">
       <AppProvider>
+        <ChatBox />
         <RollToTopButton />
         <BrowserRouter>
           <NavBar />

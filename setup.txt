@@ -9,6 +9,12 @@ use em for text ?
 
 =========== !important ===========
 
+fixed navbar
+remake user
+remake cart
+remake checkout
+blog detail
+
 remake button ? 
 
 seperate page and component ~
