@@ -25,21 +25,16 @@ const Account = () => {
                         location={"Tài khoản"}
                     />
                 </div>
-                <div className="relative w-full h-auto flex flex-row justify-end ">
-                    <div className="absolute left-0 w-1/3 h-[80vh] bg-[#3e3e3e] rounded-xl hidden lg:flex justify-center items-center mt-[5vh]">
-                        <div className="w-[90%] h-[90%] flex flex-col items-center  gap-5 border rounded-xl p-5">
-                            <div className="w-full flex flex-row gap-3 ">
-                                <div className="w-1/4 h-full flex items-center justify-center ">
-                                    <img
-                                        src={avt}
-                                        className="w-full rounded-full border-2 border-white "
-                                    />
-                                </div>
-                                <div className="w-3/4 flex flex-col  ">
-                                    <p className="text-white font-bold text-xl mb-3">Phạm Ngọc Qúi</p>
-                                    <p className="cursor-pointer text-white font-semibold italic">Đăng xuất</p>
-                                </div>
+                <div className=" w-full h-auto bg-white flex flex-row overflow-hidden justify-end border shadow-2xl">
+                    <div className=" w-1/3 h-full bg-[#3e3e3e] hidden p-3 lg:flex justify-center items-center">
+                        <div className="w-full h-full flex flex-col items-center  gap-5 border  p-5">
+                            <div className="w-3/5 flex flex-col gap-3">
+                                <img
+                                    src={avt}
+                                    className="w-full border-2 border-white "
+                                />
                             </div>
+
                             <div className="w-full flex flex-col gap-5 mt-10">
                                 <AccountButton
                                     icon={"fa-solid fa-user"}
@@ -73,7 +68,7 @@ const Account = () => {
                             </div>
                         </div>
                     </div>
-                    <div className=" w-full  lg:w-[85%] h-auto bg-white rounded-xl shadow-2xl border border-black flex flex-col lg:flex-row items-start lg:justify-end gap-5 lg:gap-0 p-3 lg:py-[5vh]">
+                    <div className=" w-full lg:w-2/3 h-auto bg-white rounded-xl shadow-2xl  flex flex-col lg:flex-row items-start lg:justify-end gap-5 lg:gap-0 p-3 lg:py-[5vh]">
                         <div className="h-[80vh] lg:block hidden"></div>
                         <div className={` w-full h-auto rounded-t-xl lg:hidden flex flex-col p-3 bg-[#3e3e3e] gap-3 duration-300 ease-out`}>
                             <div className="w-full flex flex-row   items-start justify-between">

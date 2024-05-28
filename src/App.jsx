@@ -24,6 +24,7 @@ import Breadcrumb from './components/Breadcrumb/Breadcrumb';
 import StoreDisplay from './pages/Store/StoreDisplay';
 import Search from './pages/Search/Search';
 import ChatBox from './pages/ChatBot/ChatBox';
+import BlogDetail from './pages/Blog/BlogDetail';
 function App() {
 
   return (
@@ -55,9 +56,8 @@ function App() {
 
               <Route path="/trang-trai" element={<Farm />} />
 
-              <Route path="/blog" element={<Blog />}>
-                <Route path=":name" element={<Blog />} />
-              </Route>
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:name" element={<BlogDetail />} />
 
               <Route path='/dang-nhap' element={<Login />}>
                 <Route index element={<SignIn />} />

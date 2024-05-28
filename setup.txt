@@ -9,11 +9,12 @@ use em for text ?
 
 =========== !important ===========
 
-fixed navbar
 remake user
-remake cart
 remake checkout
+remake order success
 blog detail
+
+set auto roll up when load
 
 remake button ? 
 

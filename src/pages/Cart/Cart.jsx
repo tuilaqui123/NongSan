@@ -14,9 +14,9 @@ const Cart = () => {
                         location={"Giỏ hàng"}
                     />
                 </div>
-                <div className="w-full border border-gray-300 shadow-2xl flex items-center justify-center py-[5vh] rounded-xl ">
-                    <div className="w-11/12 h-full flex flex-row">
-                        <div className="w-full">
+                <div className="w-full border border-gray-300 shadow-2xl flex items-center justify-center p-7 rounded-xl ">
+                    <div className="w-full  h-full flex flex-row gap-7">
+                        <div className="w-2/3">
                             <div className="flex flex-row justify-between items-center w-full mb-10">
                                 <p className="text-4xl font-bold">Giỏ hàng</p>
                                 <p className="text-[#3e3e3e] font-bold">(7 sản phẩm)</p>
@@ -30,12 +30,13 @@ const Cart = () => {
                             <div className="w-full">
                                 <CartItem />
                                 <CartItem />
+                                <CartItem />
+                                <CartItem />
+                                <CartItem />
                             </div>
-                            <div className="w-full border-b-2 border-[#7dc642] mt-3"></div>
 
-                            <div className="w-full h-auto mt-10 sm:mt-5 flex flex-col sm:flex-row sm:items-start items-center justify-between gap-10 md:gap-5">
-
-                                <div className="w-10/12 h-full sm:w-1/2 md:w-2/5 grid grid-cols-1 ">
+                            <div className="w-full hidden h-auto mt-10 sm:mt-5 flex flex-col sm:flex-row sm:items-start items-center justify-between gap-10 md:gap-5">
+                                <div className="w-10/12 hidden h-full sm:w-1/2 md:w-2/5 grid grid-cols-1 ">
                                     <div className="w-full">
                                         <p className="text-xl text-left font-bold mb-3 pb-3 border-b">Ưu đãi & giảm giá</p>
                                         <div className="relative w-full flex items-center gap-3">
@@ -57,7 +58,6 @@ const Cart = () => {
                                     </div>
                                 </div>
 
-                                <div className="w-1/2 sm:hidden border-b border-[#3e3e3e]"></div>
 
                                 <div className="w-10/12 sm:w-1/2 md:w-2/5  flex flex-col justify-between items-center">
                                     <div className="w-full pb-5 border-b-2 border-[#3e3e3e]">
@@ -87,14 +87,28 @@ const Cart = () => {
                             </div>
                         </div>
 
-                        <div className="w-2/5 border-l pl-5 ml-5 hidden">
-                            <p className="text-3xl text-center font-bold mb-5">Chi tiết đơn hàng</p>
-                            <div>
-
-                            </div>
-                            <div className="flex flex-row items-end gap-3">
-                                <p className="text-xl font-bold">Tổng tiền:</p>
-                                <p className="text-3xl font-bold text-[#7dc642]">500.000đ</p>
+                        <div className="w-1/3 h-[500px] flex flex-col justify-between bg-gray-100 rounded-lg p-5 py-7">
+                            <div className="w-full flex flex-col gap-5">
+                                <div className="w-full flex flex-row justify-between text-lg font-medium border-b border-gray-500 pb-3 mb-3">
+                                    <p>Tạm tính:</p>
+                                    <p>100.000đ</p>
+                                </div>
+                                <div className="text-lg font-medium">
+                                    <p className="mb-2">Mã giảm giá:</p>
+                                    <input
+                                        type="text"
+                                        placeholder="#"
+                                        className="w-full border border-[#3e3e3e] p-2 mb-3 rounded-md"
+                                    />
+                                    <div className="w-full flex flex-row justify-between text-lg font-medium border-b border-gray-500 pb-3 mb-3">
+                                        <p>Tiền giảm:</p>
+                                        <p>100.000đ</p>
+                                    </div>
+                                </div>
+                                <div className="w-full mt-5 flex flex-row justify-between text-2xl font-bold border-b border-gray-500 pb-3 mb-3">
+                                    <p>TỔNG TIỀN:</p>
+                                    <p>100.000đ</p>
+                                </div>
                             </div>
                             <div className="w-full flex flex-row justify-center">
                                 <Link
