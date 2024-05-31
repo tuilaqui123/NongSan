@@ -1,26 +1,32 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import CartItem from "./CartItem";
 import UseDiscount from "./UseDiscount";
 import RouterButton from "../../components/ButtonComponent/RouterButton";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 
 const Cart = () => {
     const { cart, order, setOrder } = useContext(AppContext)
-
+    const [total, setTotal] = useState(0)
     const [discount, setDiscount] = useState(0)
+    useEffect(() => {
+        const total = cart.reduce((acc, item) => {
+            const discountPrice = item.price - item.price * item.tag;
+            return acc + discountPrice * item.quantity;
+        }, 0)
+        setTotal(total)
+    }, [])
+    // var total = 0
 
-    var total = 0
-
-    for (let i = 0; i < cart.length; i++) {
-        console.log(cart[i])
-        total += (cart[i].price - cart[i].price * cart[i].tag) * cart[i].quantity
-    }
-
+    // for (let i = 0; i < cart.length; i++) {
+    //     console.log(cart[i])
+    //     total += (cart[i].price - cart[i].price * cart[i].tag) * cart[i].quantity
+    // }
     function makeOrder() {
         const temp = {}
         setOrder({ cart: cart, total: total, discount: discount, info: temp })
+        history.push('/thanh-toan'); 
     }
     return (
         <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
@@ -132,14 +138,14 @@ const Cart = () => {
                                 </div>
                             </div>
                             <div className="w-full flex flex-row justify-center">
-                                <Link
-                                    to={"/thanh-toan"}
+                                <div
+                                    // to={"/thanh-toan"}
                                     onClick={makeOrder}
                                     className="relative bg-[#3e3e3e] w-4/5 h-[50px] rounded-xl flex items-center group overflow-hidden"
                                 >
                                     <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-300"></div>
                                     <p className="text-lg text-center w-full text-white font-bold z-10">Đặt hàng</p>
-                                </Link>
+                                </div>
                             </div>
                         </div>
 

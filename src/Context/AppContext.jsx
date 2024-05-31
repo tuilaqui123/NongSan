@@ -14,7 +14,6 @@ export const AppProvider = ({ children }) => {
         child: 0,
     })
 
-
     const [farms, setFarms] = useState([])
     const [items, setItems] = useState([])
     const [order, setOrder] = useState(() => {
