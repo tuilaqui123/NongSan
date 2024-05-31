@@ -5,6 +5,7 @@ import UseDiscount from "./UseDiscount";
 import RouterButton from "../../components/ButtonComponent/RouterButton";
 import { Link, Navigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
+import axios from "axios";
 
 const Cart = () => {
     const { cart, order, setOrder } = useContext(AppContext)
@@ -12,21 +13,37 @@ const Cart = () => {
     const [discount, setDiscount] = useState(0)
     useEffect(() => {
         const total = cart.reduce((acc, item) => {
-            const discountPrice = item.price - item.price * item.tag;
-            return acc + discountPrice * item.quantity;
+            const totalPrice = item.item.price - item.item.price * item.item.tag;
+            return acc + totalPrice * item.amount;
         }, 0)
         setTotal(total)
-    }, [])
-    // var total = 0
+    }, [cart])
 
-    // for (let i = 0; i < cart.length; i++) {
-    //     console.log(cart[i])
-    //     total += (cart[i].price - cart[i].price * cart[i].tag) * cart[i].quantity
-    // }
+    const formatNumber = (number) => {
+        return new Intl.NumberFormat('de-DE').format(number);
+    };
+
+    const handleChange = (e) => {
+        const discountVal = e.target.value
+        axios.get(`http://localhost:8082/vouchers/${discountVal}`)
+        .then((res) => {
+            if (res.data) {
+                console.log(res.data)
+                if (total >= res.data.conditionValue){
+                    setDiscount(total - ((total*res.data.percent)/100));
+                }
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            setDiscount(0);
+        });
+    }
+
     function makeOrder() {
-        const temp = {}
-        setOrder({ cart: cart, total: total, discount: discount, info: temp })
-        history.push('/thanh-toan'); 
+        // const temp = {}
+        // setOrder({ cart: cart, total: total, discount: discount, info: temp })
+        // history.push('/thanh-toan'); 
     }
     return (
         <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
@@ -116,25 +133,26 @@ const Cart = () => {
                             <div className="w-full flex flex-col gap-5">
                                 <div className="w-full flex flex-row justify-between text-lg font-medium border-b border-gray-500 pb-3 mb-3">
                                     <p>Tạm tính:</p>
-                                    <p>{total}đ</p>
+                                    <p>{formatNumber(total)}đ</p>
                                 </div>
                                 <div className="text-lg font-medium">
                                     <p className="mb-2">Mã giảm giá:</p>
                                     <input
                                         type="text"
                                         placeholder="#"
+                                        onChange={(e) => handleChange(e)}
                                         className="w-full border border-[#3e3e3e] p-2 mb-3 rounded-md"
                                     />
                                     {discount != 0 && (
                                         <div className="w-full flex flex-row justify-between text-lg font-medium border-b border-gray-500 pb-3 mb-3">
                                             <p>Tiền giảm:</p>
-                                            <p>{discount * total}đ</p>
+                                            <p>{formatNumber(discount)}đ</p>
                                         </div>
                                     )}
                                 </div>
                                 <div className="w-full mt-5 flex flex-row justify-between text-2xl font-bold border-b border-gray-500 pb-3 mb-3">
                                     <p>TỔNG TIỀN:</p>
-                                    <p>{total - total * discount}đ</p>
+                                    <p>{formatNumber(total - discount)}đ</p>
                                 </div>
                             </div>
                             <div className="w-full flex flex-row justify-center">

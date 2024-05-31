@@ -48,15 +48,13 @@ export const AppProvider = ({ children }) => {
     
     //cart
     const fetchCart = (customerId) => {
-        axios.get("http://localhost:8082/carts", {
-
+        axios.get("http://localhost:8082/carts/6659770a93ff789d47918207")
+        .then((res) => {
+            setCart(res.data.items)
         })
-           .then((res) => {
-                setCart(res.data)
-            })
-           .catch((err) => {
-                console.log(err)
-            })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     //item
