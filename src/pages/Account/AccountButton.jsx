@@ -7,8 +7,8 @@ const AccountButton = ({ icon, name, position, select, onclick }) => {
         <div
             onClick={onclick}
             className={clsx({
-                "p-[6px] border border-white rounded-full cursor-pointer overflow-hidden": position == select,
-                "p-[6px] border border-transparent hover:border-white rounded-full cursor-pointer overflow-hidden duration-150": position !== select
+                "p-[6px] border border-white bg-[#3e3e3e] rounded-full cursor-pointer overflow-hidden group": position == select,
+                "p-[6px] border border-transparent hover:border-white rounded-full cursor-pointer overflow-hidden duration-150 group": position !== select
             })}
         >
             <div
@@ -29,10 +29,11 @@ const AccountButton = ({ icon, name, position, select, onclick }) => {
                     <div className="absolute left-[-5px] w-[50px] h-[50px] flex justify-center items-center bg-[#3e3e3e] rounded-full"></div>
                 </div>
                 <p
-                    className={clsx({
-                        "text-[#3e3e3e] font-bold text-base ml-2": position == select,
-                        "text-white font-bold text-base ml-2": position !== select,
-                    })}
+                    // className={clsx({
+                    //     "text-[#3e3e3e] font-bold text-base ml-2": position == select,
+                    //     "text-[#3e3e3e] font-bold text-base ml-2": position !== select,
+                    // })}
+                    className="text-[#3e3e3e] font-bold text-base ml-2 group-hover:text-[#7dc642]"
                 >
                     {name}
                 </p>

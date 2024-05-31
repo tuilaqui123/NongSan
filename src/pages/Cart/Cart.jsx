@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import CartItem from "./CartItem";
 import UseDiscount from "./UseDiscount";
 import RouterButton from "../../components/ButtonComponent/RouterButton";
 import { Link } from "react-router-dom";
+import { AppContext } from "../../Context/AppContext";
 
 const Cart = () => {
+    const { cart, order, setOrder } = useContext(AppContext)
+
+    const [discount, setDiscount] = useState(0)
+
+    var total = 0
+
+    for (let i = 0; i < cart.length; i++) {
+        console.log(cart[i])
+        total += (cart[i].price - cart[i].price * cart[i].tag) * cart[i].quantity
+    }
+
+    function makeOrder() {
+        const temp = {}
+        setOrder({ cart: cart, total: total, discount: discount, info: temp })
+    }
     return (
         <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
             <div className="w-11/12">
@@ -19,7 +35,7 @@ const Cart = () => {
                         <div className="w-2/3">
                             <div className="flex flex-row justify-between items-center w-full mb-10">
                                 <p className="text-4xl font-bold">Giỏ hàng</p>
-                                <p className="text-[#3e3e3e] font-bold">(7 sản phẩm)</p>
+                                <p className="text-[#3e3e3e] font-bold">({cart.length} sản phẩm)</p>
                             </div>
                             <div className="w-full flex flex-row ">
                                 <div className="w-1/12"></div>
@@ -28,11 +44,14 @@ const Cart = () => {
                                 <p className="w-2/12 text-lg text-end font-bold text-[#7dc642] md:block hidden">Thành tiền</p>
                             </div>
                             <div className="w-full">
-                                <CartItem />
-                                <CartItem />
-                                <CartItem />
-                                <CartItem />
-                                <CartItem />
+                                {cart.map((value, index) => {
+                                    return (
+                                        <CartItem
+                                            key={index}
+                                            value={value}
+                                        />
+                                    )
+                                })}
                             </div>
 
                             <div className="w-full hidden h-auto mt-10 sm:mt-5 flex flex-col sm:flex-row sm:items-start items-center justify-between gap-10 md:gap-5">
@@ -91,7 +110,7 @@ const Cart = () => {
                             <div className="w-full flex flex-col gap-5">
                                 <div className="w-full flex flex-row justify-between text-lg font-medium border-b border-gray-500 pb-3 mb-3">
                                     <p>Tạm tính:</p>
-                                    <p>100.000đ</p>
+                                    <p>{total}đ</p>
                                 </div>
                                 <div className="text-lg font-medium">
                                     <p className="mb-2">Mã giảm giá:</p>
@@ -100,19 +119,22 @@ const Cart = () => {
                                         placeholder="#"
                                         className="w-full border border-[#3e3e3e] p-2 mb-3 rounded-md"
                                     />
-                                    <div className="w-full flex flex-row justify-between text-lg font-medium border-b border-gray-500 pb-3 mb-3">
-                                        <p>Tiền giảm:</p>
-                                        <p>100.000đ</p>
-                                    </div>
+                                    {discount != 0 && (
+                                        <div className="w-full flex flex-row justify-between text-lg font-medium border-b border-gray-500 pb-3 mb-3">
+                                            <p>Tiền giảm:</p>
+                                            <p>{discount * total}đ</p>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="w-full mt-5 flex flex-row justify-between text-2xl font-bold border-b border-gray-500 pb-3 mb-3">
                                     <p>TỔNG TIỀN:</p>
-                                    <p>100.000đ</p>
+                                    <p>{total - total * discount}đ</p>
                                 </div>
                             </div>
                             <div className="w-full flex flex-row justify-center">
                                 <Link
                                     to={"/thanh-toan"}
+                                    onClick={makeOrder}
                                     className="relative bg-[#3e3e3e] w-4/5 h-[50px] rounded-xl flex items-center group overflow-hidden"
                                 >
                                     <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-300"></div>

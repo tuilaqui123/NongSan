@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import logo from '../../assets/logo.png'
 import FarmBox from "./FarmBox";
@@ -6,9 +6,14 @@ import RecommentItem from "../../components/RecommentItem/RecommentItem";
 import FarmProduct from "./FarmProduct";
 import '../../hiddenScroll.css'
 import FarmInfo from "./FarmInfo";
+import { AppContext } from "../../Context/AppContext";
 
 
 const Farm = () => {
+
+    const { farms, setFarms, fetchFarm } = useContext(AppContext)
+
+    console.log(farms)
 
     const [preInfo, setPreInfo] = useState(false)
     const [preHeight, setPreHeigth] = useState(0)
@@ -68,30 +73,16 @@ const Farm = () => {
                     )}
 
                     <div className="w-full grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-5 md:mt-10">
-                        <FarmBox
-                            onclick={showPreInfo}
-                            isShow={preInfo}
-                        />
-                        <FarmBox
-                            onclick={showPreInfo}
-                            isShow={preInfo}
-                        />
-                        <FarmBox
-                            onclick={showPreInfo}
-                            isShow={preInfo}
-                        />
-                        <FarmBox
-                            onclick={showPreInfo}
-                            isShow={preInfo}
-                        />
-                        <FarmBox
-                            onclick={showPreInfo}
-                            isShow={preInfo}
-                        />
-                        <FarmBox
-                            onclick={showPreInfo}
-                            isShow={preInfo}
-                        />
+                        {farms.map((value, index) => {
+                            return (
+                                <FarmBox
+                                    key={index}
+                                    onclick={showPreInfo}
+                                    isShow={preInfo}
+                                    value={value}
+                                />
+                            )
+                        })}
                     </div>
                 </div>
             </div>

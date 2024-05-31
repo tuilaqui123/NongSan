@@ -7,7 +7,7 @@ import { AppContext } from "../../Context/AppContext";
 import { Link } from "react-router-dom";
 
 const ScrollNavBar = () => {
-    const { breadcrumb, setBreadcrumb } = useContext(AppContext)
+    const { breadcrumb, setBreadcrumb, cart } = useContext(AppContext)
     const [sideBar, setSideBar] = useState(true)
     function showSideBar(main, child) {
         const temp = {
@@ -151,7 +151,7 @@ const ScrollNavBar = () => {
                             </div>
                             <div className="hidden xl:block">
                                 <p class="text-white font-normal text-sm text-left">Giỏ hàng</p>
-                                <p class="text-[#7dc642] font-medium text-sm text-left">0 sản phẩm</p>
+                                <p class="text-[#7dc642] font-medium text-sm text-left">{cart.length} sản phẩm</p>
                             </div>
                         </div>
                     </RouterButton>
@@ -173,7 +173,7 @@ const ScrollNavBar = () => {
                             </div>
                             <div className="hidden lg:block">
                                 <p class="text-white font-normal text-sm text-left">Giỏ hàng</p>
-                                <p class="text-[#7dc642] font-medium text-sm text-left">0 sản phẩm</p>
+                                <p class="text-[#7dc642] font-medium text-sm text-left">{cart.length} sản phẩm</p>
                             </div>
                         </div>
                     </RouterButton>

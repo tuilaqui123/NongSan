@@ -9,8 +9,14 @@ import { AppContext } from "../../Context/AppContext";
 import ResponsiveSelect from "./ResponsiveSelect";
 
 const Store = () => {
+
+    const { items, setItems, fetchItem } = useContext(AppContext)
+
+    console.log(items)
+
     const [showSelect, setShowSelect] = useState(false)
     const [location, setLocation] = useState("")
+
     return (
         <div className="relative w-full h-auto flex flex-col items-center py-5 mb-20 ">
             {showSelect && (
@@ -40,59 +46,19 @@ const Store = () => {
                         <RecommentSelect />
                     </div>
                     <div className="w-full lg:w-4/5 grid-cols-2 sm:grid-cols-3 grid md:grid-cols-4 gap-5 ">
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
-                        <Item
-                            itemColor={"green-800"}
-                        />
+                        {items.map((value, index) => {
+                            return (
+                                <Item
+                                    itemColor={"green-800"}
+                                    value={value}
+                                />
+                            )
+                        })}
                     </div>
                 </div>
-                <div className="w-full flex justify-end mt-10">
+                {/* <div className="w-full flex justify-end mt-10">
                     <PagePagination />
-                </div>
+                </div> */}
             </div>
         </div>
     );
