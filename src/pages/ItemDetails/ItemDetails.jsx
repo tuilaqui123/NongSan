@@ -32,6 +32,10 @@ const ItemDetails = () => {
         fetchItem()
     }, [params.name])
 
+    const formatNumber = (number) => {
+        return new Intl.NumberFormat('de-DE').format(number);
+    };
+
     const addCart = () => {
         setIsLoading(true)
         axios.post('http://localhost:8082/carts', {
@@ -99,7 +103,7 @@ const ItemDetails = () => {
                                     </div>
                                     <div className="w-full">
                                         <div className="w-full flex flex-row items-end gap-3">
-                                            <p className="font-bold text-4xl">{item.price - item.price * item.tag}đ</p>
+                                            <p className="font-bold text-4xl">{formatNumber(item.price - item.price * item.tag)}đ</p>
                                             {item.tag != 0 && (
                                                 <p className="text-[16px] font-medium text-gray-500 line-through">{item.price}đ</p>
                                             )}
