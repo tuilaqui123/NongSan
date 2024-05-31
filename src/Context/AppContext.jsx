@@ -16,22 +16,24 @@ export const AppProvider = ({ children }) => {
 
     const [farms, setFarms] = useState([])
     const [items, setItems] = useState([])
-    const [order, setOrder] = useState(() => {
-        const savedOrder = localStorage.getItem('order')
-        return savedOrder ? JSON.parse(savedOrder) : []
-    })
-    const [cart, setCart] = useState(() => {
-        const savedCart = localStorage.getItem('cart')
-        return savedCart ? JSON.parse(savedCart) : []
-    });
+    const [order, setOrder] = useState([])
+    const [cart, setCart] = useState([])
+    // const [order, setOrder] = useState(() => {
+    //     const savedOrder = localStorage.getItem('order')
+    //     return savedOrder ? JSON.parse(savedOrder) : []
+    // })
+    // const [cart, setCart] = useState(() => {
+    //     const savedCart = localStorage.getItem('cart')
+    //     return savedCart ? JSON.parse(savedCart) : []
+    // });
 
-    useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cart))
-    }, [cart])
+    // useEffect(() => {
+    //     localStorage.setItem('cart', JSON.stringify(cart))
+    // }, [cart])
 
-    useEffect(() => {
-        localStorage.setItem('order', JSON.stringify(order))
-    }, [order])
+    // useEffect(() => {
+    //     localStorage.setItem('order', JSON.stringify(order))
+    // }, [order])
 
     //farm
     const fetchFarm = () => {
@@ -40,6 +42,19 @@ export const AppProvider = ({ children }) => {
                 setFarms(res.data)
             })
             .catch((err) => {
+                console.log(err)
+            })
+    }
+    
+    //cart
+    const fetchCart = (customerId) => {
+        axios.get("http://localhost:8082/carts", {
+
+        })
+           .then((res) => {
+                setCart(res.data)
+            })
+           .catch((err) => {
                 console.log(err)
             })
     }
@@ -58,15 +73,14 @@ export const AppProvider = ({ children }) => {
     useEffect(() => {
         fetchFarm()
         fetchItem()
+        fetchCart()
     }, [])
-
-
 
     return <AppContext.Provider value={{
         breadcrumb, setBreadcrumb,
         farms, setFarms, fetchFarm,
         items, setItems, fetchItem,
-        cart, setCart,
+        cart, setCart, fetchCart,
         order, setOrder
     }}>
         {children}
