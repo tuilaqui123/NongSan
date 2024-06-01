@@ -11,7 +11,7 @@ const CommonSelect = ({ title, setText }) => {
                 defaultValue={""}
                 onChange={handleSelect}
                 className="w-4/5 pl-3 h-[45px] text-[#3e3e3e] border border-[#3e3e3e] rounded-lg focus:ring-[#7dc642] focus:outline-[#7dc642]">
-                <option value="" disabled selected>{title}</option>
+                <option value="" disabled>{title}</option>
                 <option></option>
                 <option></option>
                 <option></option>

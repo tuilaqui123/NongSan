@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import avt from '../../assets/cmt.jpg'
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import CheckoutItem from "./CheckoutItem";
@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import CommonInput from "../../components/Input/CommonInput";
 import CommonSelect from "../../components/Input/CommonSelect";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const Checkout = () => {
-    const { order, setOrder } = useContext(AppContext)
-
+    const { order, setOrder, paymentState, setPaymentState } = useContext(AppContext)
+    const {tempPrice, discount, totalPrice, from} = paymentState
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
@@ -17,7 +19,21 @@ const Checkout = () => {
     const [city, setCity] = useState("")
     const [district, setDistrict] = useState("")
     const [address, setAddress] = useState("")
-
+    const formatNumber = (number) => {
+        return new Intl.NumberFormat('de-DE').format(number);
+    };
+    const notify = (message) => {
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 700,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
     function getInfo() {
         const temp = {
             name: name,
@@ -28,14 +44,37 @@ const Checkout = () => {
             address: address
         }
         setOrder({ cart: order.cart, total: order.total, discount: order.discount, info: temp })
-        console.log(order)
     }
 
-    console.log(name)
-
-    console.log(order)
+    const handlePayment = () => {
+        if (!name){
+            notify("Vui lòng nhập tên")
+            return
+        }
+        if (!email){
+            notify("Vui lòng nhập email")
+            return
+        }
+        if (!phone){
+            notify("Vui lòng nhập số điện thoại")
+            return
+        }
+        if (!address){
+            notify("Vui lòng nhập địa chỉ")
+            return
+        }
+        if (!city){
+            notify("Vui lòng nhập tỉnh/thành phố")
+            return
+        }
+        if (!district){
+            notify("Vui lòng nhập quận/huyện")
+            return
+        }
+    }
     return (
         <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
+            <ToastContainer/>
             <div className="w-11/12">
                 <div className="w-2/3 mb-5">
                     <Breadcrumb
@@ -110,20 +149,21 @@ const Checkout = () => {
                                 <p className="text-3xl md:text-2xl lg:text-3xl font-bold text-[#7dc642] pb-3 mb-3 border-b border-gray-300">Chi tiết đơn hàng</p>
                                 {/* <div className="w-full flex flex-col gap-3"> */}
                                 <div className="w-full flex flex-col sm:grid sm:grid-cols-2 md:flex md:flex-col gap-3">
-                                    {order.cart.map((value, index) => {
+                                    {/* {order.map((value, index) => {
                                         return (
                                             <CheckoutItem
                                                 key={index}
                                                 value={value}
                                             />
                                         )
-                                    })}
+                                    })} */}
                                 </div>
                                 <div className="w-2/3 my-3  border-b border-gray-300"></div>
                                 <div className="w-full flex flex-col gap-3">
                                     <div className="w-full flex flex-row md:flex-col lg:flex-row justify-between items-end text-white">
                                         <p className="font-bold w-auto md:w-full lg:w-auto">Tạm tính:</p>
-                                        <p className="text-lg font-bold text-[#7dc642]">{order.total}đ</p>
+                                        {/* <p className="text-lg font-bold text-[#7dc642]">{order.total}đ</p> */}
+                                        <p className="text-lg font-bold text-[#7dc642]">{formatNumber(tempPrice)}đ</p>
                                     </div>
                                     <div className="w-full flex flex-row md:flex-col lg:flex-row justify-between items-end text-white">
                                         <p className="font-bold w-auto md:w-full lg:w-auto">Phí giao hàng:</p>
@@ -131,21 +171,21 @@ const Checkout = () => {
                                     </div>
                                     <div className="w-full flex flex-row md:flex-col lg:flex-row justify-between items-end text-white">
                                         <p className="font-bold w-auto md:w-full lg:w-auto">Giảm giá:</p>
-                                        <p className="text-lg font-bold text-[#7dc642]">-{order.total * order.discount}đ</p>
+                                        <p className="text-lg font-bold text-[#7dc642]">-{formatNumber(discount)}đ</p>
                                     </div>
                                 </div>
                                 <div className="w-full flex flex-row md:flex-col lg:flex-row justify-between items-end text-white mt-7">
                                     <p className=" text-xl font-bold w-auto md:w-full lg:w-auto" onClick={getInfo}>Tổng tiền:</p>
-                                    <p className="text-2xl font-bold text-[#7dc642]">{order.total - order.total * order.discount}đ</p>
+                                    <p className="text-2xl font-bold text-[#7dc642]">{formatNumber(totalPrice+30000)}đ</p>
                                 </div>
-                                <Link
+                                <div
                                     // to={"/hoa-don"}
-
-                                    className="relative bg-[#3e3e3e] w-4/5 h-[50px] border border-white hover:border-[#7dc642] rounded-xl flex items-center group overflow-hidden mt-5"
+                                    onClick={() => handlePayment()}
+                                    className="relative bg-[#3e3e3e] w-4/5 h-[50px] border border-white hover:border-[#7dc642] rounded-xl flex items-center group overflow-hidden mt-5 cursor-pointer"
                                 >
                                     <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-300"></div>
                                     <p className="text-lg text-center w-full text-white font-bold z-10">Đặt hàng</p>
-                                </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
