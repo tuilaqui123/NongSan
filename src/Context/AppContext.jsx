@@ -19,7 +19,7 @@ export const AppProvider = ({ children }) => {
         discount: null,
         totalPrice: null,
         from: null
-    });
+    })
 
     const [farms, setFarms] = useState([])
     const [items, setItems] = useState([])

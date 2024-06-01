@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Item from '../../components/Item/Item';
 import CategorySelect from "./CategorySelect";
@@ -12,11 +12,8 @@ const Store = () => {
 
     const { items, setItems, fetchItem } = useContext(AppContext)
 
-    console.log(items)
-
     const [showSelect, setShowSelect] = useState(false)
     const [location, setLocation] = useState("")
-
     return (
         <div className="relative w-full h-auto flex flex-col items-center py-5 mb-20 ">
             {showSelect && (

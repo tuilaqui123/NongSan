@@ -69,6 +69,12 @@ const ItemDetails = () => {
 
     const handlePayment = () => {
         const paymentObj = {
+            items: [{
+                item: item._id,
+                amount: quantity,
+                price: item.price*quantity
+            }],
+            voucher: null,
             tempPrice: item.price*quantity,
             discount: 0,
             totalPrice: item.price*quantity,

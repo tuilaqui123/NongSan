@@ -11,6 +11,7 @@ const Cart = () => {
     const { cart, order, setOrder, getPaymentState } = useContext(AppContext)
     const [total, setTotal] = useState(0)
     const [discount, setDiscount] = useState(0)
+    const [voucherSelect, setVoucherSelect] = useState(null)
     const navigate = useNavigate()
     useEffect(() => {
         const total = cart.reduce((acc, item) => {
@@ -37,6 +38,7 @@ const Cart = () => {
                     setDiscount(0)
                     return
                 }
+                setVoucherSelect(res.data._id)
                 setDiscount((total >= res.data.conditionValue) ? (total - ((total*res.data.percent)/100)) : 0)
             }
         })
@@ -49,6 +51,8 @@ const Cart = () => {
     const makeOrder = () => {
         const price = total - discount
         const paymentObj = {
+            items: cart,
+            voucher: voucherSelect,
             tempPrice: total,
             discount: discount,
             totalPrice: price,

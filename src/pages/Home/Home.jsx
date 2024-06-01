@@ -1,4 +1,3 @@
-import React from "react";
 import BannerReverse from "../../components/Banner/BannerReverse";
 import Category from "../../components/Category/Category";
 import CategoryDisplay from "../../components/CategoryDisplay/CategoryDisplay";
