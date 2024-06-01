@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import itemImg from '../../assets/image/item.png';
 import QuantitySelection from "./QuantitySelection";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import ItemInfo from "./ItemInfo";
 import ItemComment from "./ItemComment";
 import clsx from "clsx";
@@ -10,15 +10,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import BeatLoader from "react-spinners/BeatLoader";
 import RecommentItem from "../../components/RecommentItem/RecommentItem";
-import axios from "axios";
 import { AppContext } from "../../Context/AppContext";
+import axios from "axios";
 
 const ItemDetails = () => {
-    const { cart, setCart } = useContext(AppContext)
     const [item, setItem] = useState()
     const [quantity, setQuantity] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
+    const { getPaymentState } = useContext(AppContext)
     const params = useParams()
+    const navigate = useNavigate()
     useEffect(() => {
         const fetchItem = () => {
             axios.get(`http://localhost:8082/items/${params.name}`)
@@ -46,7 +47,7 @@ const ItemDetails = () => {
         .then(() => {
             toast.success('Thêm sản phẩm vào giỏ hàng thành công', {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 700,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -64,6 +65,17 @@ const ItemDetails = () => {
         .finally(() => {
             setIsLoading(false)
         })
+    }
+
+    const handlePayment = () => {
+        const paymentObj = {
+            tempPrice: item.price*quantity,
+            discount: 0,
+            totalPrice: item.price*quantity,
+            from: 'product'
+        }
+        getPaymentState(paymentObj)
+        navigate('/thanh-toan')
     }
 
     return (
@@ -125,7 +137,7 @@ const ItemDetails = () => {
                                         <div className="flex flex-row mt-5 gap-3">
                                             <button className="relative overflow-hidden w-1/3 h-[60px] flex items-center justify-start bg-[#3e3e3e] rounded-xl cursor-pointer  group  duration-700 ease-linear">
                                                 <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-200"></div>
-                                                <p className="text-lg w-full text-white font-bold z-10">Thanh toán</p>
+                                                <p onClick={handlePayment} className="text-lg w-full text-white font-bold z-10">Thanh toán</p>
                                             </button>
                                             <button
                                                 onClick={addCart}

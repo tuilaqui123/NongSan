@@ -14,6 +14,13 @@ export const AppProvider = ({ children }) => {
         child: 0,
     })
 
+    const [paymentState, setPaymentState] = useState({
+        tempPrice: null,
+        discount: null,
+        totalPrice: null,
+        from: null
+    });
+
     const [farms, setFarms] = useState([])
     const [items, setItems] = useState([])
     const [order, setOrder] = useState([])
@@ -68,6 +75,10 @@ export const AppProvider = ({ children }) => {
             })
     }
 
+    const getPaymentState = (data) => {
+        setPaymentState(data);
+    };
+
     useEffect(() => {
         fetchFarm()
         fetchItem()
@@ -79,7 +90,8 @@ export const AppProvider = ({ children }) => {
         farms, setFarms, fetchFarm,
         items, setItems, fetchItem,
         cart, setCart, fetchCart,
-        order, setOrder
+        order, setOrder,
+        paymentState, setPaymentState, getPaymentState
     }}>
         {children}
     </AppContext.Provider>

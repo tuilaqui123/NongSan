@@ -3,14 +3,15 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import CartItem from "./CartItem";
 import UseDiscount from "./UseDiscount";
 import RouterButton from "../../components/ButtonComponent/RouterButton";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import axios from "axios";
 
 const Cart = () => {
-    const { cart, order, setOrder } = useContext(AppContext)
+    const { cart, order, setOrder, getPaymentState } = useContext(AppContext)
     const [total, setTotal] = useState(0)
     const [discount, setDiscount] = useState(0)
+    const navigate = useNavigate()
     useEffect(() => {
         const total = cart.reduce((acc, item) => {
             const totalPrice = item.item.price - item.item.price * item.item.tag;
@@ -18,20 +19,25 @@ const Cart = () => {
         }, 0)
         setTotal(total)
     }, [cart])
-
+    
     const formatNumber = (number) => {
         return new Intl.NumberFormat('de-DE').format(number);
     };
 
     const handleChange = (e) => {
         const discountVal = e.target.value
+        if (discountVal === ""){
+            setDiscount(0)
+            return
+        }
         axios.get(`http://localhost:8082/vouchers/${discountVal}`)
         .then((res) => {
             if (res.data) {
-                console.log(res.data)
-                if (total >= res.data.conditionValue){
-                    setDiscount(total - ((total*res.data.percent)/100));
+                if (res.data.message === "Voucher don't exist"){
+                    setDiscount(0)
+                    return
                 }
+                setDiscount((total >= res.data.conditionValue) ? (total - ((total*res.data.percent)/100)) : 0)
             }
         })
         .catch((err) => {
@@ -40,10 +46,16 @@ const Cart = () => {
         });
     }
 
-    function makeOrder() {
-        // const temp = {}
-        // setOrder({ cart: cart, total: total, discount: discount, info: temp })
-        // history.push('/thanh-toan'); 
+    const makeOrder = () => {
+        const price = total - discount
+        const paymentObj = {
+            tempPrice: total,
+            discount: discount,
+            totalPrice: price,
+            from: 'cart'
+        }
+        getPaymentState(paymentObj)
+        navigate('/thanh-toan')
     }
     return (
         <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
@@ -116,7 +128,7 @@ const Cart = () => {
                                         <UseDiscount />
                                         <UseDiscount />
                                     </div>
-                                    <div className="w-4/5 flex flex-row mt-20">
+                                    <div className="w-4/5 flex flex-row mt-20 cursor-pointer">
                                         <Link
                                             to={"/thanh-toan"}
                                             className="relative bg-[#3e3e3e] w-full h-[50px] rounded-xl flex items-center group overflow-hidden"
@@ -157,9 +169,8 @@ const Cart = () => {
                             </div>
                             <div className="w-full flex flex-row justify-center">
                                 <div
-                                    // to={"/thanh-toan"}
                                     onClick={makeOrder}
-                                    className="relative bg-[#3e3e3e] w-4/5 h-[50px] rounded-xl flex items-center group overflow-hidden"
+                                    className="relative bg-[#3e3e3e] w-4/5 h-[50px] rounded-xl flex items-center group overflow-hidden cursor-pointer"
                                 >
                                     <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-300"></div>
                                     <p className="text-lg text-center w-full text-white font-bold z-10">Đặt hàng</p>
