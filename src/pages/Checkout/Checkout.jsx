@@ -119,14 +119,14 @@ const Checkout = () => {
             notify("Vui lòng nhập số điện thoại")
             return
         }
-        if (!city){
-            notify("Vui lòng nhập tỉnh/thành phố")
-            return
-        }
-        if (!district){
-            notify("Vui lòng nhập quận/huyện")
-            return
-        }
+        // if (!city){
+        //     notify("Vui lòng nhập tỉnh/thành phố")
+        //     return
+        // }
+        // if (!district){
+        //     notify("Vui lòng nhập quận/huyện")
+        //     return
+        // }
         if (!address){
             notify("Vui lòng nhập địa chỉ")
             return
@@ -134,8 +134,21 @@ const Checkout = () => {
         
         if (paymentMethod==="bank"){
             axios.post('http://localhost:8082/orders/payment', {
-                amount: 2000,
-                orderInfo: "oke"
+                amount: totalPrice + 30000,
+                orderInfo: `payment with ${totalPrice + 30000}`,
+                deliveryFee: 30000,
+                items: formatItems,
+                voucher: voucher,
+                customer: {
+                    name: name,
+                    phone: phone,
+                    address: address,
+                    email: email,
+                    note: "oke"
+                },
+                userId: "6659770a93ff789d47918207", // local storage
+                method: "bank",
+                from: from
             })
             .then((data) => {
                 window.open(data.data.payUrl, "_self")

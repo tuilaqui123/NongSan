@@ -46,6 +46,7 @@ const Store = () => {
                         {items.map((value, index) => {
                             return (
                                 <Item
+                                    key={index}
                                     itemColor={"green-800"}
                                     value={value}
                                 />

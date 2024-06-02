@@ -26,7 +26,6 @@ import Search from './pages/Search/Search';
 import ChatBox from './pages/ChatBot/ChatBox';
 import BlogDetail from './pages/Blog/BlogDetail';
 function App() {
-
   return (
     <div className="relative">
       <AppProvider>
