@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Item from '../../components/Item/Item';
 import CategorySelect from "./CategorySelect";
@@ -9,14 +9,9 @@ import { AppContext } from "../../Context/AppContext";
 import ResponsiveSelect from "./ResponsiveSelect";
 
 const Store = () => {
-
-    const { items, setItems, fetchItem } = useContext(AppContext)
-
-    console.log(items)
-
+    const { items, setItems, fetchItem, breadcrumb } = useContext(AppContext)
     const [showSelect, setShowSelect] = useState(false)
     const [location, setLocation] = useState("")
-
     return (
         <div className="relative w-full h-auto flex flex-col items-center py-5 mb-20 ">
             {showSelect && (
@@ -46,9 +41,21 @@ const Store = () => {
                         <RecommentSelect />
                     </div>
                     <div className="w-full lg:w-4/5 grid-cols-2 sm:grid-cols-3 grid md:grid-cols-4 gap-5 ">
-                        {items.map((value, index) => {
-                            return (
+                        {breadcrumb.second !== '' && items.map((value, index) => {
+                            if (value.type === breadcrumb.second){
+                                return (    
+                                    <Item
+                                        key={index}
+                                        itemColor={"green-800"}
+                                        value={value}
+                                    />
+                                )
+                            }
+                        })}
+                        {breadcrumb.second === '' && items.map((value, index) => {
+                            return (    
                                 <Item
+                                    key={index}
                                     itemColor={"green-800"}
                                     value={value}
                                 />

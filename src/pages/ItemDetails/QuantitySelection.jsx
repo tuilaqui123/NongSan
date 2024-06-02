@@ -20,13 +20,13 @@ const QuantitySelection = ({ quantity, updateQuantity, limit }) => {
                 <p className="font-bold text-base">Số lượng: </p>
                 <div className="flex flex-row items-center">
                     <div className="border border-[#3e3e3e] rounded-full p-1 cursor-pointer " onClick={MinusQuantity}>
-                        <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 12h14" ></path>
                         </svg>
                     </div>
                     <p className="mx-3 text-lg font-bold">{quantity}</p>
                     <div className="border border-[#3e3e3e] rounded-full p-1 cursor-pointer " onClick={AddQuantity}>
-                        <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 12h14"></path>
                             <path d="M12 5v14"></path>
                         </svg>
