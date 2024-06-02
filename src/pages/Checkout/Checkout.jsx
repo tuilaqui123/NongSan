@@ -131,7 +131,18 @@ const Checkout = () => {
             notify("Vui lòng nhập địa chỉ")
             return
         }
-        
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regexEmail.test(email)){
+            notify("Nhập sai định dạng email")
+            return
+        }
+
+        const regexPhone = /^(\+?\d{1,4}[\s-]?)?(\(?\d{3}\)?[\s-]?)?\d{3}[\s-]?\d{4}$/;
+        if (!regexPhone.test(phone)){
+            notify("Nhập sai định dạng số điện thoại")
+            return
+        }
+
         if (paymentMethod==="bank"){
             axios.post('http://localhost:8082/orders/payment', {
                 amount: totalPrice + 30000,
@@ -268,7 +279,6 @@ const Checkout = () => {
                                             <p className="text-2xl font-bold text-[#7dc642]">{formatNumber(totalPrice+30000)}đ</p>
                                         </div>
                                         <div
-                                            // to={"/hoa-don"}
                                             onClick={() => handlePayment()}
                                             className="relative bg-[#3e3e3e] w-4/5 h-[50px] border border-white hover:border-[#7dc642] rounded-xl flex items-center group overflow-hidden mt-5 cursor-pointer"
                                         >

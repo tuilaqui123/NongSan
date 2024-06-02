@@ -9,9 +9,7 @@ import { AppContext } from "../../Context/AppContext";
 import ResponsiveSelect from "./ResponsiveSelect";
 
 const Store = () => {
-
-    const { items, setItems, fetchItem } = useContext(AppContext)
-
+    const { items, setItems, fetchItem, breadcrumb } = useContext(AppContext)
     const [showSelect, setShowSelect] = useState(false)
     const [location, setLocation] = useState("")
     return (
@@ -43,8 +41,19 @@ const Store = () => {
                         <RecommentSelect />
                     </div>
                     <div className="w-full lg:w-4/5 grid-cols-2 sm:grid-cols-3 grid md:grid-cols-4 gap-5 ">
-                        {items.map((value, index) => {
-                            return (
+                        {breadcrumb.second !== '' && items.map((value, index) => {
+                            if (value.type === breadcrumb.second){
+                                return (    
+                                    <Item
+                                        key={index}
+                                        itemColor={"green-800"}
+                                        value={value}
+                                    />
+                                )
+                            }
+                        })}
+                        {breadcrumb.second === '' && items.map((value, index) => {
+                            return (    
                                 <Item
                                     key={index}
                                     itemColor={"green-800"}
