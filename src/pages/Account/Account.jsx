@@ -3,7 +3,7 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import avt from '../../assets/cmt.jpg'
 import clsx from "clsx";
 import AccountButton from "./AccountButton";
-
+import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 
 
@@ -11,11 +11,17 @@ import { Outlet } from "react-router-dom";
 const Account = () => {
     const [select, setSelect] = useState(1)
     const [navSlide, setNavSlide] = useState(false)
-
+    const navigate = useNavigate()
     function Choose(choose) {
         setSelect(choose)
     }
 
+    // const logout = () => {
+    //     Choose(5)
+    //     localStorage.removeItem("user")
+    //     localStorage.removeItem("token")
+    //     navigate('/dang-nhap')
+    // }
 
     return (
         <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
@@ -66,6 +72,14 @@ const Account = () => {
                             position={4}
                             select={select}
                             onclick={() => Choose(4)}
+                        />
+                        <AccountButton
+                            icon={"fa-solid fa-sign-out"}
+                            name={"Đăng xuất"}
+                            position={5}
+                            select={select}
+                            onclick={() => Choose(5)}
+                            // path={"/trang-chu"}
                         />
                     </div>
                 </div>

@@ -57,7 +57,7 @@ const SignIn = () => {
                     progress: undefined,
                     theme: "light",
                     onClose: () => {
-                        navigate('/trang-chu')
+                        navigate('/trang-chu', {replace: true})
                     }
                 });
             }

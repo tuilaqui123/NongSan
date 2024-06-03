@@ -29,8 +29,11 @@ const Checkout = () => {
     const [userId, setUserId] = useState(null)
     const navigate = useNavigate()
     useEffect(() => {
-        const userObj = JSON.parse(localStorage.user)
-        setUserId(userObj._id)
+        if (localStorage.user) {
+            const userObj = JSON.parse(localStorage.user)
+            setUserId(userObj._id)
+        }
+
         if (from === "cart") {
             setFormatItems(items.map((ele) => {
                 return {
