@@ -5,7 +5,13 @@ import 'swiper/css/pagination';
 import Item from '../Item/Item'
 import SwiperNavControl from "./SwiperNavControl";
 
-const RecommentItem = () => {
+const RecommentItem = ({farm}) => {
+    const [list, setList] = useState([])
+    useEffect(() => {
+        axios.get(`http://localhost:8082/items/farm/${farm}`)
+        .then((res) => setList(res.data))
+        .catch((err) => console.log(err))
+    }, [farm])
     return (
         <div className="w-11/12">
             <p className="font-bold text-3xl">SẢN PHẨM LIÊN QUAN</p>
@@ -27,18 +33,11 @@ const RecommentItem = () => {
                     loop={true}
                     className="mySwiper"
                 >
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
-                    <SwiperSlide> <Item itemColor={"green-800"} /> </SwiperSlide>
+                    {list.map((ele, index) => {
+                        return (
+                            <SwiperSlide key={index}> <Item itemColor={"green-800"} value={ele}/> </SwiperSlide>
+                        )
+                    })}
                     <SwiperNavControl />
                 </Swiper>
             </div>
