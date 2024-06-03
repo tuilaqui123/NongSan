@@ -86,9 +86,9 @@ const Farm = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full mt-32 flex justify-center pr-1">
+            {/* <div className="w-full mt-32 flex justify-center pr-1">
                 <RecommentItem />
-            </div>
+            </div> */}
         </div>
     );
 }
