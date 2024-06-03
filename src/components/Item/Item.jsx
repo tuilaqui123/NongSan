@@ -17,6 +17,9 @@ const Item = ({ itemColor, value }) => {
 
         setBreadcrumb(temp)
     }
+    const formatNumber = (number) => {
+        return new Intl.NumberFormat('de-DE').format(number);
+    };
     return (
         <>
             {value && (
@@ -48,9 +51,9 @@ const Item = ({ itemColor, value }) => {
                             </div>
                             <div className="flex flex-row items-center justify-between">
                                 <div className="flex flex-row items-end gap-1">
-                                    <p className="text-xl font-bold text-[#3e3e3e] group-hover:text-white duration-100">{value.price - value.price * value.tag}đ</p>
+                                    <p className="text-xl font-bold text-[#3e3e3e] group-hover:text-white duration-100">{formatNumber(value.price - value.price * value.tag)}đ</p>
                                     {value.tag != 0 && (
-                                        <p className="line-through text-gray-400 text-base font-medium group-hover:text-white">{value.price}đ</p>
+                                        <p className="line-through text-gray-400 text-base font-medium group-hover:text-white">{formatNumber(value.price)}đ</p>
                                     )}
                                 </div>
                             </div>
