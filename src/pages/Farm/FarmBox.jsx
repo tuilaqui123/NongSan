@@ -11,7 +11,7 @@ const FarmBox = ({ onclick, isShow, value }) => {
                 >
                     <img
                         src={value.image}
-                        className="w-auto h-[150px] group-hover:scale-110 duration-200"
+                        className="w-auto group-hover:scale-110 duration-200"
                     />
                 </div>
             )}

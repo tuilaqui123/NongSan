@@ -34,7 +34,7 @@ const Item = ({ itemColor, value }) => {
                             <img
                                 src={value.image}
                                 alt="item"
-                                className="w-full h-[150px] group-hover:scale-125 group-hover:brightness-110 duration-300"
+                                className="w-full group-hover:scale-125 group-hover:brightness-110 duration-300"
                             />
                             {/* <StatusTag>
                         <p className="text-white text-sm">HOT DEAL</p>

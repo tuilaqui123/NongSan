@@ -20,32 +20,32 @@ const Cart = () => {
         }, 0)
         setTotal(total)
     }, [cart])
-    
+
     const formatNumber = (number) => {
         return new Intl.NumberFormat('de-DE').format(number);
     };
 
     const handleChange = (e) => {
         const discountVal = e.target.value
-        if (discountVal === ""){
+        if (discountVal === "") {
             setDiscount(0)
             return
         }
         axios.get(`http://localhost:8082/vouchers/${discountVal}`)
-        .then((res) => {
-            if (res.data) {
-                if (res.data.message === "Voucher don't exist"){
-                    setDiscount(0)
-                    return
+            .then((res) => {
+                if (res.data) {
+                    if (res.data.message === "Voucher don't exist") {
+                        setDiscount(0)
+                        return
+                    }
+                    setVoucherSelect(res.data._id)
+                    setDiscount((total >= res.data.conditionValue) ? (total - ((total * res.data.percent) / 100)) : 0)
                 }
-                setVoucherSelect(res.data._id)
-                setDiscount((total >= res.data.conditionValue) ? (total - ((total*res.data.percent)/100)) : 0)
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-            setDiscount(0);
-        });
+            })
+            .catch((err) => {
+                console.error(err);
+                setDiscount(0);
+            });
     }
 
     const makeOrder = () => {

@@ -3,14 +3,10 @@ import clsx from "clsx";
 import OrderBox from "./OrderBox";
 import '../../hiddenScroll.css'
 
-const OrderHistory = ({ position, select }) => {
+const OrderHistory = () => {
     return (
         <div
-            // className="w-11/12"
-            className={clsx({
-                "w-full lg:w-11/12": position == select,
-                "hidden": position !== select,
-            })}
+            className="w-full h-full"
         >
             <p className="text-4xl font-bold">Lịch sử đơn hàng</p>
             <div className="relative h-[50px] w-full flex flex-row items-center mt-5">
@@ -28,7 +24,7 @@ const OrderHistory = ({ position, select }) => {
                     <p className="text-sm sm:text-base font-bold justify-self-center">Tổng tiền</p>
                     <p className="text-sm sm:text-base font-bold justify-self-end">Trạng thái</p>
                 </div>
-                <div className="w-full h-[50vh] flex flex-col gap-3 overflow-y-scroll scrollable-div">
+                <div className="w-full h-[60vh] flex flex-col gap-3 overflow-y-scroll scrollable-div">
                     <OrderBox />
                     <OrderBox />
                     <OrderBox />
