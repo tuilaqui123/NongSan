@@ -18,9 +18,13 @@ const ItemDetails = () => {
     const [quantity, setQuantity] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
     const { getPaymentState } = useContext(AppContext)
+    const [userId, setUserId] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
     useEffect(() => {
+        const userObj = JSON.parse(localStorage.user)
+        setUserId(userObj._id)
+
         const fetchItem = () => {
             axios.get(`http://localhost:8082/items/${params.name}`)
             .then((res) => {
@@ -40,7 +44,7 @@ const ItemDetails = () => {
     const addCart = () => {
         setIsLoading(true)
         axios.post('http://localhost:8082/carts', {
-            customerId: "6659770a93ff789d47918207", // lấy từ local storage
+            customerId: userId,
             itemId: item._id,
             amount: quantity
         })

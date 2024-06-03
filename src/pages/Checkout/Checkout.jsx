@@ -24,8 +24,11 @@ const Checkout = () => {
     const [address, setAddress] = useState("")
     const [paymentMethod, setPaymentMethod] = useState("cash")
     const [isLoading, setIsLoading] = useState(false)
+    const [userId, setUserId] = useState(null)
     const navigate = useNavigate()
     useEffect(() => {
+        const userObj = JSON.parse(localStorage.user)
+        setUserId(userObj._id)
         if (from === "cart"){
             setFormatItems(items.map((ele) => {
                 return {
@@ -78,7 +81,7 @@ const Checkout = () => {
                 email: email,
                 note: "oke"
             },
-            userId: "6659770a93ff789d47918207", // local storage
+            userId: userId,
             method: "cash",
             from: from
         })
@@ -157,7 +160,7 @@ const Checkout = () => {
                     email: email,
                     note: "oke"
                 },
-                userId: "6659770a93ff789d47918207", // local storage
+                userId: userId,
                 method: "bank",
                 from: from
             })
