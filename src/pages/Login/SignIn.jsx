@@ -1,13 +1,72 @@
 import clsx from "clsx";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignIn = () => {
-
     const [showPassrword, setShowPassword] = useState(false)
+    const [emailPhone, setEmailPhone] = useState(null)
+    const [password, setPassword] = useState(null)
+    const navigate = useNavigate()
+    const notifyError = (message) => {
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 700,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
+    const handleSignIn = () => {
+        if (!emailPhone){
+            notifyError("Vui lòng nhập email hoặc số điện thoại")
+            return
+        }
+        if (!password){
+            notifyError("Vui lòng nhập password")
+            return
+        }
 
+        axios.post('http://localhost:8082/login', {
+            email: emailPhone,
+            password:  password
+        })
+        .then((res) => {
+            if (res.data.message === 'User not registered'){
+                notifyError("Email hoặc số điện thoại chưa được đăng ký")
+                return
+            }else if (res.data.message === 'Wrong Password'){
+                notifyError("Sai mật khẩu")
+                return
+            }else{
+                localStorage.setItem('token', res.data.accessToken)
+                localStorage.setItem('user', JSON.stringify(res.data.user))
+
+                toast.success("Đăng nhập thành công", {
+                    position: "top-right",
+                    autoClose: 700,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    onClose: () => {
+                        navigate('/trang-chu')
+                    }
+                });
+            }
+        })
+        .catch(err => console.log(err))
+    }
     return (
         <div className="w-full lg:w-3/5 h-[90vh] flex flex-col items-center lg:items-start">
+            <ToastContainer/>
             <p className="text-4xl font-bold text-[#7dc642]">Đăng nhập</p>
             <div className="w-full h-3/5 pt-10 lg:w-10/12">
                 <div className="w-full mb-1">
@@ -15,6 +74,7 @@ const SignIn = () => {
                     <input
                         type="text"
                         placeholder="Email/Số điện thoại"
+                        onChange={(e) => setEmailPhone(e.target.value)}
                         className="w-full h-[50px] border border-[#3e3e3e] pl-3 font-medium rounded-lg focus:ring-[#7dc642] focus:outline-[#7dc642]"
                     />
                     <p className="text-sm italic w-full text-end text-[#ff4343] invisible ">Vui lòng nhập thông tin</p>
@@ -25,6 +85,7 @@ const SignIn = () => {
                         <input
                             type={showPassrword ? "text" : "password"}
                             placeholder="Mật khẩu"
+                            onChange={(e) => setPassword(e.target.value)}
                             className="w-full h-[50px] border border-[#3e3e3e] pl-3 font-medium rounded-lg focus:ring-[#7dc642] focus:outline-[#7dc642]"
                         />
                         <i
@@ -40,7 +101,7 @@ const SignIn = () => {
                 </div>
 
                 <div className="w-full flex flex-row justify-between items-center">
-                    <button className="relative w-1/3 overflow-hidden h-[50px] flex items-center justify-start bg-[#3e3e3e] rounded-xl cursor-pointer  group  duration-700 ease-linear">
+                    <button onClick={handleSignIn} className="relative w-1/3 overflow-hidden h-[50px] flex items-center justify-start bg-[#3e3e3e] rounded-xl cursor-pointer  group  duration-700 ease-linear">
                         <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-200"></div>
                         <p className="text-lg w-full text-white font-bold z-10">
                             Đăng nhập

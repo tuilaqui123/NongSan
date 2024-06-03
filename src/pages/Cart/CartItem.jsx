@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import itemImg from '../../assets/image/item.png'
 import QuantitySelectionCart from "./QuantitySelecotionCart";
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,14 +11,19 @@ import axios from "axios";
 const CartItem = ({ value }) => {
     const [quantity, setQuantity] = useState(value.amount)
     const [isLoading, setIsLoading] = useState(false)
+    const [userId, setUserId] = useState(null)
     const { fetchCart } = useContext(AppContext)
     const [dialogVisible, setDialogVisible] = useState(false);
     const formatNumber = (number) => {
         return new Intl.NumberFormat('de-DE').format(number);
     };
+    useEffect(() => {
+        const userObj = JSON.parse(localStorage.user)
+        setUserId(userObj._id)
+    }, [])
     const deleteItem = () => {
         setIsLoading(true)
-        axios.delete(`http://localhost:8082/carts/665995e6c747351b4d9a709b?customerId=6659770a93ff789d47918207&itemId=${value._id}`)
+        axios.delete(`http://localhost:8082/carts/665995e6c747351b4d9a709b?customerId=${userId}&itemId=${value._id}`)
             .then(() => {
                 toast.success('Xóa sản phẩm trong giỏ hàng thành công', {
                     position: "top-right",
