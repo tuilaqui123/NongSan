@@ -201,7 +201,7 @@ const ItemDetails = () => {
                             </div>
                         </div>
                         <div className="w-full flex justify-center mt-20">
-                            <RecommentItem />
+                            <RecommentItem farm={item.farm}/>
                         </div>
                         <ToastContainer />
                     </div>
