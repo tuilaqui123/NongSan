@@ -9,6 +9,7 @@ const AccountButton = ({ icon, name, position, select, onclick, path }) => {
         localStorage.removeItem("token")
         navigate('/trang-chu', {replace: true})
     }   
+    
     return (
         <>
             {select !== 5 && (
@@ -33,7 +34,12 @@ const AccountButton = ({ icon, name, position, select, onclick, path }) => {
                                     "w-[40px] h-[40px] flex justify-center items-center border border-dashed rounded-full z-10": position !== select
                                 })}
                             >
-                                <i class={`${icon} text-lg text-white group-hover:text-[#7dc642]`}></i>
+                                <i
+                                    className={clsx(icon, "text-lg", "text-white", {
+                                        "group-hover:text-white text-white": position == select,
+                                        "group-hover:text-[#7dc642] text-[#3e3e3e]": position !== select,
+                                    })}
+                                ></i>
                             </div>
                             <div className="absolute left-[-5px] w-[50px] h-[50px] flex justify-center items-center bg-[#3e3e3e] rounded-full"></div>
                         </div>
@@ -42,7 +48,6 @@ const AccountButton = ({ icon, name, position, select, onclick, path }) => {
                                 "text-white font-bold text-lg ml-2": position == select,
                                 "text-[#3e3e3e] font-bold text-base ml-2 group-hover:text-[#7dc642]": position !== select,
                             })}
-                        // className="text-[#3e3e3e] font-bold text-base ml-2 group-hover:text-[#7dc642]"
                         >
                             {name}
                         </p>

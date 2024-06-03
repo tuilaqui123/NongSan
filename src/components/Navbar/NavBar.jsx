@@ -54,8 +54,12 @@ const NavBar = () => {
     }
 
     function handleSearch() {
-        navigate(`/tim-kiem/${search}`)
-        setSearch("")
+        const trimmedSearch = search.trim();
+
+        if (trimmedSearch !== "") {
+            navigate(`/tim-kiem/${trimmedSearch}`);
+            setSearch("");
+        } else setSearch("")
     }
 
     return (
