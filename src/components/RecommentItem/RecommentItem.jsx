@@ -13,7 +13,6 @@ const RecommentItem = ({farm}) => {
         .then((res) => setList(res.data))
         .catch((err) => console.log(err))
     }, [farm])
-    console.log(list)
     return (
         <>
             {list && (
