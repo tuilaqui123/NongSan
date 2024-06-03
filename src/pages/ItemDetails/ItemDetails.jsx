@@ -22,8 +22,10 @@ const ItemDetails = () => {
     const params = useParams()
     const navigate = useNavigate()
     useEffect(() => {
-        const userObj = JSON.parse(localStorage.user)
-        setUserId(userObj._id)
+        if (localStorage.user){
+            const userObj = JSON.parse(localStorage.user)
+            setUserId(userObj._id)
+        }
 
         const fetchItem = () => {
             axios.get(`http://localhost:8082/items/${params.name}`)

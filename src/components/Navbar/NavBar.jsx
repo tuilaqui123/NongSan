@@ -12,6 +12,7 @@ const NavBar = () => {
     const [sideBar, setSideBar] = useState(true)
     const [search, setSearch] = useState("")
     const [isPast, setIsPast] = useState(false);
+    const [token, setToken] = useState(null);
     const divRef = useRef(null);
     const navigate = useNavigate()
     const handleScroll = () => {
@@ -35,6 +36,10 @@ const NavBar = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    useEffect(() => {
+        setToken(localStorage.token);
+    }, [])
 
     function showSideBar(main, child) {
         const temp = {
@@ -248,7 +253,7 @@ const NavBar = () => {
                                 <i class="fa-solid fa-magnifying-glass absolute cursor-pointer hover:bg-[#3e3e3e] mr-5 right-0 text-xl text-[#7dc642]"></i>
                             </div>
                             <div className=" flex flex-row justify-evenly gap-7 w-3/12 lg:gap-2 lg:justify-center sm:w-4/12 ">
-                                <RouterButton path={"/tai-khoan"}>
+                                <RouterButton path={token ? "/tai-khoan" : "/dang-nhap"}>
                                     <div class="flex flex-row items-center gap-2 cursor-pointer group">
                                         <div className="relative flex items-center justify-center">
                                             <i class="absolute fa-solid fa-circle-user fa-2x text-transparent rounded-full border border-[#7dc642] hover:scale-125 duration-200 group-hover:scale-125"></i>
@@ -256,7 +261,7 @@ const NavBar = () => {
                                         </div>
                                         <div className="hidden lg:block">
                                             <p class="text-white font-normal text-sm text-left">Tài khoản</p>
-                                            {localStorage.token ? <div className="text-[#7dc642] font-medium text-sm text-left">{JSON.parse(localStorage.user).email}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}
+                                            {token ? <div className="text-[#7dc642] font-medium text-sm text-left">{JSON.parse(localStorage.user).email}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}
                                         </div>
                                     </div>
                                 </RouterButton>
@@ -375,9 +380,6 @@ const NavBar = () => {
                     </div>
                 </div>
             </div>
-            {/* {isPast && (
-                <ScrollNavBar />
-            )} */}
         </div>
 
     );
