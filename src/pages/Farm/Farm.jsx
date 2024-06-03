@@ -13,32 +13,15 @@ const Farm = () => {
 
     const { farms, setFarms, fetchFarm } = useContext(AppContext)
 
-    const [preInfo, setPreInfo] = useState(false)
-    const [preHeight, setPreHeigth] = useState(0)
     const [preFarm, setPreFarm] = useState([])
+    const [isShow, setIsShow] = useState(false)
 
+    console.log(farms)
 
-    useEffect(() => {
-        setPreInfo(false)
-        setPreHeigth(0)
-    }, [])
-
-    function showPreInfo(value) {
-
+    function showFarm(value) {
         setPreFarm(value)
-
-        console.log(value)
-
-        const element = document.getElementById("FarmPreview");
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            console.error(`Element with id "${id}" not found.`);
-        }
-
-        if (!preInfo) setPreHeigth("[90vh]")
-        else setPreHeigth(0)
-        setPreInfo(!preInfo)
+        if (value == preFarm)
+            setIsShow(!isShow)
     }
 
     return (
@@ -65,21 +48,17 @@ const Farm = () => {
                             </div>
                         </p>
                     </div>
-                    {preInfo && (
-                        <FarmInfo
-                            preHeight={preHeight}
-                            preInfo={preInfo}
-                            value={preFarm}
-                        />
-                    )}
+                    <FarmInfo
+                        isShow={isShow}
+                        value={preFarm}
+                    />
 
                     <div className="w-full grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-5 md:mt-10">
                         {farms.map((value, index) => {
                             return (
                                 <FarmBox
                                     key={index}
-                                    onclick={() => showPreInfo(value)}
-                                    isShow={preInfo}
+                                    onclick={() => showFarm(value)}
                                     value={value}
                                 />
                             )
