@@ -11,6 +11,7 @@ const NavBar = () => {
     const { breadcrumb, setBreadcrumb, cart } = useContext(AppContext)
     const [sideBar, setSideBar] = useState(true)
     const [isPast, setIsPast] = useState(false);
+    const [token, setToken] = useState(null);
     const divRef = useRef(null);
     const handleScroll = () => {
         if (divRef.current) {
@@ -34,6 +35,10 @@ const NavBar = () => {
         };
     }, []);
 
+    useEffect(() => {
+        setToken(localStorage.token);
+    }, [])
+
     function showSideBar(main, child) {
         const temp = {
             main: main,
@@ -51,7 +56,7 @@ const NavBar = () => {
         setBreadcrumb(temp)
     }
     return (
-        <>
+        <div className="sticky top-0 z-40">
             <div className="w-full relative" ref={divRef}>
                 <div className={clsx("fixed sm:hidden w-full h-screen z-30 flex flex-row", { 'hidden': sideBar })}>
                     <div className="w-3/5 bg-[#3e3e3e] h-full p-3 z-30 flex flex-row-reverse gap-5">
@@ -236,7 +241,7 @@ const NavBar = () => {
                                 <i class="fa-solid fa-magnifying-glass absolute mr-5 right-0 text-xl text-[#7dc642]"></i>
                             </div>
                             <div className=" flex flex-row justify-evenly gap-7 w-3/12 lg:gap-2 lg:justify-center sm:w-4/12 ">
-                                <RouterButton path={"/tai-khoan"}>
+                                <RouterButton path={token ? "/tai-khoan" : "/dang-nhap"}>
                                     <div class="flex flex-row items-center gap-2 cursor-pointer group">
                                         <div className="relative flex items-center justify-center">
                                             <i class="absolute fa-solid fa-circle-user fa-2x text-transparent rounded-full border border-[#7dc642] hover:scale-125 duration-200 group-hover:scale-125"></i>
@@ -244,7 +249,7 @@ const NavBar = () => {
                                         </div>
                                         <div className="hidden lg:block">
                                             <p class="text-white font-normal text-sm text-left">Tài khoản</p>
-                                            {localStorage.token ? <div className="text-[#7dc642] font-medium text-sm text-left">{JSON.parse(localStorage.user).email}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}
+                                            {token ? <div className="text-[#7dc642] font-medium text-sm text-left">{JSON.parse(localStorage.user).email}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}
                                         </div>
                                     </div>
                                 </RouterButton>
@@ -363,10 +368,7 @@ const NavBar = () => {
                     </div>
                 </div>
             </div>
-            {isPast && (
-                <ScrollNavBar />
-            )}
-        </>
+        </div>
 
     );
 }
