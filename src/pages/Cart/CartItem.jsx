@@ -19,27 +19,27 @@ const CartItem = ({ value }) => {
     const deleteItem = () => {
         setIsLoading(true)
         axios.delete(`http://localhost:8082/carts/665995e6c747351b4d9a709b?customerId=6659770a93ff789d47918207&itemId=${value._id}`)
-        .then(() => {
-            toast.success('Xóa sản phẩm trong giỏ hàng thành công', {
-                position: "top-right",
-                autoClose: 700,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                onClose: async() => {
-                    await fetchCart()
-                }
-            });
-        })
-        .catch((err) =>{
-            console.log(err)
-        })
-        .finally(() => {
-            setIsLoading(false)
-        })
+            .then(() => {
+                toast.success('Xóa sản phẩm trong giỏ hàng thành công', {
+                    position: "top-right",
+                    autoClose: 700,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    onClose: async () => {
+                        await fetchCart()
+                    }
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
     }
 
     const handleDialogResponse = (confirmed) => {
@@ -50,12 +50,12 @@ const CartItem = ({ value }) => {
     };
     return (
         <>
-            {isLoading == false ? 
+            {isLoading == false ?
                 value && (
                     <div className="w-full flex flex-row mt-3 pt-3 border-t border-gray-300">
-                        <ToastContainer/>
+                        <ToastContainer />
                         <div className="w-1/12 flex items-center justify-center">
-                            <i className="fa-solid fa-xmark-circle cursor-pointer hover:text-[#fc0307]" 
+                            <i className="fa-solid fa-xmark-circle cursor-pointer hover:text-[#fc0307]"
                                 onClick={() => setDialogVisible(true)}></i>
                         </div>
                         <div className="w-11/12 md:w-7/12 flex flex-row gap-3">
@@ -89,7 +89,7 @@ const CartItem = ({ value }) => {
                         <p className="w-2/12 text-end font-medium text-[17px] md:block hidden">{formatNumber(value.price)}đ</p>
                         {dialogVisible && <DialogForm onDialog={handleDialogResponse} />}
                     </div>
-                ) 
+                )
                 :
                 <div className="flex justify-center items-center h-[250px]">
                     <BeatLoader
@@ -97,7 +97,7 @@ const CartItem = ({ value }) => {
                         size={30}
                     />
                 </div>
-            } 
+            }
         </>
     );
 }

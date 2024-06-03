@@ -14,6 +14,8 @@ remake checkout
 remake order success
 blog detail
 
+đổi điểm lấy mã giảm giá
+
 pts farm img
 
 set auto roll up when load

@@ -25,6 +25,9 @@ import StoreDisplay from './pages/Store/StoreDisplay';
 import Search from './pages/Search/Search';
 import ChatBox from './pages/ChatBot/ChatBox';
 import BlogDetail from './pages/Blog/BlogDetail';
+import AccountInfo from './pages/Account/AccountInfo';
+import OrderHistory from './pages/Account/OrderHistory';
+import OrderShipping from './pages/Account/OrderShipping';
 function App() {
   return (
     <div className="relative">
@@ -47,7 +50,11 @@ function App() {
 
               <Route path="/lien-he" element={<Contact />} />
 
-              <Route path="/tai-khoan" element={<Account />} />
+              <Route path="/tai-khoan" element={<Account />}>
+                <Route index element={<AccountInfo />} />
+                <Route path='lich-su' element={<OrderHistory />} />
+                <Route path='don-hang' element={<OrderShipping />} />
+              </Route>
 
               <Route path="/gio-hang" element={<Cart />} />
               <Route path="/thanh-toan" element={<Checkout />} />
