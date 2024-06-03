@@ -7,6 +7,7 @@ import AccountButton from "./AccountButton";
 import { Outlet } from "react-router-dom";
 
 
+
 const Account = () => {
     const [select, setSelect] = useState(1)
     const [navSlide, setNavSlide] = useState(false)

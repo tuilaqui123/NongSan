@@ -52,16 +52,16 @@ export const AppProvider = ({ children }) => {
                 console.log(err)
             })
     }
-    
+
     //cart
     const fetchCart = (customerId) => {
         axios.get("http://localhost:8082/carts/6659770a93ff789d47918207")
-        .then((res) => {
-            setCart(res.data.items)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            .then((res) => {
+                setCart(res.data.items)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     //item
@@ -84,6 +84,7 @@ export const AppProvider = ({ children }) => {
         fetchItem()
         fetchCart()
     }, [])
+
 
     return <AppContext.Provider value={{
         breadcrumb, setBreadcrumb,
