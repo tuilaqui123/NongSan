@@ -5,8 +5,11 @@ import RegisterRecomment from "../../components/RegisterRecomment/RegisterRecomm
 import News from "../../components/News/News";
 import HotDeal from "../../components/HotDeal/HotDeal";
 import FarmContent from "../../components/FarmContent/FarmContent";
+import { useContext } from "react";
+import { AppContext } from "../../Context/AppContext";
 
 const Home = () => {
+    const { items } = useContext(AppContext)
     return (
         <div>
             <BannerReverse />
@@ -17,30 +20,35 @@ const Home = () => {
                 themeColor={"green-100"}
                 itemColor={"red-800"}
                 title={"Thịt tươi"}
+                value={items}
             />
             <CategoryDisplay
                 mainColor={"blue-500"}
                 themeColor={"white"}
                 itemColor={"blue-800"}
                 title={"Hải sản"}
+                value={items}
             />
             <CategoryDisplay
                 mainColor={"green-500"}
                 themeColor={"green-100"}
                 itemColor={"green-800"}
                 title={"Rau củ"}
+                value={items}
             />
             <CategoryDisplay
                 mainColor={"orange-500"}
                 themeColor={"white"}
                 itemColor={"orange-800"}
                 title={"Trái cây"}
+                value={items}
             />
             <CategoryDisplay
                 mainColor={"slate-500"}
                 themeColor={"green-100"}
                 itemColor={"gray-800"}
                 title={"Gói nguyên liệu"}
+                value={items}
             />
             <FarmContent />
             <RegisterRecomment />

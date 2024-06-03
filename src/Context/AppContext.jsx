@@ -89,6 +89,17 @@ export const AppProvider = ({ children }) => {
         fetchCart()
     }, [])
 
+    function RollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    useEffect(() => {
+        RollToTop()
+    }, [params])
+
 
     return <AppContext.Provider value={{
         breadcrumb, setBreadcrumb,

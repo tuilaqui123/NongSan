@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import FarmBox from "./FarmBox";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -6,8 +6,10 @@ import 'swiper/css/pagination';
 import SwiperNavControl from "../RecommentItem/SwiperNavControl";
 import StyleRouterButton from "../ButtonComponent/StyleRouterButton";
 import farmImg from '../../assets/farm.png'
+import { AppContext } from "../../Context/AppContext";
 
 const FarmContent = () => {
+    const { farms } = useContext(AppContext)
     return (
         <div className=" flex items-center justify-center ">
             <div className="w-11/12 py-20 flex flex-col justify-center items-center">
@@ -25,6 +27,7 @@ const FarmContent = () => {
                                 responsive={"w-11/12 md:w-9/12 "}
                                 topColor={"green-500"}
                                 bottomColor={"[#3e3e3e]"}
+                                path={"/trang-trai"}
                             >
                                 <p className="text-white text-sm font-medium">Xem thêm</p>
                             </StyleRouterButton>
@@ -42,55 +45,23 @@ const FarmContent = () => {
                                 slidesPerView: 3,
                             },
                             1024: {
-                                slidesPerView: 4,
+                                slidesPerView: 5,
                             },
                         }}
                         spaceBetween={10}
                         loop={true}
                         className="mySwiper w-full"
                     >
-                        <SwiperSlide>
-                            <FarmBox
-                                farmImage={farmImg}
-                                name={"Công ty thiên nhiên Việt"}
-                                content={"Công ty nhiên nhiên Việt chuyên về sản xuất các mặt hàng từ Việt Nam..."}
-                            />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <FarmBox
-                                farmImage={farmImg}
-                                name={"Công ty thiên nhiên Việt"}
-                                content={"Công ty nhiên nhiên Việt chuyên về sản xuất các mặt hàng từ Việt Nam..."}
-                            />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <FarmBox
-                                farmImage={farmImg}
-                                name={"Công ty thiên nhiên Việt"}
-                                content={"Công ty nhiên nhiên Việt chuyên về sản xuất các mặt hàng từ Việt Nam..."}
-                            />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <FarmBox
-                                farmImage={farmImg}
-                                name={"Công ty thiên nhiên Việt"}
-                                content={"Công ty nhiên nhiên Việt chuyên về sản xuất các mặt hàng từ Việt Nam..."}
-                            />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <FarmBox
-                                farmImage={farmImg}
-                                name={"Công ty thiên nhiên Việt"}
-                                content={"Công ty nhiên nhiên Việt chuyên về sản xuất các mặt hàng từ Việt Nam..."}
-                            />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <FarmBox
-                                farmImage={farmImg}
-                                name={"Công ty thiên nhiên Việt"}
-                                content={"Công ty nhiên nhiên Việt chuyên về sản xuất các mặt hàng từ Việt Nam..."}
-                            />
-                        </SwiperSlide>
+                        {farms.map((value, index) => {
+                            return (
+                                <SwiperSlide key={index}>
+                                    <FarmBox
+                                        value={value}
+                                    />
+                                </SwiperSlide>
+                            )
+                        })}
+
 
                         <SwiperNavControl />
                     </Swiper>

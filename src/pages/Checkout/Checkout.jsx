@@ -10,10 +10,12 @@ import BeatLoader from "react-spinners/BeatLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import axios from "axios";
+import HCM from "../../Context/HCM";
+
 
 const Checkout = () => {
     const { order, setOrder, paymentState, setPaymentState, cart, fetchCart } = useContext(AppContext)
-    const {items, voucher, tempPrice, discount, totalPrice, from} = paymentState
+    const { items, voucher, tempPrice, discount, totalPrice, from } = paymentState
     const [formatItems, setFormatItems] = useState([])
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -29,7 +31,7 @@ const Checkout = () => {
     useEffect(() => {
         const userObj = JSON.parse(localStorage.user)
         setUserId(userObj._id)
-        if (from === "cart"){
+        if (from === "cart") {
             setFormatItems(items.map((ele) => {
                 return {
                     item: ele.item._id,
@@ -37,7 +39,7 @@ const Checkout = () => {
                     price: ele.price
                 }
             }))
-        }else{
+        } else {
             setFormatItems(items)
         }
     }, [from])
@@ -85,40 +87,40 @@ const Checkout = () => {
             method: "cash",
             from: from
         })
-        .then(() => {
-            toast.success('Đặt hàng thành công', {
-                position: "top-right",
-                autoClose: 700,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                onClose: () => {
-                    navigate('/cua-hang')
-                }
-            });
-        })
-        .catch((err) =>{
-            console.log(err)
-        })
-        .finally(async () => {
-            await fetchCart()
-            setIsLoading(false)
-        })
+            .then(() => {
+                toast.success('Đặt hàng thành công', {
+                    position: "top-right",
+                    autoClose: 700,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    onClose: () => {
+                        navigate('/cua-hang')
+                    }
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+            .finally(async () => {
+                await fetchCart()
+                setIsLoading(false)
+            })
     }
 
     const handlePayment = () => {
-        if (!name){
+        if (!name) {
             notify("Vui lòng nhập tên")
             return
         }
-        if (!email){
+        if (!email) {
             notify("Vui lòng nhập email")
             return
         }
-        if (!phone){
+        if (!phone) {
             notify("Vui lòng nhập số điện thoại")
             return
         }
@@ -130,23 +132,23 @@ const Checkout = () => {
         //     notify("Vui lòng nhập quận/huyện")
         //     return
         // }
-        if (!address){
+        if (!address) {
             notify("Vui lòng nhập địa chỉ")
             return
         }
         const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!regexEmail.test(email)){
+        if (!regexEmail.test(email)) {
             notify("Nhập sai định dạng email")
             return
         }
 
         const regexPhone = /^(\+?\d{1,4}[\s-]?)?(\(?\d{3}\)?[\s-]?)?\d{3}[\s-]?\d{4}$/;
-        if (!regexPhone.test(phone)){
+        if (!regexPhone.test(phone)) {
             notify("Nhập sai định dạng số điện thoại")
             return
         }
 
-        if (paymentMethod==="bank"){
+        if (paymentMethod === "bank") {
             axios.post('http://localhost:8082/orders/payment', {
                 amount: totalPrice + 30000,
                 orderInfo: `payment with ${totalPrice + 30000}`,
@@ -164,18 +166,21 @@ const Checkout = () => {
                 method: "bank",
                 from: from
             })
-            .then((data) => {
-                window.open(data.data.payUrl, "_self")
-            })
-        }else{
+                .then((data) => {
+                    window.open(data.data.payUrl, "_self")
+                })
+        } else {
             paymentByCash()
         }
     }
+
+    console.log(HCM)
+
     return (
         <>
-            {isLoading == false ? 
+            {isLoading == false ?
                 <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
-                    <ToastContainer/>
+                    <ToastContainer />
                     <div className="w-11/12">
                         <div className="w-2/3 mb-5">
                             <Breadcrumb
@@ -234,12 +239,12 @@ const Checkout = () => {
                                     <div className="w-full mt-5">
                                         <p className="font-bold text-xl mb-5">Phương thức thanh toán<span className="text-[#f1564b] font-bold"> *</span></p>
                                         <div className="w-full flex flex-row gap-5">
-                                            <div className={`w-2/5 lg:w-1/4 p-3 rounded-xl flex flex-col items-center border-2 ${paymentMethod==='cash' ? 'border-[#7dc642]' : ''} gap-3 bg-gray-100 cursor-pointer`}
+                                            <div className={`w-2/5 lg:w-1/4 p-3 rounded-xl flex flex-col items-center border-2 ${paymentMethod === 'cash' ? 'border-[#7dc642]' : ''} gap-3 bg-gray-100 cursor-pointer`}
                                                 onClick={() => setPaymentMethod("cash")}>
                                                 <img src="http://nongsan.monamedia.net/template/assets/images/c-form-method-4.png" alt="" />
                                                 <p className="text-center w-4/5">Thanh toán tiền mặt</p>
                                             </div>
-                                            <div className={`w-2/5 lg:w-1/4 p-3 rounded-xl flex flex-col items-center border-2 ${paymentMethod==='bank' ? 'border-[#7dc642]' : ''} gap-3 bg-gray-100 cursor-pointer`}
+                                            <div className={`w-2/5 lg:w-1/4 p-3 rounded-xl flex flex-col items-center border-2 ${paymentMethod === 'bank' ? 'border-[#7dc642]' : ''} gap-3 bg-gray-100 cursor-pointer`}
                                                 onClick={() => setPaymentMethod("bank")}>
                                                 <img src="http://nongsan.monamedia.net/template/assets/images/c-form-method-2.png" />
                                                 <p className="text-center ">Chuyển khoản ngân hàng</p>
@@ -279,7 +284,7 @@ const Checkout = () => {
                                         </div>
                                         <div className="w-full flex flex-row md:flex-col lg:flex-row justify-between items-end text-white mt-7">
                                             <p className=" text-xl font-bold w-auto md:w-full lg:w-auto" onClick={getInfo}>Tổng tiền:</p>
-                                            <p className="text-2xl font-bold text-[#7dc642]">{formatNumber(totalPrice+30000)}đ</p>
+                                            <p className="text-2xl font-bold text-[#7dc642]">{formatNumber(totalPrice + 30000)}đ</p>
                                         </div>
                                         <div
                                             onClick={() => handlePayment()}
@@ -294,16 +299,16 @@ const Checkout = () => {
                         </div>
                     </div>
                 </div>
-            :
-            <div className="flex justify-center items-center h-[250px]">
-                <BeatLoader
-                    color={"#36d7b7"}
-                    size={30}
-                />
-            </div>
+                :
+                <div className="flex justify-center items-center h-[250px]">
+                    <BeatLoader
+                        color={"#36d7b7"}
+                        size={30}
+                    />
+                </div>
             }
         </>
-        
+
     );
 }
 

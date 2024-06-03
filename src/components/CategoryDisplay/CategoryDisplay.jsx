@@ -4,7 +4,7 @@ import SmallRouterButton from "../ButtonComponent/SmallRouterButton";
 import bg3 from '../../assets/bg/bg3.png'
 import logo from '../../assets/logo.png'
 
-const CategoryDisplay = ({ mainColor, themeColor, itemColor, title }) => {
+const CategoryDisplay = ({ mainColor, themeColor, itemColor, title, value }) => {
     return (
         <div
             className={`w-full bg-${themeColor} flex flex-col items-center `}
@@ -23,27 +23,18 @@ const CategoryDisplay = ({ mainColor, themeColor, itemColor, title }) => {
                     </SmallRouterButton>
                 </div>
                 <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-5">
-                    <Item
-                        itemColor={itemColor}
-                    />
-                    <Item
-                        itemColor={itemColor}
-                    />
-                    <Item
-                        itemColor={itemColor}
-                    />
-                    <Item
-                        itemColor={itemColor}
-                    />
-                    <Item
-                        itemColor={itemColor}
-                    />
-                    <Item
-                        itemColor={itemColor}
-                    />
-                    <Item
-                        itemColor={itemColor}
-                    />
+                    {value
+                        .filter(ele => ele.type.includes(title)) // Lọc các phần tử theo điều kiện
+                        .slice(0, 10) // Lấy chỉ 10 phần tử đầu tiên
+                        .map((ele, index) => (
+                            <Item
+                                key={index}
+                                itemColor={itemColor}
+                                value={ele}
+                            />
+                        ))
+                    }
+
                 </div>
             </div>
         </div>
