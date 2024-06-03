@@ -13,8 +13,6 @@ const Farm = () => {
 
     const { farms, setFarms, fetchFarm } = useContext(AppContext)
 
-    console.log(farms)
-
     const [preInfo, setPreInfo] = useState(false)
     const [preHeight, setPreHeigth] = useState(0)
     const [preFlex, setPreFlex] = useState("hidden")

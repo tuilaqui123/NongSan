@@ -54,14 +54,18 @@ export const AppProvider = ({ children }) => {
     }
     
     //cart
-    const fetchCart = (customerId) => {
-        axios.get("http://localhost:8082/carts/6659770a93ff789d47918207")
-        .then((res) => {
-            setCart(res.data.items)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+    const fetchCart = () => {
+        if (localStorage.user){
+            const userObj = JSON.parse(localStorage.user)
+            const userId = userObj._id;
+            axios.get(`http://localhost:8082/carts/${userId}`)
+            .then((res) => {
+                setCart(res.data.items)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
     }
 
     //item

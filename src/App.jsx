@@ -20,6 +20,7 @@ import Login from './pages/Login/Login';
 import SignIn from './pages/Login/SignIn';
 import SignUp from './pages/Login/SignUp';
 import ForgotPassword from './pages/Login/ForgotPassword';
+import ResetPasswords from './pages/Login/ResetPassword';
 import Breadcrumb from './components/Breadcrumb/Breadcrumb';
 import StoreDisplay from './pages/Store/StoreDisplay';
 import Search from './pages/Search/Search';
@@ -69,6 +70,7 @@ function App() {
                 <Route index element={<SignIn />} />
                 <Route path='dang-ky' element={<SignUp />} />
                 <Route path='quen-mat-khau' element={<ForgotPassword />} />
+                <Route path='doi-mat-khau' element={<ResetPasswords />} />
               </Route>
 
               <Route path='/tim-kiem/:search' element={<Search />} />
