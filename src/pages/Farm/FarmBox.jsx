@@ -1,7 +1,7 @@
 import React from "react";
 import farmImg from '../../assets/farm.png'
 
-const FarmBox = ({ onclick, isShow, value }) => {
+const FarmBox = ({ onclick, value }) => {
     return (
         <>
             {value && (

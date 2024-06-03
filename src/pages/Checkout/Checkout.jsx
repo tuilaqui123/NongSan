@@ -10,7 +10,8 @@ import BeatLoader from "react-spinners/BeatLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import axios from "axios";
-import HCM from "../../Context/HCM";
+// import HCM from "../../Context/HCM";
+import HCM from "../../Context/HCM"
 
 
 const Checkout = () => {
@@ -20,8 +21,8 @@ const Checkout = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
-    const [note, setNote] = useState("")
-    const [city, setCity] = useState("")
+    const [communeSelect, setCommuneSelect] = useState("")
+    const [commune, setCommune] = useState("")
     const [district, setDistrict] = useState("")
     const [address, setAddress] = useState("")
     const [paymentMethod, setPaymentMethod] = useState("cash")
@@ -46,6 +47,17 @@ const Checkout = () => {
             setFormatItems(items)
         }
     }, [from])
+
+    useEffect(() => {
+        for (let i = 0; i < HCM.length; i++) {
+            // console.log(HCM[i])
+            if (HCM[i].name.includes(district)) {
+                setCommuneSelect(HCM[i].xa)
+                break
+            }
+        }
+    }, [district])
+    // console.log(communeSelect)
     const formatNumber = (number) => {
         return new Intl.NumberFormat('de-DE').format(number);
     };
@@ -66,7 +78,7 @@ const Checkout = () => {
             name: name,
             email: email,
             phone: phone,
-            city: city,
+            commune: commune,
             district: district,
             address: address
         }
@@ -177,7 +189,7 @@ const Checkout = () => {
         }
     }
 
-    console.log(HCM)
+    // console.log(HCM)
 
     return (
         <>
@@ -225,12 +237,15 @@ const Checkout = () => {
                                             setText={setPhone}
                                         />
                                         <CommonSelect
-                                            title={"Tỉnh / Thành phố"}
-                                            setText={setCity}
-                                        />
-                                        <CommonSelect
                                             title={"Quận / Huyện"}
                                             setText={setDistrict}
+                                            value={HCM}
+                                        />
+
+                                        <CommonSelect
+                                            title={"Xã / Phường"}
+                                            setText={setCommune}
+                                            value={communeSelect}
                                         />
                                         <CommonInput
                                             tilte={"Địa chỉ"}
