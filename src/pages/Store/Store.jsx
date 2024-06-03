@@ -12,6 +12,7 @@ const Store = () => {
     const { items, setItems, fetchItem, breadcrumb } = useContext(AppContext)
     const [showSelect, setShowSelect] = useState(false)
     const [location, setLocation] = useState("")
+
     return (
         <div className="relative w-full h-auto flex flex-col items-center py-5 mb-20 ">
             {showSelect && (
@@ -42,8 +43,8 @@ const Store = () => {
                     </div>
                     <div className="w-full lg:w-4/5 grid-cols-2 sm:grid-cols-3 grid md:grid-cols-4 gap-5 ">
                         {breadcrumb.second !== '' && items.map((value, index) => {
-                            if (value.type === breadcrumb.second){
-                                return (    
+                            if (value.type === breadcrumb.second) {
+                                return (
                                     <Item
                                         key={index}
                                         itemColor={"green-800"}
@@ -53,7 +54,7 @@ const Store = () => {
                             }
                         })}
                         {breadcrumb.second === '' && items.map((value, index) => {
-                            return (    
+                            return (
                                 <Item
                                     key={index}
                                     itemColor={"green-800"}

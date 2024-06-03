@@ -15,16 +15,19 @@ const Farm = () => {
 
     const [preInfo, setPreInfo] = useState(false)
     const [preHeight, setPreHeigth] = useState(0)
-    const [preFlex, setPreFlex] = useState("hidden")
+    const [preFarm, setPreFarm] = useState([])
 
-    const divToScrollRef = useRef(null);
 
     useEffect(() => {
         setPreInfo(false)
         setPreHeigth(0)
     }, [])
 
-    function showPreInfo() {
+    function showPreInfo(value) {
+
+        setPreFarm(value)
+
+        console.log(value)
 
         const element = document.getElementById("FarmPreview");
         if (element) {
@@ -63,10 +66,10 @@ const Farm = () => {
                         </p>
                     </div>
                     {preInfo && (
-
                         <FarmInfo
                             preHeight={preHeight}
                             preInfo={preInfo}
+                            value={preFarm}
                         />
                     )}
 
@@ -75,12 +78,13 @@ const Farm = () => {
                             return (
                                 <FarmBox
                                     key={index}
-                                    onclick={showPreInfo}
+                                    onclick={() => showPreInfo(value)}
                                     isShow={preInfo}
                                     value={value}
                                 />
                             )
                         })}
+
                     </div>
                 </div>
             </div>

@@ -1,47 +1,25 @@
-Fudee: Nơi mang đến nguồn thực phẩm sạch cho sức khỏe
-Giới thiệu về trang web Fudee:
-
-Fudee tự hào là trang web thương mại điện tử tiên phong trong lĩnh vực cung cấp nông sản sạch, an toàn cho sức khỏe người tiêu dùng. Với sứ mệnh cao cả là mang đến cho khách hàng nguồn thực phẩm chất lượng cao, Fudee đã và đang nỗ lực không ngừng để xây dựng một hệ thống cung cấp thực phẩm toàn diện, uy tín, đáp ứng mọi nhu cầu của khách hàng. (số lượng sản phẩm, user, nông trại liên kết)
-
-
-
-Sứ mệnh và tầm nhìn:
-
-Sứ mệnh: Fudee hoạt động với sứ mệnh cao cả là mang đến cho khách hàng nguồn thực phẩm sạch, an toàn, đảm bảo sức khỏe và nâng cao chất lượng cuộc sống cho mọi người.
-
-Tầm nhìn: Fudee hướng đến mục tiêu trở thành thương hiệu uy tín hàng đầu trong lĩnh vực cung cấp nông sản sạch tại Việt Nam, góp phần xây dựng một cộng đồng tiêu dùng thông minh, an toàn và bảo vệ môi trường sống.
-
-
-
-Lợi ích khi chọn Fudee:
-
-Sản phẩm chất lượng hàng đầu: Fudee luôn chú trọng vào việc tuyển chọn kỹ lưỡng các nhà cung cấp uy tín, có quy trình sản xuất đạt chuẩn, đảm bảo an toàn vệ sinh thực phẩm. Mỗi sản phẩm đến tay khách hàng đều trải qua quá trình kiểm tra chất lượng nghiêm ngặt, đảm bảo an toàn cho sức khỏe người tiêu dùng.
-
-Nguồn gốc xuất xứ rõ ràng: Fudee minh bạch trong mọi hoạt động, cam kết cung cấp đầy đủ thông tin về nguồn gốc xuất xứ của từng sản phẩm. Khách hàng có thể dễ dàng truy xuất nguồn gốc sản phẩm thông qua hệ thống tem truy xuất điện tử được gắn trên mỗi sản phẩm.
-
-Giá cả hợp lý: Fudee luôn nỗ lực để mang đến cho khách hàng những sản phẩm chất lượng cao với mức giá hợp lý nhất. Chúng tôi hiểu rằng giá cả là một yếu tố quan trọng ảnh hưởng đến quyết định mua sắm của khách hàng, vì vậy Fudee luôn cân nhắc kỹ lưỡng để đưa ra mức giá phù hợp với mọi đối tượng khách hàng.
-
-Dịch vụ chuyên nghiệp, tận tâm: Fudee đặt lợi ích của khách hàng lên hàng đầu, luôn sẵn sàng hỗ trợ khách hàng tận tình, chu đáo. Đội ngũ nhân viên chuyên nghiệp, am hiểu sản phẩm sẽ luôn tư vấn và giải đáp mọi thắc mắc của khách hàng một cách nhanh chóng và hiệu quả.
-
-Giao hàng nhanh chóng, tiện lợi: Fudee hợp tác với các nhà cung cấp dịch vụ vận chuyển uy tín để đảm bảo giao hàng nhanh chóng, đúng hẹn đến tay khách hàng. Chúng tôi cung cấp đa dạng các hình thức thanh toán để khách hàng có thể lựa chọn phương thức phù hợp nhất với nhu cầu của mình.
-
-
-
-Cam kết chất lượng:
-
-Fudee cam kết:
-100% sản phẩm sạch, an toàn, đảm bảo vệ sinh an toàn thực phẩm.
-Hoàn tiền 100% giá trị sản phẩm nếu khách hàng phát hiện sản phẩm kém chất lượng.
-Giao hàng nhanh chóng, tận nơi trên toàn quốc.
-Dịch vụ khách hàng chuyên nghiệp, chu đáo, hỗ trợ 24/7.
-
-Hãy chọn Fudee để bảo vệ sức khỏe của bạn và gia đình!
-
-Fudee - Nơi khởi đầu cho cuộc sống khỏe mạnh!
-
-Ngoài ra, Fudee còn cung cấp:
-
-Chương trình khuyến mãi hấp dẫn: Fudee thường xuyên tổ chức các chương trình khuyến mãi, giảm giá để tri ân khách hàng.
-Hệ thống blog chia sẻ kiến thức: Fudee cung cấp hệ thống blog chia sẻ các kiến thức về dinh dưỡng, sức khỏe và cách chế biến món ăn ngon từ các nguyên liệu sạch.
-Dịch vụ tư vấn dinh dưỡng: Fudee hợp tác với các chuyên gia dinh dưỡng uy tín để cung cấp dịch vụ tư vấn dinh dưỡng miễn phí cho khách hàng.
-Với những cam kết và lợi ích trên, Fudee tin tưởng rằng sẽ mang đến cho khách hàng sự hài lòng tuyệt đối. Hãy đến với Fudee để trải nghiệm mua sắm thông minh và an toàn cho sức khỏe!
+"{
+    "msg_type":"knowledge_recall",
+"data":"{
+    "prompt":"\n# 回答规则\n根据引用的内容回答问题:\n1.如果引用的内容里面包含 \u003cimg src=\"\"\u003e 的标签, 标签里的 src 字段表示图片地址, 可以在回答问题的时候展示出去, 输出格式为\"![图片名称](图片地址)\" \n2.如果引用的内容不包含 \u003cimg src=\"\"\u003e 的标签, 你回答问题时不需要展示图片 \n\n# 引用的内容 \nsection 1 start:\n1.\tRau xà lách\r\na.\tLoại sản phẩm: Rau củ\r\nb.\tId: 001\r\n2.\tRau cải\r\na.\tLoại sản phẩm: Rau củ\r\nb.\tId: 002\r\n\n\nsection 1 ends.\n","chunks":[{"slice":"1.\tRau xà lách\r\na.\tLoại sản phẩm: Rau củ\r\nb.\tId: 001\r\n2.\tRau cải\r\na.\tLoại sản phẩm: Rau củ\r\nb.\tId: 002\r\n\n",
+    "score":0.60498046875,
+    "meta":{
+        "dataset":{
+            "id":"7376282931863814145",
+            "name":"oke"
+        },
+        "document":{
+            "id":"7376282931863928833",
+            "name":"setup.txt",
+            "format_type":0,
+            "source_type":1
+        },
+        "link":{
+            "title":"oke_setup.txt",
+            "url":"https://github.com/tuilaqui123/NongSan/blob/main/setup.txt"
+        }
+    }
+                    }
+                    ]
+                    }\"
+}"

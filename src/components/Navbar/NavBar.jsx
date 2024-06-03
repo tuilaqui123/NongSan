@@ -4,15 +4,17 @@ import Button from "../ButtonComponent/NavButon";
 import logo from '../../assets/logo.png'
 import RouterButton from "../ButtonComponent/RouterButton";
 import { AppContext } from "../../Context/AppContext";
-import { Link, json } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ScrollNavBar from "./ScrollNavBar";
 
 const NavBar = () => {
     const { breadcrumb, setBreadcrumb, cart } = useContext(AppContext)
     const [sideBar, setSideBar] = useState(true)
+    const [search, setSearch] = useState("")
     const [isPast, setIsPast] = useState(false);
     const [token, setToken] = useState(null);
     const divRef = useRef(null);
+    const navigate = useNavigate()
     const handleScroll = () => {
         if (divRef.current) {
             const rect = divRef.current.getBoundingClientRect();
@@ -55,6 +57,12 @@ const NavBar = () => {
         }
         setBreadcrumb(temp)
     }
+
+    function handleSearch() {
+        navigate(`/tim-kiem/${search}`)
+        setSearch("")
+    }
+
     return (
         <div className="sticky top-0 z-40">
             <div className="w-full relative" ref={divRef}>
@@ -83,6 +91,7 @@ const NavBar = () => {
                                     <input
                                         type="text"
                                         placeholder="Tìm kiếm..."
+
                                         className="w-full h-full rounded-lg pl-5 text-base focus:ring-2 focus:outline-none focus:border-[#7dc642] focus:ring-[#7dc642]"
                                     />
                                     <div className="absolute w-1/5 right-0 h-full bg-[#7dc642] flex justify-center items-center rounded-lg cursor-pointer group">
@@ -205,7 +214,7 @@ const NavBar = () => {
                     </div>
                     <div className="absolute w-full h-full bg-white blur-xl opacity-40 brightness-90"></div>
                 </div>
-
+                {/* main */}
                 <div className="w-full py-3 pt-5 px-3 sm:px-5 flex flex-col md:flex-row  items-center justify-between bg-[#3e3e3e]">
                     <div className="w-full sm:w-2/5 md:w-1/5 flex items-center justify-between sm:justify-center">
                         <i class="fa-solid fa-bars text-white text-3xl sm:hidden cursor-pointer" onClick={() => setSideBar(!sideBar)}></i>
@@ -236,9 +245,12 @@ const NavBar = () => {
                                 <input
                                     type="text"
                                     placeholder="Nhập từ khoá tìm kiếm..."
+                                    value={search}
+                                    onChange={(event) => setSearch(event.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                                     className="w-full h-full rounded-lg pl-5 text-base focus:ring-2 focus:outline-none focus:border-[#7dc642] focus:ring-[#7dc642]"
                                 />
-                                <i class="fa-solid fa-magnifying-glass absolute mr-5 right-0 text-xl text-[#7dc642]"></i>
+                                <i class="fa-solid fa-magnifying-glass absolute cursor-pointer hover:bg-[#3e3e3e] mr-5 right-0 text-xl text-[#7dc642]"></i>
                             </div>
                             <div className=" flex flex-row justify-evenly gap-7 w-3/12 lg:gap-2 lg:justify-center sm:w-4/12 ">
                                 <RouterButton path={token ? "/tai-khoan" : "/dang-nhap"}>

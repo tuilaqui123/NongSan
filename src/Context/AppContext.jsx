@@ -52,19 +52,19 @@ export const AppProvider = ({ children }) => {
                 console.log(err)
             })
     }
-    
+
     //cart
     const fetchCart = () => {
-        if (localStorage.user){
+        if (localStorage.user) {
             const userObj = JSON.parse(localStorage.user)
             const userId = userObj._id;
             axios.get(`http://localhost:8082/carts/${userId}`)
-            .then((res) => {
-                setCart(res.data.items)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+                .then((res) => {
+                    setCart(res.data.items)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
         }
     }
 
@@ -88,6 +88,7 @@ export const AppProvider = ({ children }) => {
         fetchItem()
         fetchCart()
     }, [])
+
 
     return <AppContext.Provider value={{
         breadcrumb, setBreadcrumb,
