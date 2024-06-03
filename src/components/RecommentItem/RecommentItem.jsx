@@ -6,11 +6,14 @@ import Item from '../Item/Item'
 import SwiperNavControl from "./SwiperNavControl";
 import axios from "axios";
 
-const RecommentItem = ({farm}) => {
+const RecommentItem = ({farm, currItem}) => {
     const [list, setList] = useState([])
     useEffect(() => {
         axios.get(`http://localhost:8082/items/farm/${farm}`)
-        .then((res) => setList(res.data))
+        .then((res) => {
+            const filteredData = res.data.filter(item => item._id !== currItem);
+            setList(filteredData)
+        })
         .catch((err) => console.log(err))
     }, [farm])
     return (

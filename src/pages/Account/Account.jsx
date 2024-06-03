@@ -4,8 +4,7 @@ import avt from '../../assets/cmt.jpg'
 import clsx from "clsx";
 import AccountButton from "./AccountButton";
 import { useNavigate } from "react-router-dom";
-import { Outlet } from "react-router-dom";
-
+import { Outlet } from "react-router-dom"; 
 
 
 const Account = () => {
@@ -15,13 +14,6 @@ const Account = () => {
     function Choose(choose) {
         setSelect(choose)
     }
-
-    // const logout = () => {
-    //     Choose(5)
-    //     localStorage.removeItem("user")
-    //     localStorage.removeItem("token")
-    //     navigate('/dang-nhap')
-    // }
 
     return (
         <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
@@ -90,8 +82,6 @@ const Account = () => {
             </div>
 
         </div>
-
-        // </div>
     );
 }
 

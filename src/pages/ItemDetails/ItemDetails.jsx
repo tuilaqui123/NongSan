@@ -44,14 +44,36 @@ const ItemDetails = () => {
     };
 
     const addCart = () => {
-        setIsLoading(true)
-        axios.post('http://localhost:8082/carts', {
-            customerId: userId,
-            itemId: item._id,
-            amount: quantity
-        })
-        .then(() => {
-            toast.success('Thêm sản phẩm vào giỏ hàng thành công', {
+        if (localStorage.token){
+            setIsLoading(true)
+            axios.post('http://localhost:8082/carts', {
+                customerId: userId,
+                itemId: item._id,
+                amount: quantity
+            })
+            .then(() => {
+                toast.success('Thêm sản phẩm vào giỏ hàng thành công', {
+                    position: "top-right",
+                    autoClose: 700,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    onClose: () => {
+                        location.reload();
+                    }
+                });
+            })
+            .catch((err) =>{
+                console.log(err)
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+        }else{
+            toast.warning('Vui lòng đăng nhập để mua hàng', {
                 position: "top-right",
                 autoClose: 700,
                 hideProgressBar: false,
@@ -61,16 +83,10 @@ const ItemDetails = () => {
                 progress: undefined,
                 theme: "light",
                 onClose: () => {
-                    location.reload();
+                    navigate('/dang-nhap')
                 }
             });
-        })
-        .catch((err) =>{
-            console.log(err)
-        })
-        .finally(() => {
-            setIsLoading(false)
-        })
+        }
     }
 
     const handlePayment = () => {
@@ -207,7 +223,7 @@ const ItemDetails = () => {
                             </div>
                         </div>
                         <div className="w-full flex justify-center mt-20">
-                            <RecommentItem farm={item.farm}/>
+                            <RecommentItem farm={item.farm} currItem={item._id}/>
                         </div>
                         <ToastContainer />
                     </div>
