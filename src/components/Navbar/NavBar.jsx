@@ -256,7 +256,7 @@ const NavBar = () => {
                                         </div>
                                         <div className="hidden lg:block">
                                             <p class="text-white font-normal text-sm text-left">Tài khoản</p>
-                                            <p class="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>
+                                            {localStorage.token ? <div className="text-[#7dc642] font-medium text-sm text-left">{JSON.parse(localStorage.user).email}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}
                                         </div>
                                     </div>
                                 </RouterButton>
