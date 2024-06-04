@@ -63,7 +63,7 @@ const NavBar = () => {
     }
 
     return (
-        <div className="sticky top-0 z-40">
+        <div className="sticky top-0 z-40 shadow shadow-[#575656]">
             <div className="w-full relative" ref={divRef}>
                 <div className={clsx("fixed sm:hidden w-full h-screen z-30 flex flex-row", { 'hidden': sideBar })}>
                     <div className="w-3/5 bg-[#3e3e3e] h-full p-3 z-30 flex flex-row-reverse gap-5">
