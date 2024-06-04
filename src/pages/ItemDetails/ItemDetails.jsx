@@ -22,19 +22,19 @@ const ItemDetails = () => {
     const params = useParams()
     const navigate = useNavigate()
     useEffect(() => {
-        if (localStorage.user){
+        if (localStorage.user) {
             const userObj = JSON.parse(localStorage.user)
             setUserId(userObj._id)
         }
 
         const fetchItem = () => {
             axios.get(`http://localhost:8082/items/${params.name}`)
-            .then((res) => {
-                setItem(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+                .then((res) => {
+                    setItem(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
         }
         fetchItem()
     }, [params.name])
@@ -50,27 +50,27 @@ const ItemDetails = () => {
             itemId: item._id,
             amount: quantity
         })
-        .then(() => {
-            toast.success('Thêm sản phẩm vào giỏ hàng thành công', {
-                position: "top-right",
-                autoClose: 700,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                onClose: () => {
-                    location.reload();
-                }
-            });
-        })
-        .catch((err) =>{
-            console.log(err)
-        })
-        .finally(() => {
-            setIsLoading(false)
-        })
+            .then(() => {
+                toast.success('Thêm sản phẩm vào giỏ hàng thành công', {
+                    position: "top-right",
+                    autoClose: 700,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    onClose: () => {
+                        location.reload();
+                    }
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
     }
 
     const handlePayment = () => {
@@ -78,12 +78,12 @@ const ItemDetails = () => {
             items: [{
                 item: item._id,
                 amount: quantity,
-                price: item.price*quantity
+                price: item.price * quantity
             }],
             voucher: null,
-            tempPrice: item.price*quantity,
+            tempPrice: item.price * quantity,
             discount: 0,
-            totalPrice: item.price*quantity,
+            totalPrice: item.price * quantity,
             from: 'product'
         }
         getPaymentState(paymentObj)
@@ -92,7 +92,7 @@ const ItemDetails = () => {
 
     return (
         <>
-            {isLoading == false ? 
+            {isLoading == false ?
                 item && (
                     <div className="w-full h-auto flex flex-col items-center py-5 mb-20">
                         <div className="w-11/12">
@@ -116,7 +116,7 @@ const ItemDetails = () => {
                                             )}
                                         </div>
                                         <p className="text-4xl font-bold mt-2 mb-1">{item.name}</p>
-                                        <p className="italic text-sm mb-2">{item.unitText}</p>
+                                        <p className="italic text-lg font-medium my-2">{item.unitText}</p>
                                         <p className="font-bold flex flex-row items-center">Trang trại:
                                             <Link className="group">
                                                 <div className="ml-1 hover:bg-[#7dc642]  px-2 py-1 rounded-lg">
@@ -207,7 +207,7 @@ const ItemDetails = () => {
                             </div>
                         </div>
                         <div className="w-full flex justify-center mt-20">
-                            <RecommentItem farm={item.farm}/>
+                            <RecommentItem farm={item.farm} />
                         </div>
                         <ToastContainer />
                     </div>

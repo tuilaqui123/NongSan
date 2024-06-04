@@ -39,7 +39,7 @@ const Store = () => {
                         <CategorySelect
                             setLocation={setLocation}
                         />
-                        <RecommentSelect />
+                        {/* <RecommentSelect /> */}
                     </div>
                     <div className="w-full lg:w-4/5 grid-cols-2 sm:grid-cols-3 grid md:grid-cols-4 gap-5 ">
                         {breadcrumb.second !== '' && items.map((value, index) => {
