@@ -11,8 +11,44 @@ import seafood from '../../assets/icon/seafood.png'
 import seafood_hover from '../../assets/icon/seafood_hover.png'
 import chef from '../../assets/icon/chef.png'
 import chef_hover from '../../assets/icon/chef_hover.png'
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../Context/AppContext";
+import { useContext } from "react";
 
 const Category = () => {
+    const { setBreadcrumb, setNavigateStore } = useContext(AppContext);
+    const navigate = useNavigate()
+    const handleNavigate = (selectedOpt) => {
+        switch (selectedOpt) {
+            case 1:
+                navigate('/cua-hang/thit-tuoi')
+                setNavigateStore(true)
+                setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: "Thịt tươi" }))
+                break;
+            case 2:
+                navigate('/cua-hang/hai-san')
+                setNavigateStore(true)
+                setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: "Hải sản" }))
+                break;
+            case 3:
+                navigate('/cua-hang/rau-cu')
+                setNavigateStore(true)
+                setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: "Rau củ" }))
+                break;
+            case 4:
+                navigate('/cua-hang/trai-cay')
+                setNavigateStore(true)
+                setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: "Trái cây" }))
+                break;
+            case 5:
+                navigate('/cua-hang/goi-nau-an')
+                setNavigateStore(true)
+                setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: "Gói nấu ăn" }))
+                break;
+            default:
+                break;
+        }
+    }
     return (
         <div
             style={{ backgroundImage: `url(${bg3})`, backgroundSize: "cover" }}
@@ -28,26 +64,31 @@ const Category = () => {
                         img1={meat}
                         img2={meat_hover}
                         content={"Thịt tươi"}
+                        onClick={() => handleNavigate(1)}
                     />
                     <CategoryOption
                         img1={seafood}
                         img2={seafood_hover}
                         content={"Hải sản"}
+                        onClick={() => handleNavigate(2)}
                     />
                     <CategoryOption
                         img1={vegetables}
                         img2={vegetables_hover}
                         content={"Rau củ"}
+                        onClick={() => handleNavigate(3)}
                     />
                     <CategoryOption
                         img1={fruit}
                         img2={fruit_hover}
                         content={"Trái cây"}
+                        onClick={() => handleNavigate(4)}
                     />
                     <CategoryOption
                         img1={chef}
                         img2={chef_hover}
                         content={"Gói nấu ăn"}
+                        onClick={() => handleNavigate(5)}
                     />
                 </div>
             </div>

@@ -1,9 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useContext} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "../../Context/AppContext";
 
 const styleRouterButton = ({ onClick, children, path, width, py, px, topColor, bottomColor, responsive }) => {
+    const navigate = useNavigate()
+    const { setNavigateStore, setBreadcrumb } = useContext(AppContext);
+    const handleNavigate = (path) => {
+        setNavigateStore(true)
+        setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: (path === '/cua-hang/trai-cay') ? "Trái cây" : "Rau củ"}))
+        navigate(path)
+    }
     return (
-        <Link to={path}>
+        <div onClick={() => handleNavigate(path)}>
             <button
                 type="button"
                 onClick={onClick}
@@ -17,7 +25,7 @@ const styleRouterButton = ({ onClick, children, path, width, py, px, topColor, b
                     <i class="fa-solid fa-arrow-right text-white justify-self-end"></i>
                 </div>
             </button>
-        </Link>
+        </div>
     );
 };
 

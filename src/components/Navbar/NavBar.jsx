@@ -4,16 +4,18 @@ import Button from "../ButtonComponent/NavButon";
 import logo from '../../assets/logo.png'
 import RouterButton from "../ButtonComponent/RouterButton";
 import { AppContext } from "../../Context/AppContext";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import ScrollNavBar from "./ScrollNavBar";
 
 const NavBar = () => {
-    const { breadcrumb, setBreadcrumb, cart, fetchCart } = useContext(AppContext)
+    const { breadcrumb, setBreadcrumb, cart, navigateStore, setNavigateStore } = useContext(AppContext)
     const [sideBar, setSideBar] = useState(true)
     const [search, setSearch] = useState("")
     const [isPast, setIsPast] = useState(false);
     const divRef = useRef(null);
     const navigate = useNavigate()
+    const location = useLocation()
+    console.log(navigateStore)
     const handleScroll = () => {
         if (divRef.current) {
             const rect = divRef.current.getBoundingClientRect();
@@ -26,8 +28,8 @@ const NavBar = () => {
             }
         }
     };
-
     useEffect(() => {
+        // setNavigateStore(false)
         window.addEventListener('scroll', handleScroll);
         handleScroll(); // Initial check
 
@@ -286,7 +288,8 @@ const NavBar = () => {
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
                                             "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 1,
-                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 1
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 1,
+                                            "text-lg font-black py-1 text-[#7dc642] border-[#7dc642]": navigateStore === false
                                         })}
                                     >Trang chủ</p>
                                 </li>
@@ -309,7 +312,8 @@ const NavBar = () => {
                                             // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                             className={clsx({
                                                 "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 3,
-                                                "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 3
+                                                "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 3,
+                                                "text-lg font-black py-1 text-[#7dc642] border-[#7dc642]": navigateStore===true
                                             })}
                                         >Cửa hàng</p>
                                     </li>
