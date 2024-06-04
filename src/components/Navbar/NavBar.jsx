@@ -28,6 +28,14 @@ const NavBar = () => {
             }
         }
     };
+    const [name, setName] = useState("")
+    useEffect(() => {
+        if (localStorage.user) {
+            const userObj = JSON.parse(localStorage.user)
+            setName(userObj.name || "")
+
+        }
+    }, [])
 
     // useEffect(() => {
     //     fetchCart()
@@ -91,7 +99,7 @@ const NavBar = () => {
     }
 
     useEffect(() => {
-        if (localStorage.cartNoAcc){
+        if (localStorage.cartNoAcc) {
             const cartNoAccount = JSON.parse(localStorage.cartNoAcc)
             setNumCartNoAcc(cartNoAccount.length)
         }
@@ -286,7 +294,7 @@ const NavBar = () => {
                                 />
                                 <i class="fa-solid fa-magnifying-glass absolute cursor-pointer hover:bg-[#3e3e3e] mr-5 right-0 text-xl text-[#7dc642]"></i>
                             </div>
-                            <div className=" flex flex-row justify-evenly gap-7 w-3/12 lg:gap-2 lg:justify-center sm:w-4/12 ">
+                            <div className=" flex flex-row justify-between gap-7 w-3/12 lg:gap-5 lg:justify-center sm:w-4/12 ">
                                 <RouterButton path={localStorage.token ? "/tai-khoan" : "/dang-nhap"}>
                                     <div class="flex flex-row items-center gap-2 cursor-pointer group">
                                         <div className="relative flex items-center justify-center">
@@ -295,7 +303,7 @@ const NavBar = () => {
                                         </div>
                                         <div className="hidden lg:block">
                                             <p class="text-white font-normal text-sm text-left">Tài khoản</p>
-                                            {localStorage.token ? <div className="text-[#7dc642] font-medium text-sm text-left">Cập nhật tài khoản</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}
+                                            {name != "" ? <div className="text-[#7dc642] font-medium text-sm text-left">{name}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}
                                         </div>
                                     </div>
                                 </RouterButton>

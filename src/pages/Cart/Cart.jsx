@@ -15,14 +15,14 @@ const Cart = () => {
     const [cartNoAcc, setCartNoAcc] = useState([])
     const navigate = useNavigate()
     useEffect(() => {
-        if (cart.length !== 0){
+        if (cart.length !== 0) {
             const total = cart.reduce((acc, item) => {
                 const totalPrice = item.item.price - item.item.price * item.item.tag;
                 return acc + totalPrice * item.amount;
             }, 0)
             setTotal(total)
-        }else{
-            if (localStorage.cartNoAcc){
+        } else {
+            if (localStorage.cartNoAcc) {
                 const cartNoAccount = JSON.parse(localStorage.cartNoAcc)
                 setCartNoAcc(cartNoAccount)
             }

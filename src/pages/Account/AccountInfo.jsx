@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import axios from "axios";
@@ -11,7 +11,7 @@ const AccountInfo = ({ position, select }) => {
     const [phone, setPhone] = useState("")
     const [birthday, setBirthday] = useState("")
     useEffect(() => {
-        if (localStorage.user){
+        if (localStorage.user) {
             const userObj = JSON.parse(localStorage.user)
             setUserId(userObj._id)
             setName(userObj.name || "")
@@ -49,19 +49,19 @@ const AccountInfo = ({ position, select }) => {
         });
     }
     const UpdateUser = () => {
-        if (!name){
+        if (!name) {
             notifyError("Vui lòng nhập họ và tên")
             return
         }
-        if (!email){
+        if (!email) {
             notifyError("Vui lòng nhập email")
             return
         }
-        if (!phone){
+        if (!phone) {
             notifyError("Vui lòng nhập số điện thoại")
             return
         }
-        if (!birthday){
+        if (!birthday) {
             notifyError("Vui lòng nhập ngày sinh")
             return
         }
@@ -83,12 +83,23 @@ const AccountInfo = ({ position, select }) => {
             email: email,
             birthday: birthday
         })
-        .then((res)=>{
-            notifySuccess("Cập nhật thông tin thành công")
-            localStorage.setItem('user', JSON.stringify(res.data));
-            location.reload()
-        })
-        .catch(err => console.error(err))
+            .then((res) => {
+                notifySuccess("Cập nhật thông tin thành công")
+                localStorage.setItem('user', JSON.stringify(res.data));
+                if (localStorage.user) {
+                    const userObj = JSON.parse(localStorage.user)
+                    setUserId(userObj._id)
+                    setName(userObj.name || "")
+                    setEmail(userObj.email || "")
+                    setPhone(userObj.phone || "")
+                    if (userObj.birthday) {
+                        const date = new Date(userObj.birthday);
+                        const formattedDate = date.toISOString().split('T')[0];
+                        setBirthday(formattedDate);
+                    }
+                }
+            })
+            .catch(err => console.error(err))
     }
     return (
         <div
@@ -98,7 +109,7 @@ const AccountInfo = ({ position, select }) => {
             })}
         >
             <div className="w-full">
-                <ToastContainer/>
+                <ToastContainer />
                 <p className="text-4xl font-bold">Thông tin tài khoản</p>
                 <div className="w-full flex flex-col-reverse mt-5 md:mt-0 md:flex-row justify-between pr-5">
                     <div className="w-full md:w-8/12 flex flex-col gap-5 mt-10">

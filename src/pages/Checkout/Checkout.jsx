@@ -29,6 +29,8 @@ const Checkout = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [userId, setUserId] = useState(null)
     const navigate = useNavigate()
+
+    console.log(paymentState)
     useEffect(() => {
         if (localStorage.user) {
             const userObj = JSON.parse(localStorage.user)
@@ -127,42 +129,41 @@ const Checkout = () => {
     }
 
     const handlePayment = () => {
-        if (!name) {
-            notify("Vui lòng nhập tên")
-            return
-        }
-        if (!email) {
-            notify("Vui lòng nhập email")
-            return
-        }
-        if (!phone) {
-            notify("Vui lòng nhập số điện thoại")
-            return
-        }
-        // if (!city){
-        //     notify("Vui lòng nhập tỉnh/thành phố")
+        // if (!name) {
+        //     notify("Vui lòng nhập tên")
         //     return
         // }
-        // if (!district){
+        // if (!email) {
+        //     notify("Vui lòng nhập email")
+        //     return
+        // }
+        // if (!phone) {
+        //     notify("Vui lòng nhập số điện thoại")
+        //     return
+        // }
+        // if (!commune) {
+        //     notify("Vui lòng nhập xã phường")
+        //     return
+        // }
+        // if (!district) {
         //     notify("Vui lòng nhập quận/huyện")
         //     return
         // }
-        if (!address) {
-            notify("Vui lòng nhập địa chỉ")
-            return
-        }
-        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!regexEmail.test(email)) {
-            notify("Nhập sai định dạng email")
-            return
-        }
+        // if (!address) {
+        //     notify("Vui lòng nhập địa chỉ")
+        //     return
+        // }
+        // const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // if (!regexEmail.test(email)) {
+        //     notify("Nhập sai định dạng email")
+        //     return
+        // }
 
-        const regexPhone = /^(\+?\d{1,4}[\s-]?)?(\(?\d{3}\)?[\s-]?)?\d{3}[\s-]?\d{4}$/;
-        if (!regexPhone.test(phone)) {
-            notify("Nhập sai định dạng số điện thoại")
-            return
-        }
-
+        // const regexPhone = /^(\+?\d{1,4}[\s-]?)?(\(?\d{3}\)?[\s-]?)?\d{3}[\s-]?\d{4}$/;
+        // if (!regexPhone.test(phone)) {
+        //     notify("Nhập sai định dạng số điện thoại")
+        //     return
+        // }
         if (paymentMethod === "bank") {
             axios.post('http://localhost:8082/orders/payment', {
                 amount: totalPrice + 30000,
@@ -206,7 +207,7 @@ const Checkout = () => {
                             <div className="w-[95%] h-[90%] flex flex-col md:flex-row gap-10 justify-between">
                                 <div className="w-full md:w-[55%] lg:w-3/5 h-auto">
                                     <p className="text-4xl font-bold mb-10">Thông tin giao hàng</p>
-                                    <div className=" mb-7 flex flex-row md:flex-col lg:flex-row gap-5">
+                                    {/* <div className=" mb-7 flex flex-row md:flex-col lg:flex-row gap-5">
                                         <button className="bg-[#7dc642] w-1/2 sm:w-1/3 md:w-2/3 lg:w-2/5 h-[50px] rounded-xl">
                                             <p className="text-white font-medium">Sử dụng thông tin có sẵn</p>
                                         </button>
@@ -216,7 +217,7 @@ const Checkout = () => {
                                             <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-300"></div>
                                             <p className="text-center w-full text-[#3e3e3e] group-hover:text-white font-bold z-10">Nhập thông tin khác</p>
                                         </button>
-                                    </div>
+                                    </div> */}
                                     <div className="flex flex-col gap-7">
                                         <CommonInput
                                             tilte={"Họ và tên"}
@@ -275,14 +276,14 @@ const Checkout = () => {
                                         <p className="text-3xl md:text-2xl lg:text-3xl font-bold text-[#7dc642] pb-3 mb-3 border-b border-gray-300">Chi tiết đơn hàng</p>
                                         {/* <div className="w-full flex flex-col gap-3"> */}
                                         <div className="w-full flex flex-col sm:grid sm:grid-cols-2 md:flex md:flex-col gap-3">
-                                            {/* {order.map((value, index) => {
+                                            {paymentState.items.map((value, index) => {
                                                 return (
                                                     <CheckoutItem
                                                         key={index}
                                                         value={value}
                                                     />
                                                 )
-                                            })} */}
+                                            })}
                                         </div>
                                         <div className="w-2/3 my-3  border-b border-gray-300"></div>
                                         <div className="w-full flex flex-col gap-3">
