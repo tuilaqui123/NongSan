@@ -45,7 +45,7 @@ const ItemDetails = () => {
 
     const addCart = () => {
 
-        if (localStorage.token){
+        if (localStorage.token) {
             setIsLoading(true)
             axios.post('http://localhost:8082/carts', {
                 customerId: userId,
@@ -53,31 +53,31 @@ const ItemDetails = () => {
                 amount: quantity
             })
 
-            .then(() => {
-                toast.success('Thêm sản phẩm vào giỏ hàng thành công', {
-                    position: "top-right",
-                    autoClose: 700,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    onClose: () => {
-                        location.reload();
-                    }
-                });
-            })
+                .then(() => {
+                    toast.success('Thêm sản phẩm vào giỏ hàng thành công', {
+                        position: "top-right",
+                        autoClose: 700,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        onClose: () => {
+                            location.reload();
+                        }
+                    });
+                })
 
-            .catch((err) =>{
+                .catch((err) => {
 
-                console.log(err)
-            })
-            .finally(() => {
-                setIsLoading(false)
-            })
+                    console.log(err)
+                })
+                .finally(() => {
+                    setIsLoading(false)
+                })
 
-        }else{
+        } else {
             toast.warning('Vui lòng đăng nhập để mua hàng', {
                 position: "top-right",
                 autoClose: 700,
@@ -229,9 +229,7 @@ const ItemDetails = () => {
                             </div>
                         </div>
                         <div className="w-full flex justify-center mt-20">
-
-                                <RecommentItem farm={item.farm} currItem={item._id}/>
-
+                            <RecommentItem farm={item.farm} currItem={item._id}/>
                             <ToastContainer />
                         </div>
                     </div>
