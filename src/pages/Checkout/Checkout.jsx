@@ -96,7 +96,7 @@ const Checkout = () => {
             customer: {
                 name: name,
                 phone: phone,
-                address: address,
+                address: address + ", " + commune + ", " + district,
                 email: email,
                 note: "oke"
             },
@@ -129,41 +129,41 @@ const Checkout = () => {
     }
 
     const handlePayment = () => {
-        // if (!name) {
-        //     notify("Vui lòng nhập tên")
-        //     return
-        // }
-        // if (!email) {
-        //     notify("Vui lòng nhập email")
-        //     return
-        // }
-        // if (!phone) {
-        //     notify("Vui lòng nhập số điện thoại")
-        //     return
-        // }
-        // if (!commune) {
-        //     notify("Vui lòng nhập xã phường")
-        //     return
-        // }
-        // if (!district) {
-        //     notify("Vui lòng nhập quận/huyện")
-        //     return
-        // }
-        // if (!address) {
-        //     notify("Vui lòng nhập địa chỉ")
-        //     return
-        // }
-        // const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        // if (!regexEmail.test(email)) {
-        //     notify("Nhập sai định dạng email")
-        //     return
-        // }
+        if (!name) {
+            notify("Vui lòng nhập tên")
+            return
+        }
+        if (!email) {
+            notify("Vui lòng nhập email")
+            return
+        }
+        if (!phone) {
+            notify("Vui lòng nhập số điện thoại")
+            return
+        }
+        if (!commune) {
+            notify("Vui lòng nhập xã phường")
+            return
+        }
+        if (!district) {
+            notify("Vui lòng nhập quận/huyện")
+            return
+        }
+        if (!address) {
+            notify("Vui lòng nhập địa chỉ")
+            return
+        }
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regexEmail.test(email)) {
+            notify("Nhập sai định dạng email")
+            return
+        }
 
-        // const regexPhone = /^(\+?\d{1,4}[\s-]?)?(\(?\d{3}\)?[\s-]?)?\d{3}[\s-]?\d{4}$/;
-        // if (!regexPhone.test(phone)) {
-        //     notify("Nhập sai định dạng số điện thoại")
-        //     return
-        // }
+        const regexPhone = /^(\+?\d{1,4}[\s-]?)?(\(?\d{3}\)?[\s-]?)?\d{3}[\s-]?\d{4}$/;
+        if (!regexPhone.test(phone)) {
+            notify("Nhập sai định dạng số điện thoại")
+            return
+        }
         if (paymentMethod === "bank") {
             axios.post('http://localhost:8082/orders/payment', {
                 amount: totalPrice + 30000,
