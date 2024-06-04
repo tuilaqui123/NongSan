@@ -229,8 +229,7 @@ const ItemDetails = () => {
                             </div>
                         </div>
                         <div className="w-full flex justify-center mt-20">
-
-                            <RecommentItem farm={item.farm} currItem={item._id} />
+                            <RecommentItem farm={item.farm} currItem={item._id}/>
 
                             <ToastContainer />
                         </div>
