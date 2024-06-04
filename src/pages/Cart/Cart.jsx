@@ -12,13 +12,21 @@ const Cart = () => {
     const [total, setTotal] = useState(0)
     const [discount, setDiscount] = useState(0)
     const [voucherSelect, setVoucherSelect] = useState(null)
+    const [cartNoAcc, setCartNoAcc] = useState([])
     const navigate = useNavigate()
     useEffect(() => {
-        const total = cart.reduce((acc, item) => {
-            const totalPrice = item.item.price - item.item.price * item.item.tag;
-            return acc + totalPrice * item.amount;
-        }, 0)
-        setTotal(total)
+        if (cart.length !== 0){
+            const total = cart.reduce((acc, item) => {
+                const totalPrice = item.item.price - item.item.price * item.item.tag;
+                return acc + totalPrice * item.amount;
+            }, 0)
+            setTotal(total)
+        }else{
+            if (localStorage.cartNoAcc){
+                const cartNoAccount = JSON.parse(localStorage.cartNoAcc)
+                setCartNoAcc(cartNoAccount)
+            }
+        }
     }, [cart])
 
     const formatNumber = (number) => {
@@ -74,7 +82,7 @@ const Cart = () => {
                         <div className="w-2/3">
                             <div className="flex flex-row justify-between items-center w-full mb-10">
                                 <p className="text-4xl font-bold">Giỏ hàng</p>
-                                <p className="text-[#3e3e3e] font-bold">({cart.length} sản phẩm)</p>
+                                <p className="text-[#3e3e3e] font-bold">({localStorage.token ? cart.length : cartNoAcc.length} sản phẩm)</p>
                             </div>
                             <div className="w-full flex flex-row ">
                                 <div className="w-1/12"></div>
@@ -83,7 +91,15 @@ const Cart = () => {
                                 <p className="w-2/12 text-lg text-end font-bold text-[#7dc642] md:block hidden">Thành tiền</p>
                             </div>
                             <div className="w-full">
-                                {cart.map((value, index) => {
+                                {cart.length !== 0 && cart.map((value, index) => {
+                                    return (
+                                        <CartItem
+                                            key={index}
+                                            value={value}
+                                        />
+                                    )
+                                })}
+                                {cart.length === 0 && cartNoAcc.map((value, index) => {
                                     return (
                                         <CartItem
                                             key={index}
