@@ -43,7 +43,7 @@ const Item = ({ itemColor, value }) => {
 
                         </div>
                         <div className="w-full">
-                            <p className="text-lg text-[#3e3e3e] text-left font-bold group-hover:text-white truncate">{value.name}</p>
+                            <p className="text-lg text-[#3e3e3e] text-left font-bold group-hover:text-white text-ellipsis vwhitespace-nowrap overflow-hidden">{value.name}</p>
                             <div className="flex flex-row my-1 gap-2">
                                 {value.tag != 0 && (
                                     <ItemTag>

@@ -4,7 +4,8 @@ import { AppContext } from "../../Context/AppContext";
 import _ from 'lodash';
 
 
-const CategorySelect = () => {
+const FarmSelect = () => {
+    const { farms } = useContext(AppContext)
     const [isClick, setIsClick] = useState(0)
     const navigate = useNavigate()
     const { breadcrumb, setBreadcrumb } = useContext(AppContext);
@@ -14,7 +15,7 @@ const CategorySelect = () => {
     };
 
     const formatLink = (link) => {
-        if (breadcrumb.query.farm.link) return link + "&" + breadcrumb.query.farm.link
+        if (breadcrumb.query.category.link) return breadcrumb.query.category.link + "&" + link
         else return link
     }
 
@@ -29,17 +30,17 @@ const CategorySelect = () => {
                 query: {
                     link: formatLink(temp),
                     category: {
-                        slug: bread,
-                        link: temp
+                        slug: breadcrumb.query.category.slug,
+                        link: breadcrumb.query.category.link
                     },
                     farm: {
-                        slug: breadcrumb.query.farm.slug,
-                        link: breadcrumb.query.farm.link
+                        slug: bread,
+                        link: temp
                     }
                 }
             }
             setBreadcrumb(path)
-            navigate(`/cua-hang/${formatLink(temp)}`);
+            navigate(`/cua-hang/${formatLink(temp)}`)
         } else {
             setIsClick(0)
             const path = {
@@ -47,54 +48,59 @@ const CategorySelect = () => {
                 second: breadcrumb.second,
                 child: breadcrumb.child,
                 query: {
-                    link: breadcrumb.query.farm.link,
+                    link: breadcrumb.query.category.link,
                     category: {
-                        slug: "",
-                        link: ""
+                        slug: breadcrumb.query.category.slug,
+                        link: breadcrumb.query.category.link
                     },
                     farm: {
-                        slug: breadcrumb.query.farm.slug,
-                        link: breadcrumb.query.farm.link
+                        slug: "",
+                        link: ""
                     }
                 }
             }
             setBreadcrumb(path)
-            navigate(`/cua-hang/${breadcrumb.query.farm.link}`);
+            navigate(`/cua-hang/${breadcrumb.query.category.link}`)
         }
 
     }
     return (
         <div className="w-full flex flex-col border border-gray-300 rounded-t-xl overflow-hidden">
-            <p className="w-full bg-[#7dc642] py-3 text-base font-bold text-white text-center">DANH MỤC SẢN PHẨM</p>
+            <p className="w-full bg-[#7dc642] py-3 text-base font-bold text-white text-center">TRANG TRẠI</p>
             <ul className="w-full flex flex-col">
-                <li
-                    onClick={() => AddBreadcrumb("Thịt tươi", 1)}
-                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === 1 ? "bg-[#3e3e3e] text-white" : ""}`}>
-                    Thịt tươi
-                </li>
-                <li
-                    onClick={() => AddBreadcrumb("Hải sản", 2)}
+                {farms.map((value, index) => {
+                    return (
+                        <li
+                            key={index}
+                            onClick={() => AddBreadcrumb(`${value.name}`, index + 1)}
+                            className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === index + 1 ? "bg-[#3e3e3e] text-white" : ""}`}>
+                            {value.name}
+                        </li>
+                    )
+                })}
+                {/* <li
+                    onClick={() => AddBreadcrumb("Hải sản", "/cua-hang/hai-san", 2)}
                     className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === 2 ? "bg-[#3e3e3e] text-white" : ""}`}>
                     Hải sản
                 </li>
                 <li
-                    onClick={() => AddBreadcrumb("Rau củ", 3)}
+                    onClick={() => AddBreadcrumb("Rau củ", "/cua-hang/rau-cu", 3)}
                     className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === 3 ? "bg-[#3e3e3e] text-white" : ""}`}>
                     Rau củ
                 </li>
                 <li
-                    onClick={() => AddBreadcrumb("Trái cây", 4)}
+                    onClick={() => AddBreadcrumb("Trái cây", "/cua-hang/trai-cay", 4)}
                     className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === 4 ? "bg-[#3e3e3e] text-white" : ""}`}>
                     Trái cây
                 </li>
                 <li
-                    onClick={() => AddBreadcrumb("Gói nguyên liệu", 5)}
+                    onClick={() => AddBreadcrumb("Gói nấu ăn", "/cua-hang/goi-nau-an", 5)}
                     className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === 5 ? "bg-[#3e3e3e] text-white" : ""}`}>
-                    Gói nguyên liệu
-                </li>
+                    Gói nấu ăn
+                </li> */}
             </ul>
         </div>
     );
 }
 
-export default CategorySelect;
+export default FarmSelect;

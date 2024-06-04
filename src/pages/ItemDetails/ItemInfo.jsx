@@ -11,20 +11,29 @@ const ItemInfo = ({ farm, procedure, nutrition, preservation }) => {
                     </div>
                 </Link>
             </p>
-            <div className="mb-3 flex flex-col gap-3">
-                <p className="font-bold">Quy trình sản xuất:</p>
-                <p className=" whitespace-pre-wrap break-words">{procedure}</p>
-            </div>
-            <div className="mb-3 flex flex-col gap-3">
-                <p className="font-bold">Giá trị dinh dưỡng & công dụng:</p>
-                <p className=" whitespace-pre-wrap break-words">{nutrition}</p>
+            {procedure && (
 
-            </div>
-            <div className="mb-3 flex flex-col gap-3">
-                <p className="font-bold">Cách bảo quản & sử dụng:</p>
-                <p className=" whitespace-pre-wrap break-words">{preservation}</p>
+                <div className="mb-3 flex flex-col gap-3">
+                    <p className="font-bold">Quy trình sản xuất:</p>
+                    <p className=" whitespace-pre-wrap break-words">{procedure}</p>
+                </div>
+            )}
+            {nutrition && (
 
-            </div>
+                <div className="mb-3 flex flex-col gap-3">
+                    <p className="font-bold">Giá trị dinh dưỡng & công dụng:</p>
+                    <p className=" whitespace-pre-wrap break-words">{nutrition}</p>
+
+                </div>
+            )}
+            {preservation && (
+
+                <div className="mb-3 flex flex-col gap-3">
+                    <p className="font-bold">Cách bảo quản & sử dụng:</p>
+                    <p className=" whitespace-pre-wrap break-words">{preservation}</p>
+
+                </div>
+            )}
 
         </div>
     );

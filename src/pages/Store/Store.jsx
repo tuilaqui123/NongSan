@@ -7,6 +7,7 @@ import RecommentSelect from "./RecommentSelect";
 import PagePagination from "../../components/PagePagination/PagePagination";
 import { AppContext } from "../../Context/AppContext";
 import ResponsiveSelect from "./ResponsiveSelect";
+import FarmSelect from "./FarmSelect";
 
 const Store = () => {
     const { items, setItems, fetchItem, breadcrumb } = useContext(AppContext)
@@ -36,14 +37,17 @@ const Store = () => {
                 </div>
                 <div className="w-full flex flex-row justify-between gap-5">
                     <div className="w-1/5 hidden lg:flex flex-col gap-5">
-                        <CategorySelect
-                            setLocation={setLocation}
-                        />
+                        <CategorySelect />
+                        <FarmSelect />
                         {/* <RecommentSelect /> */}
                     </div>
                     <div className="w-full lg:w-4/5 grid-cols-2 sm:grid-cols-3 grid md:grid-cols-4 gap-5 ">
-                        {breadcrumb.second !== '' && items.map((value, index) => {
-                            if (value.type === breadcrumb.second) {
+                        {items.map((value, index) => {
+                            if (
+                                (value.type.includes(breadcrumb.query.category.slug) || breadcrumb.query.category.slug == "")
+                                &&
+                                (value.farm.includes(breadcrumb.query.farm.slug) || breadcrumb.query.farm.slug == "")
+                            ) {
                                 return (
                                     <Item
                                         key={index}
@@ -53,7 +57,7 @@ const Store = () => {
                                 )
                             }
                         })}
-                        {breadcrumb.second === '' && items.map((value, index) => {
+                        {/* {breadcrumb.second === '' && items.map((value, index) => {
                             return (
                                 <Item
                                     key={index}
@@ -61,7 +65,7 @@ const Store = () => {
                                     value={value}
                                 />
                             )
-                        })}
+                        })} */}
                     </div>
                 </div>
                 {/* <div className="w-full flex justify-end mt-10">
