@@ -64,7 +64,21 @@ const Contact = () => {
             address: address,
             text: text
         })
-        .then()
+        .then(() => {
+            toast.success("Gửi phản hồi thành công", {
+                position: "top-right",
+                autoClose: 700,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                onClose: () => {
+                    location.reload()
+                }
+            });
+        })
         .catch(err => console.log(err))
     }
     return (

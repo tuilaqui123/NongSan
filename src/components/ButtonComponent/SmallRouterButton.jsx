@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "../../Context/AppContext";
 
 const SmallRouterButton = ({ onClick, children, btnColor, path }) => {
+    const navigate = useNavigate()
     return (
-        <Link to={path}>
+        <div to={path}>
             <button
                 type="button"
                 onClick={onClick}
@@ -14,7 +16,7 @@ const SmallRouterButton = ({ onClick, children, btnColor, path }) => {
                     {children}
                 </div>
             </button>
-        </Link>
+        </div>
     );
 };
 

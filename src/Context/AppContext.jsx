@@ -36,22 +36,7 @@ export const AppProvider = ({ children }) => {
     const [items, setItems] = useState([])
     const [order, setOrder] = useState([])
     const [cart, setCart] = useState([])
-    // const [order, setOrder] = useState(() => {
-    //     const savedOrder = localStorage.getItem('order')
-    //     return savedOrder ? JSON.parse(savedOrder) : []
-    // })
-    // const [cart, setCart] = useState(() => {
-    //     const savedCart = localStorage.getItem('cart')
-    //     return savedCart ? JSON.parse(savedCart) : []
-    // });
-
-    // useEffect(() => {
-    //     localStorage.setItem('cart', JSON.stringify(cart))
-    // }, [cart])
-
-    // useEffect(() => {
-    //     localStorage.setItem('order', JSON.stringify(order))
-    // }, [order])
+    const [navigateStore, setNavigateStore] = useState(false)
 
     //farm
     const fetchFarm = () => {
@@ -118,7 +103,8 @@ export const AppProvider = ({ children }) => {
         items, setItems, fetchItem,
         cart, setCart, fetchCart,
         order, setOrder,
-        paymentState, setPaymentState, getPaymentState
+        paymentState, setPaymentState, getPaymentState,
+        navigateStore, setNavigateStore
     }}>
         {children}
     </AppContext.Provider>
