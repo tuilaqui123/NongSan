@@ -104,7 +104,7 @@ export const AppProvider = ({ children }) => {
         cart, setCart, fetchCart,
         order, setOrder,
         paymentState, setPaymentState, getPaymentState,
-        navigateStore, setNavigateStore
+        navigateStore, setNavigateStore,
     }}>
         {children}
     </AppContext.Provider>
