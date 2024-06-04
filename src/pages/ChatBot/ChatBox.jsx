@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import clsx from 'clsx';
 import logo from '../../assets/logo.png';
 import '../../hiddenScroll.css'
+import ChatQuery from '../../Context/ChatQuery';
+import { AppContext } from '../../Context/AppContext';
 
 const COZE_TOKEN = "pat_sKkyqAN97kv3RuBubBe62ap1dhIih2tTsu4UtStzwV1NURnnQ2n8bZqWdsm5I3DN"
 
@@ -16,13 +18,105 @@ const BOT_ID = "7372015982967226376"
     "plugin_type":1}"
 */
 
+function detectInput(input) {
+    const userInput = input.toLowerCase();
+    // Kiểm tra các từ khóa và câu hỏi để xác định loại yêu cầu
+    for (const keyword of ChatQuery.getFromCart.keywords) {
+        if (userInput.includes(keyword)) {
+            return "getFromCart";
+        }
+    }
+    for (const question of ChatQuery.getFromCart.questions) {
+        if (userInput.includes(question)) {
+            return "getFromCart";
+        }
+    }
+    for (const suggest of ChatQuery.getFromCart.suggest) {
+        if (userInput.includes(suggest)) {
+            return "getFromCart";
+        }
+    }
+
+    // Nếu không khớp với từ khóa nào, trả về null hoặc loại yêu cầu khác
+    return "none"
+
+}
+
 const ChatBox = () => {
+    const { cart } = useContext(AppContext)
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         { role: 'assistant', type: 'answer', content: "Xin chào! Tôi là Fudee, Tôi có thể giúp gì cho bạn?", content_type: 'text' }
     ]);
     const [input, setInput] = useState('');
+    const [tempInput, setTempInput] = useState("")
     const [isWaitting, setIsWaitting] = useState(false)
+    const [detect, setDetect] = useState("")
+    const [detectAnswer, setDetectAnswer] = useState()
+
+    async function handleAns(value) {
+        if (!value) {
+            setDetect("")
+            const userRequest = {
+                "conversation_id": "demo-8",
+                "bot_id": BOT_ID,
+                "user": "demo-user",
+                "query": tempInput,
+                "stream": false
+            }
+            setInput("")
+            setIsWaitting(true)
+
+            try {
+                const response = await axios
+                    .post(
+                        'https://api.coze.com/open_api/v2/chat',
+                        userRequest,
+                        config
+                    )
+                const botResponse = response.data.messages[0]
+                console.log(botResponse)
+                setMessages(prevMessages => [...prevMessages, botResponse]);
+            } catch (error) {
+                console.error("Error sending message: ", error)
+            } finally {
+                setIsWaitting(false)
+            }
+        } else {
+            setDetect("")
+
+            let tempCart = ""
+            for (let i = 0; i < cart.length; i++) {
+                tempCart += cart[i].item.name.toLowerCase()
+                tempCart += ", "
+            }
+            const userRequest = {
+                "conversation_id": "demo-8",
+                "bot_id": BOT_ID,
+                "user": "demo-user",
+                "query": tempInput + "dựa vào giỏ hàng của tôi, nếu thiếu nguyên liệu hãy bổ sung thêm: " + tempCart,
+                "stream": false
+            }
+            setInput("")
+            setIsWaitting(true)
+
+            try {
+                const response = await axios
+                    .post(
+                        'https://api.coze.com/open_api/v2/chat',
+                        userRequest,
+                        config
+                    )
+                const botResponse = response.data.messages[0]
+                console.log(botResponse)
+                setMessages(prevMessages => [...prevMessages, botResponse]);
+            } catch (error) {
+                console.error("Error sending message: ", error)
+            } finally {
+                setIsWaitting(false)
+            }
+        }
+    }
 
     const config = {
         headers: {
@@ -31,13 +125,7 @@ const ChatBox = () => {
         }
     };
 
-    const messageContainerRef = useRef(null)
-    const handleSend = async () => {
-        if (input.trim() === '') return;
-
-        const newMessages = [...messages, { role: 'user', type: 'answer', content: input, content_type: 'text' }];
-        setMessages(newMessages);
-
+    async function sendQueryToBot(input) {
         const userRequest = {
             "conversation_id": "demo-8",
             "bot_id": BOT_ID,
@@ -45,9 +133,8 @@ const ChatBox = () => {
             "query": input,
             "stream": false
         }
-        setInput('');
+        setInput("")
         setIsWaitting(true)
-
 
         try {
             const response = await axios
@@ -56,16 +143,56 @@ const ChatBox = () => {
                     userRequest,
                     config
                 )
-
             const botResponse = response.data.messages[0]
             console.log(botResponse)
             setMessages(prevMessages => [...prevMessages, botResponse]);
-
         } catch (error) {
             console.error("Error sending message: ", error)
         } finally {
             setIsWaitting(false)
         }
+    }
+
+    const messageContainerRef = useRef(null)
+    const handleSend = async () => {
+        if (input.trim() === '') return;
+
+        setDetect(detectInput(input))
+        console.log(detectInput(input))
+        const newMessages = [...messages, { role: 'user', type: 'answer', content: input, content_type: 'text' }];
+        setMessages(newMessages)
+        setTempInput(input)
+        setInput('');
+
+
+        if (detectInput(input) == "none") {
+            const userRequest = {
+                "conversation_id": "demo-8",
+                "bot_id": BOT_ID,
+                "user": "demo-user",
+                "query": input,
+                "stream": false
+            }
+            setInput('');
+            setIsWaitting(true)
+
+            try {
+                const response = await axios
+                    .post(
+                        'https://api.coze.com/open_api/v2/chat',
+                        userRequest,
+                        config
+                    )
+                const botResponse = response.data.messages[0]
+                console.log(botResponse)
+                setMessages(prevMessages => [...prevMessages, botResponse]);
+            } catch (error) {
+                console.error("Error sending message: ", error)
+            } finally {
+                setIsWaitting(false)
+            }
+        }
+
 
     }
 
@@ -110,6 +237,51 @@ const ChatBox = () => {
                             </div>
                             <div className='w-[80%] h-auto overflow-hidden p-2 px-3 rounded-md bg-gray-300'>
                                 <p className='animate-pulse'>Đang suy nghĩ . . .</p>
+                            </div>
+                        </li>
+                    )}
+                    {/* bạn có muốn thêm các sản phẩm được gợi ý vào giỏ hàng? */}
+                    {detect == "addToCart" && cart != [] && (
+
+                        <li className='flex flex-row items-end gap-2'>
+                            <div className="w-9 h-9 bg-[#3e3e3e] flex items-center justify-center rounded-md">
+                                <i className="fa-solid fa-robot text-[#7dc642]"></i>
+                            </div>
+                            <div className='w-[80%] h-auto overflow-hidden p-2 px-3 rounded-md bg-gray-300'>
+                                <p>Bạn có muốn thêm các sản phẩm được gợi ý vào giỏ hàng?</p>
+                                <div className='w-full flex flex-row items-center justify-center gap-5 my-2'>
+                                    <buton
+                                        onClick={() => handleAns(true)}
+                                        className="border-2 border-[#7dc642] px-5 py-1 rounded-md cursor-pointer hover:bg-[#7dc642] group">
+                                        <p className='font-bold group-hover:text-white'>Có</p>
+                                    </buton>
+                                    <buton
+                                        onClick={() => handleAns(false)}
+                                        className="bg-[#999999] px-5 py-1 rounded-md cursor-pointer hover:bg-[#ff0000] group">
+                                        <p className='font-bold text-white'>Không</p>
+                                    </buton>
+                                </div>
+                            </div>
+                        </li>
+                    )}
+                    {/* bạn có muốn gợi ý từ các sản phẩm trong giỏ hàng */}
+                    {detect == "getFromCart" && (
+
+                        <li className='flex flex-row items-end justify-end'>
+                            <div className='w-[80%] h-auto overflow-hidden p-2 px-3 rounded-md bg-gray-300'>
+                                <p>Bạn có muốn gợi ý từ các sản phẩm trong giỏ hàng?</p>
+                                <div className='w-full flex flex-row items-center justify-center gap-5 my-2'>
+                                    <buton
+                                        onClick={() => handleAns(true)}
+                                        className="border-2 border-black px-5 py-1 rounded-md cursor-pointer hover:bg-[#7dc642] hover:border-[#7dc642] group">
+                                        <p className='font-bold  group-hover:text-white'>Có</p>
+                                    </buton>
+                                    <buton
+                                        onClick={() => handleAns(false)}
+                                        className="bg-[#999999] px-5 py-1 rounded-md cursor-pointer hover:bg-[#ff0000] group">
+                                        <p className='font-bold text-white'>Không</p>
+                                    </buton>
+                                </div>
                             </div>
                         </li>
                     )}
