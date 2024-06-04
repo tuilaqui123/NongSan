@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AppContext } from "../../Context/AppContext";
 import axios from "axios";
 
 const OrderReceived = () => {
@@ -8,7 +9,9 @@ const OrderReceived = () => {
     const [isSucceeded, setIsSucceeded] = useState(1002)
     const [price, setPrice] = useState(0)
     const [dataBody, setDataBody] = useState({})
+    const { fetchCart } = useContext(AppContext)
     const location = useLocation()
+    const navigate = useNavigate()
     const payment = () => {
         axios.post('http://localhost:8082/orders', {
             deliveryFee: dataBody.deliveryFee,
@@ -65,6 +68,11 @@ const OrderReceived = () => {
         }
     }, [dataBody]);
 
+    const shop = () => {
+        fetchCart()
+        navigate('/cua-hang')
+    }
+
     return (
         <>
             {(isSucceeded === 0) ? (
@@ -100,13 +108,14 @@ const OrderReceived = () => {
                                     </div>
                                 </div>
                                 <div className="h-full w-full md:w-2/5 lg:w-1/4 flex items-center justify-end ">
-                                    <Link
-                                        to={"/cua-hang"}
+                                    <div
+                                        // to={"/cua-hang"}
+                                        onClick={shop}
                                         className="relative bg-[#3e3e3e] w-full h-[50px] border border-white hover:border-[#7dc642] rounded-xl flex items-center group overflow-hidden mt-5"
                                     >
                                         <div className="bg-[#7dc642] absolute w-0 h-full rounded-lg group-hover:w-full duration-300"></div>
                                         <p className="text-lg text-center w-full text-white font-bold z-10">Tiếp tục mua sắm</p>
-                                    </Link>
+                                    </div>
                                 </div>
                             </div>
 
