@@ -7,9 +7,45 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import HotDealControl from "./HotDealControl";
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../Context/AppContext";
+import _ from 'lodash';
+import { useContext } from "react";
 
 
 const HotDeal = () => {
+    const { breadcrumb, setBreadcrumb } = useContext(AppContext);
+    const navigate = useNavigate()
+    const removeAccents = (str) => {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+
+    const formatLink = (category, farm) => {
+        return category + "&" + farm
+    }
+
+    function handleNavigate(query1, query2) {
+        const category = removeAccents(query1.toLowerCase()).replace(" ", "-")
+        const farm = removeAccents(query2.toLowerCase()).replace(" ", "-")
+        const path = {
+            main: "Cửa hàng",
+            second: breadcrumb.second,
+            child: 3,
+            query: {
+                link: formatLink(category, farm),
+                category: {
+                    slug: query1,
+                    link: category
+                },
+                farm: {
+                    slug: query2,
+                    link: farm
+                }
+            }
+        }
+        setBreadcrumb(path)
+        navigate(`/cua-hang/${formatLink(category, farm)}`);
+    }
     return (
         <div className="w-full h-auto p-5 py-20 bg-[#3e3e3e] ">
             <div>
@@ -37,7 +73,7 @@ const HotDeal = () => {
                         content={"Tận hưởng hương vị của mùa hè"}
                         btnTopColor={"orange-500"}
                         btnBottomColor={"[#3e3e3e]"}
-                        path={"/cua-hang/trai-cay"}
+                        onclick={() => handleNavigate("Trái cây", "FRESH MARKET")}
                     />
                     <DealContent
                         bgImage={d3}
@@ -48,7 +84,8 @@ const HotDeal = () => {
                         content={"Món quà vườn rau tươi ngon"}
                         btnTopColor={"green-500"}
                         btnBottomColor={"[#3e3e3e]"}
-                        path={"/cua-hang/rau-cu"}
+                        onclick={() => handleNavigate("Rau củ", "ORGANIC FOOD")}
+
                     />
                     {/* <DealContent
                         bgImage={deal1}

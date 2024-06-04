@@ -1,9 +1,10 @@
 import React from "react";
 import StyleRouterButton from "../ButtonComponent/StyleRouterButton";
 
-const DealContent = ({ bgImage, bgColor, textColor, title, name, content, btnTopColor, btnBottomColor, path }) => {
+const DealContent = ({ bgImage, bgColor, textColor, title, name, content, btnTopColor, btnBottomColor, path, onclick }) => {
     return (
         <div
+            onClick={onclick}
             className={`w-full lg:w-full h-[40vh] md:h-[45vh] bg-${bgColor} rounded-xl flex items-center shadow`}
             style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover" }}
         >

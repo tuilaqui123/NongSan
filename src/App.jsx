@@ -47,7 +47,6 @@ function App() {
 
               <Route path="/cua-hang" element={<Store />} />
               <Route path="/cua-hang/:tag" element={<Store />} />
-              {/* <Route path="/cua-hang/:query" element={<Store />} /> */}
               <Route path="/cua-hang/:tag/:name" element={<ItemDetails />} />
 
               <Route path="/lien-he" element={<Contact />} />

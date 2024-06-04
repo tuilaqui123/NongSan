@@ -1,43 +1,39 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Item from "../Item/Item";
 import SmallRouterButton from "../ButtonComponent/SmallRouterButton";
 import bg3 from '../../assets/bg/bg3.png'
 import { useNavigate } from "react-router-dom";
+import _ from 'lodash';
 import { AppContext } from "../../Context/AppContext";
 
 const CategoryDisplay = ({ mainColor, themeColor, itemColor, title, value }) => {
     const navigate = useNavigate()
-    const { setBreadcrumb, setNavigateStore } = useContext(AppContext);
-    const handleNavigate = (titleInput) => {
-        switch (titleInput) {
-            case "Thịt tươi":
-                navigate('/cua-hang/thit-tuoi')
-                setNavigateStore(true)
-                setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: "Thịt tươi" }))
-                break;
-            case "Hải sản":
-                navigate('/cua-hang/hai-san')
-                setNavigateStore(true)
-                setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: "Hải sản" }))
-                break;
-            case "Rau củ":
-                navigate('/cua-hang/rau-cu')
-                setNavigateStore(true)
-                setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: "Rau củ" }))
-                break;
-            case "Trái cây":
-                navigate('/cua-hang/trai-cay')
-                setNavigateStore(true)
-                setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: "Trái cây" }))
-                break;
-            case "Gói nguyên liệu":
-                navigate('/cua-hang/goi-nau-an')
-                setNavigateStore(true)
-                setBreadcrumb(prev => ({ ...prev, child: 3, main: "Cửa hàng" , second: "Gói nấu ăn" }))
-                break;
-            default:
-                break;
+    const { breadcrumb, setBreadcrumb } = useContext(AppContext);
+
+    const removeAccents = (str) => {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+
+    function handleNavigate() {
+        const temp = removeAccents(title.toLowerCase()).replace(" ", "-")
+        const path = {
+            main: "Cửa hàng",
+            second: breadcrumb.second,
+            child: 3,
+            query: {
+                link: temp,
+                category: {
+                    slug: title,
+                    link: temp
+                },
+                farm: {
+                    slug: "",
+                    link: ""
+                }
+            }
         }
+        setBreadcrumb(path)
+        navigate(`/cua-hang/${temp}`);
     }
     return (
         <div
@@ -52,7 +48,7 @@ const CategoryDisplay = ({ mainColor, themeColor, itemColor, title, value }) => 
                     <SmallRouterButton
                         btnColor={mainColor}
                     >
-                        <p onClick={() => handleNavigate(title)}>Xem thêm</p>
+                        <p onClick={handleNavigate}>Xem thêm</p>
                         <i class="fa-solid fa-arrow-right"></i>
                     </SmallRouterButton>
                 </div>
