@@ -12,6 +12,17 @@ export const AppProvider = ({ children }) => {
         main: "",
         second: "",
         child: 0,
+        query: {
+            link: "",
+            category: {
+                slug: "",
+                link: ""
+            },
+            farm: {
+                slug: "",
+                link: ""
+            }
+        }
     })
 
     const [paymentState, setPaymentState] = useState({

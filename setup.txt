@@ -9,27 +9,24 @@ use em for text ?
 
 =========== !important ===========
 
-remake user
-remake checkout
-remake order success
-blog detail
+-giới thiệu web
+	lý do làm web
+    các tính năng của web có
+    giới thiệu feature
+        chatbot
+        gợi ý món ăn
+        ..
 
-đổi điểm lấy mã giảm giá
+-demo web
+    đặt hàng (không đăng nhập và đăng nhập)
+    test bot
+        hỏi về công thức nấu ăn
+        hỏi về dinh dưỡng, chế độ giảm cân
+        gợi ý món ăn từ giỏ hàng
+        thêm các sản phẩm từ gợi ý vào giỏ hàng
 
-pts farm img
+-rút kết luận
+    ưu điểm, những gì đặt được
+    nhược điểm, khó khăn
+    hướng phát triển
 
-set auto roll up when load
-
-remake button ? 
-
-seperate page and component ~
-
-Motion Blur Portfolio Showcase - banner
-
-redesign account 
-
-chatbox icon
-
-skeleto loading / lazy loading
-
-form validate (quantity, input, selection)

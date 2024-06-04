@@ -41,7 +41,18 @@ const NavBar = () => {
     function showSideBar(main, child) {
         const temp = {
             main: main,
-            child: child
+            child: child,
+            query: {
+                link: "",
+                category: {
+                    slug: "",
+                    link: ""
+                },
+                farm: {
+                    slug: "",
+                    link: ""
+                }
+            }
         }
         setBreadcrumb(temp)
         setSideBar(!sideBar);
@@ -50,7 +61,18 @@ const NavBar = () => {
         const temp = {
             main: main,
             second: second,
-            child: child
+            child: child,
+            query: {
+                link: "",
+                category: {
+                    slug: "",
+                    link: ""
+                },
+                farm: {
+                    slug: "",
+                    link: ""
+                }
+            }
         }
         setBreadcrumb(temp)
     }

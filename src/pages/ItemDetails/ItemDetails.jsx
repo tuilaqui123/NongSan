@@ -159,7 +159,7 @@ const ItemDetails = () => {
                                         </div>
                                         <div className="w-full">
                                             <p className="font-bold mt-3">Mô tả sản phẩm:</p>
-                                            <p>{item.description}</p>
+                                            <p className="whitespace-pre-wrap break-words">{item.description}</p>
                                         </div>
                                         <div className="w-full mt-3">
                                             <QuantitySelection
