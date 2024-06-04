@@ -14,18 +14,69 @@ const CartItem = ({ value }) => {
     const [userId, setUserId] = useState(null)
     const { fetchCart } = useContext(AppContext)
     const [dialogVisible, setDialogVisible] = useState(false);
+    // const [cartNoAcc, getCartNoAcc] = useState({})
     const formatNumber = (number) => {
         return new Intl.NumberFormat('de-DE').format(number);
     };
+    // console.log(cartNoAcc)
     useEffect(() => {
-        const userObj = JSON.parse(localStorage.user)
-        setUserId(userObj._id)
+        if (localStorage.user){
+            const userObj = JSON.parse(localStorage.user)
+            setUserId(userObj._id)
+        }
     }, [])
     const deleteItem = () => {
-        setIsLoading(true)
-        axios.delete(`http://localhost:8082/carts/665995e6c747351b4d9a709b?customerId=${userId}&itemId=${value._id}`)
-            .then(() => {
-                toast.success('Xóa sản phẩm trong giỏ hàng thành công', {
+        if (localStorage.token){
+            setIsLoading(true)
+            axios.delete(`http://localhost:8082/carts/665995e6c747351b4d9a709b?customerId=${userId}&itemId=${value._id}`)
+                .then(() => {
+                    toast.success('Xóa sản phẩm trong giỏ hàng thành công', {
+                        position: "top-right",
+                        autoClose: 700,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        onClose: async () => {
+                            await fetchCart()
+                        }
+                    });
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+                .finally(() => {
+                    setIsLoading(false)
+                })
+        }else{
+            axios.delete(`http://localhost:8082/ordersAnonymus?itemId=${value.item._id}&amount=${value.amount}`)
+            .then((res) => {
+                let cartNoAcc = []
+                let check = false
+                let recordIndex = -1
+                if (localStorage.cartNoAcc){
+                    cartNoAcc = JSON.parse(localStorage.cartNoAcc)
+                    cartNoAcc.map((ele, index) => {
+                        console.log(ele)
+                        console.log(res.data)
+                        if (ele.item._id === res.data.item._id) {
+                            ele.amount -= res.data.amount
+                            if (ele.amount <= 0) {
+                                check = true
+                                recordIndex = index
+                            }
+                        }
+                    })
+                    if (check) {
+                        cartNoAcc.splice(recordIndex, 1)
+                    }
+                }
+                console.log(cartNoAcc)
+                localStorage.setItem('cartNoAcc', JSON.stringify(cartNoAcc))
+
+                toast.success('Xóa sản phẩm thành công', {
                     position: "top-right",
                     autoClose: 700,
                     hideProgressBar: false,
@@ -34,17 +85,13 @@ const CartItem = ({ value }) => {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                    onClose: async () => {
-                        await fetchCart()
+                    onClose: () => {
+                        location.reload();
                     }
                 });
             })
-            .catch((err) => {
-                console.log(err)
-            })
-            .finally(() => {
-                setIsLoading(false)
-            })
+            .catch(err => console.error(err))
+        }
     }
 
     const handleDialogResponse = (confirmed) => {
@@ -91,7 +138,7 @@ const CartItem = ({ value }) => {
                                 limit={20}
                             />
                         </div>
-                        <p className="w-2/12 text-end font-medium text-[17px] md:block hidden">{formatNumber(value.price)}đ</p>
+                        <p className="w-2/12 text-end font-medium text-[17px] md:block hidden">{localStorage.token ? formatNumber(value.price) : (formatNumber(value.amount*value.item.price))}đ</p>
                         {dialogVisible && <DialogForm onDialog={handleDialogResponse} />}
                     </div>
                 )

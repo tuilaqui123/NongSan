@@ -12,10 +12,10 @@ const NavBar = () => {
     const [sideBar, setSideBar] = useState(true)
     const [search, setSearch] = useState("")
     const [isPast, setIsPast] = useState(false);
+    const [numCartNoAcc, setNumCartNoAcc] = useState(0)
     const divRef = useRef(null);
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(navigateStore)
     const handleScroll = () => {
         if (divRef.current) {
             const rect = divRef.current.getBoundingClientRect();
@@ -85,6 +85,13 @@ const NavBar = () => {
             setSearch("");
         } else setSearch("")
     }
+
+    useEffect(() => {
+        if (localStorage.cartNoAcc){
+            const cartNoAccount = JSON.parse(localStorage.cartNoAcc)
+            setNumCartNoAcc(cartNoAccount.length)
+        }
+    }, [])
 
     return (
         <div className="sticky top-0 z-40 shadow shadow-[#575656]">
@@ -256,7 +263,7 @@ const NavBar = () => {
                                     </div>
                                     <div className="hidden lg:block">
                                         <p class="text-white font-normal text-sm text-left">Giỏ hàng</p>
-                                        <p class="text-[#7dc642] font-medium text-sm text-left">{cart.length} sản phẩm</p>
+                                        <p class="text-[#7dc642] font-medium text-sm text-left">{cart.length !== 0 ? cart.length : numCartNoAcc} sản phẩm</p>
                                     </div>
                                 </div>
                             </RouterButton>
@@ -297,7 +304,7 @@ const NavBar = () => {
                                         </div>
                                         <div className="hidden lg:block">
                                             <p class="text-white font-normal text-sm text-left">Giỏ hàng</p>
-                                            <p class="text-[#7dc642] font-medium text-sm text-left">{cart.length} sản phẩm</p>
+                                            <p class="text-[#7dc642] font-medium text-sm text-left">{cart.length !== 0 ? cart.length : numCartNoAcc} sản phẩm</p>
                                         </div>
                                     </div>
                                 </RouterButton>

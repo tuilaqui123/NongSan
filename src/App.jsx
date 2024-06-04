@@ -1,5 +1,5 @@
 import './App.css'
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavBar from './components/Navbar/NavBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home/Home';
@@ -30,6 +30,17 @@ import AccountInfo from './pages/Account/AccountInfo';
 import OrderHistory from './pages/Account/OrderHistory';
 import OrderShipping from './pages/Account/OrderShipping';
 function App() {
+  useEffect(() => {
+    const handleTabClose = (event) => {
+      // localStorage.removeItem('cartNoAcc')
+    }
+
+    window.addEventListener('beforeunload', handleTabClose);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleTabClose);
+    }
+  }, [])
   return (
     <div className="relative">
       <AppProvider>
