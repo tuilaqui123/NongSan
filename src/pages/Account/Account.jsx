@@ -4,7 +4,7 @@ import avt from '../../assets/cmt.jpg'
 import clsx from "clsx";
 import AccountButton from "./AccountButton";
 import { useNavigate } from "react-router-dom";
-import { Outlet } from "react-router-dom"; 
+import { Outlet } from "react-router-dom";
 
 
 const Account = () => {
@@ -25,7 +25,7 @@ const Account = () => {
                 </div>
             </div>
             <div className="w-full h-auto bg-transparent flex flex-row justify-between gap-6 p-6 rounded-xl relative">
-                <div className=" w-1/3 h-[100vh] bg-white flex flex-col items-center border border-gray-300 shadow-2xl rounded-lg p-5 pt-10">
+                <div className="md:w-1/3 h-[100vh] bg-white flex flex-col items-center border border-gray-300 shadow-2xl rounded-lg p-5 pt-10">
                     <div className="w-2/5 flex flex-col gap-3">
                         <img
                             src={avt}
@@ -79,7 +79,7 @@ const Account = () => {
                     </div>
                 </div>
 
-                <div className="w-3/4 bg-white border border-gray-300 rounded-lg p-7 shadow-xl">
+                <div className="md:w-2/3 lg:w-3/4 bg-white border border-gray-300 rounded-lg p-7 shadow-xl">
                     <Outlet />
                 </div>
             </div>

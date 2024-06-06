@@ -54,16 +54,16 @@ const HotDeal = () => {
                     <p className="text-4xl sm:text-5xl font-bold text-white">SẢN PHẨM MỚI</p>
                 </div>
                 <div className="hidden md:grid md:grid-cols-2 gap-5">
-                    {/* <DealContent
+                    <DealContent
                         bgImage={deal1}
                         bgColor={"purple-200"}
                         textColor={"pink-500"}
                         title={"TRÁI CÂY TƯƠI"}
                         name={"HEALTHY FOOD"}
-                        content={"Giảm giá 40% cho các sản phẩm"}
+                        content={"Sản phẩm sạch, sức khoẻ xanh"}
                         btnTopColor={"purple-500"}
                         btnBottomColor={"[#3e3e3e]"}
-                    /> */}
+                    />
                     <DealContent
                         bgImage={DEAL2}
                         bgColor={"orange-200"}
@@ -111,9 +111,22 @@ const HotDeal = () => {
                                 textColor={"pink-500"}
                                 title={"TRÁI CÂY TƯƠI"}
                                 name={"HEALTHY FOOD"}
-                                content={"Giảm giá 40% cho các sản phẩm"}
+                                content={"Sản phẩm sạch, sức khoẻ xanh"}
                                 btnTopColor={"purple-500"}
                                 btnBottomColor={"[#3e3e3e]"}
+                            />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <DealContent
+                                bgImage={DEAL2}
+                                bgColor={"orange-200"}
+                                textColor={"red-500"}
+                                title={"TRÁI CÂY TƯƠI"}
+                                name={"FRESH MARKET"}
+                                content={"Tận hưởng hương vị của mùa hè"}
+                                btnTopColor={"orange-500"}
+                                btnBottomColor={"[#3e3e3e]"}
+                                onclick={() => handleNavigate("Trái cây", "FRESH MARKET")}
                             />
                         </SwiperSlide>
                         <SwiperSlide>
@@ -130,26 +143,16 @@ const HotDeal = () => {
                         </SwiperSlide>
                         <SwiperSlide>
                             <DealContent
-                                bgImage={deal1}
-                                bgColor={"purple-200"}
-                                textColor={"pink-500"}
-                                title={"TRÁI CÂY TƯƠI"}
-                                name={"HEALTHY FOOD"}
-                                content={"Giảm giá 40% cho các sản phẩm"}
-                                btnTopColor={"purple-500"}
+                                bgImage={d3}
+                                bgColor={"green-200"}
+                                textColor={"blue-500"}
+                                title={"RAU CỦ SẠCH"}
+                                name={"ORGANIC FOOD"}
+                                content={"Món quà vườn rau tươi ngon"}
+                                btnTopColor={"green-500"}
                                 btnBottomColor={"[#3e3e3e]"}
-                            />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <DealContent
-                                bgImage={deal1}
-                                bgColor={"purple-200"}
-                                textColor={"pink-500"}
-                                title={"TRÁI CÂY TƯƠI"}
-                                name={"HEALTHY FOOD"}
-                                content={"Giảm giá 40% cho các sản phẩm"}
-                                btnTopColor={"purple-500"}
-                                btnBottomColor={"[#3e3e3e]"}
+                                onclick={() => handleNavigate("Rau củ", "ORGANIC FOOD")}
+
                             />
                         </SwiperSlide>
                         <HotDealControl />

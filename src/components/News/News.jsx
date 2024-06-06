@@ -2,6 +2,10 @@ import React from "react";
 import NewsBox from "./NewsBox";
 import StyleRouterButton from "../ButtonComponent/StyleRouterButton";
 import BigBlog from "../../pages/Blog/BigBlog";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import SwiperNavControl from "../RecommentItem/SwiperNavControl";
 
 const News = () => {
     return (
@@ -27,11 +31,49 @@ const News = () => {
                         </div>
                     </div>
                 </div>
-                <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-7">
+                {/* <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-7">
                     <BigBlog />
                     <BigBlog />
                     <BigBlog />
 
+                </div> */}
+                <div className="w-full">
+                    <Swiper
+                        slidesPerView={2}
+                        breakpoints={{
+                            640: {
+                                slidesPerView: 2,
+                            },
+                            768: {
+                                slidesPerView: 3,
+                            },
+                            1024: {
+                                slidesPerView: 3,
+                            },
+                        }}
+                        spaceBetween={10}
+                        loop={true}
+                        className="mySwiper w-full"
+                    >
+                        <SwiperSlide>
+                            <BigBlog />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <BigBlog />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <BigBlog />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <BigBlog />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <BigBlog />
+                        </SwiperSlide>
+
+
+                        <SwiperNavControl />
+                    </Swiper>
                 </div>
 
             </div>

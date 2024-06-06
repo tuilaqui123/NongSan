@@ -3,6 +3,7 @@ import itemImg from '../../assets/image/item.png'
 
 
 const CheckoutItem = ({ value }) => {
+    console.log(value)
     const formatNumber = (number) => {
         return new Intl.NumberFormat('de-DE').format(number);
     };

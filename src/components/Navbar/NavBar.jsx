@@ -123,7 +123,7 @@ const NavBar = () => {
                                         </div>
                                         <div>
                                             <p class="text-white font-normal text-sm text-left">Tài khoản</p>
-                                            <p class="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>
+                                            <p class="text-[#7dc642] font-medium text-sm text-left"> {name != "" ? <div className="text-[#7dc642] font-medium text-sm text-left">{name}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}</p>
                                         </div>
                                     </div>
                                 </RouterButton>
@@ -282,7 +282,7 @@ const NavBar = () => {
                         </div>
                     </div>
                     <div className="w-full md:w-9/12 hidden sm:flex flex-col items-start gap-5">
-                        <div className="w-full flex flex-row items-center justify-between">
+                        <div className="w-full flex flex-row items-center justify-between gap-3">
                             <div className="relative h-10 flex flex-row items-center sm:w-11/12 lg:w-8/12">
                                 <input
                                     type="text"
@@ -294,7 +294,7 @@ const NavBar = () => {
                                 />
                                 <i class="fa-solid fa-magnifying-glass absolute cursor-pointer hover:bg-[#3e3e3e] mr-5 right-0 text-xl text-[#7dc642]"></i>
                             </div>
-                            <div className=" flex flex-row justify-between gap-7 w-3/12 lg:gap-5 lg:justify-center sm:w-4/12 ">
+                            <div className=" flex flex-row justify-evenly gap-7 w-3/12 lg:gap-5 lg:justify-center sm:w-4/12 ">
                                 <RouterButton path={localStorage.token ? "/tai-khoan" : "/dang-nhap"}>
                                     <div class="flex flex-row items-center gap-2 cursor-pointer group">
                                         <div className="relative flex items-center justify-center">

@@ -18,7 +18,7 @@ const BigBlog = () => {
                 <p className="mx-2">|</p>
                 <p className="hover:text-[#7dc642] cursor-pointer">Phạm Ngọc Qúi</p>
             </div>
-            <p className="text-[15px]">Mật ong là một nguyên liệu được sử dụng phổ biến trong nấu ăn. Ngoài ra, mật ong còn được ứng dụng trong chữa bệnh và làm đẹp. Dựa trên những lợi ích của mật ong, nó</p>
+            <p className="text-[15px]">{"Mật ong là một nguyên liệu được sử dụng phổ biến trong nấu ăn. Ngoài ra, mật ong còn được ứng dụng trong chữa bệnh và làm đẹp. Dựa trên những lợi ích của mật ong, nó".substring(0, 99)} . . .</p>
         </div>
     );
 }

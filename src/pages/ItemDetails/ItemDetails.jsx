@@ -82,43 +82,43 @@ const ItemDetails = () => {
             axios.post(`http://localhost:8082/orders/noAccount/${item._id}`, {
                 quantity: quantity
             })
-            .then((res) => {
-                let cartNoAcc = []
-                let check = false
-                if (localStorage.cartNoAcc){
-                    cartNoAcc = JSON.parse(localStorage.cartNoAcc)
-                    
-                    cartNoAcc.map((ele) => {
-                        console.log(ele)
-                        if (ele.item._id === res.data.item._id) {
-                            ele.quantity += res.data.quantity
-                            check = true
-                        }
-                    })
+                .then((res) => {
+                    let cartNoAcc = []
+                    let check = false
+                    if (localStorage.cartNoAcc) {
+                        cartNoAcc = JSON.parse(localStorage.cartNoAcc)
 
-                    if (check === false){
+                        cartNoAcc.map((ele) => {
+                            console.log(ele)
+                            if (ele.item._id === res.data.item._id) {
+                                ele.quantity += res.data.quantity
+                                check = true
+                            }
+                        })
+
+                        if (check === false) {
+                            cartNoAcc.push(res.data)
+                        }
+                    } else {
                         cartNoAcc.push(res.data)
                     }
-                }else{
-                    cartNoAcc.push(res.data)
-                }
-                localStorage.setItem('cartNoAcc', JSON.stringify(cartNoAcc))
+                    localStorage.setItem('cartNoAcc', JSON.stringify(cartNoAcc))
 
-                toast.success('Thêm sản phẩm vào giỏ hàng thành công', {
-                    position: "top-right",
-                    autoClose: 700,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    onClose: () => {
-                        location.reload();
-                    }
-                });
-            })
-            .catch(err => console.log(err))
+                    toast.success('Thêm sản phẩm vào giỏ hàng thành công', {
+                        position: "top-right",
+                        autoClose: 700,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        onClose: () => {
+                            location.reload();
+                        }
+                    });
+                })
+                .catch(err => console.log(err))
         }
     }
 
@@ -126,6 +126,7 @@ const ItemDetails = () => {
         const paymentObj = {
             items: [{
                 item: item._id,
+                image: item.image,
                 amount: quantity,
                 price: item.price * quantity
             }],

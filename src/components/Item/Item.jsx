@@ -3,7 +3,7 @@ import item from '../../assets/image/item.png'
 import StatusTag from "../Tag/StatusTag";
 import ItemTag from "../Tag/ItemTag";
 import RouterButton from "../ButtonComponent/RouterButton";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 
 const Item = ({ itemColor, value }) => {
@@ -23,13 +23,12 @@ const Item = ({ itemColor, value }) => {
     return (
         <>
             {value && (
-                <RouterButton
+                <Link
                     // path={`/cua-hang/${tag}/${itemName}`}
-                    path={`/cua-hang/san-pham/${value._id}`}
-                    onclick={handleBreadcrumb}
+                    to={`/cua-hang/san-pham/${value._id}`}
+                    onClick={handleBreadcrumb}
                 >
-
-                    <div className={`w-full border border-gray-400 bg-white rounded-lg p-3 hover:bg-${itemColor} group hover:border-none duration-200 cursor-pointer`}>
+                    <div className={`w-ful border border-gray-400 bg-white rounded-lg p-3 hover:bg-${itemColor} group hover:border-none duration-200 cursor-pointer`}>
                         <div className="relative w-full flex items-center justify-center border border-gray-300 rounded-lg mb-5 p-5">
                             {value.image ? (
                                 <img
@@ -43,7 +42,7 @@ const Item = ({ itemColor, value }) => {
 
                         </div>
                         <div className="w-full">
-                            <p className="text-lg text-[#3e3e3e] text-left font-bold group-hover:text-white text-ellipsis vwhitespace-nowrap overflow-hidden">{value.name}</p>
+                            <p className="text-lg text-[#3e3e3e] text-left font-bold group-hover:text-white truncate">{value.name}</p>
                             <div className="flex flex-row my-1 gap-2">
                                 {value.tag != 0 && (
                                     <ItemTag>
@@ -63,7 +62,7 @@ const Item = ({ itemColor, value }) => {
                         </div>
                     </div>
 
-                </RouterButton>
+                </Link>
             )}
         </>
 

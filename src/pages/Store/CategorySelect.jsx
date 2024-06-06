@@ -64,7 +64,7 @@ const CategorySelect = () => {
 
     }
     return (
-        <div className="w-full flex flex-col border border-gray-300 rounded-t-xl overflow-hidden">
+        <div className="w-full flex flex-col border bg-white border-gray-300 rounded-t-xl overflow-hidden">
             <p className="w-full bg-[#7dc642] py-3 text-base font-bold text-white text-center">DANH MỤC SẢN PHẨM</p>
             <ul className="w-full flex flex-col">
                 <li

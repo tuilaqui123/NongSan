@@ -65,7 +65,7 @@ const FarmSelect = () => {
 
     }
     return (
-        <div className="w-full flex flex-col border border-gray-300 rounded-t-xl overflow-hidden">
+        <div className="w-full flex bg-white flex-col border border-gray-300 rounded-t-xl overflow-hidden">
             <p className="w-full bg-[#7dc642] py-3 text-base font-bold text-white text-center">TRANG TRẠI</p>
             <ul className="w-full flex flex-col">
                 {farms.map((value, index) => {
