@@ -24,9 +24,9 @@ const ShippingBox = ({orderId, orderStatus, name, phone, address, total, items})
                     <p className="text-xl font-bold">Thông tin giỏ hàng</p>
                     <p className="text-xl font-bold text-[#69a737]"><i class="fa-solid fa-money-bill"></i> {formatNumber(total)}đ</p>
                 </div>
-                {items.map((ele) => {
+                {items.map((ele, index) => {
                     return (
-                        <div className="flex flex-row gap-3 mb-5">
+                        <div key={index} className="flex flex-row gap-3 mb-5">
                             <img
                                 src={ele.item.image}
                                 className="w-[80px] border border-[#3e3e3e] p-2 rounded-md"

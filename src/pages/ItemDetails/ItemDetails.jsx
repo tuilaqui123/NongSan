@@ -27,7 +27,6 @@ const ItemDetails = () => {
             const userObj = JSON.parse(localStorage.user)
             setUserId(userObj._id)
         }
-
         const fetchItem = () => {
             axios.get(`http://localhost:8082/items/${params.name}`)
                 .then((res) => {
@@ -123,6 +122,7 @@ const ItemDetails = () => {
     }
 
     const handlePayment = () => {
+        console.log(quantity)
         const paymentObj = {
             items: [{
                 item: item._id,

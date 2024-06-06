@@ -40,6 +40,7 @@ const Search = () => {
                             }
                         })}
                     </div>
+                    
                     <div className="col-span-1">
                         <RecommentSelect />
                     </div>
