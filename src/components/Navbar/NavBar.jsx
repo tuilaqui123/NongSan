@@ -28,18 +28,16 @@ const NavBar = () => {
             }
         }
     };
-    const [name, setName] = useState("")
+    const [name, setName] = useState(null)
     useEffect(() => {
         if (localStorage.user) {
             const userObj = JSON.parse(localStorage.user)
             setName(userObj.name || "")
-
+        }else{
+            setName(null)
         }
-    }, [])
+    }, [location])
 
-    // useEffect(() => {
-    //     fetchCart()
-    // }, [cart])
     useEffect(() => {
         // setNavigateStore(false)
         window.addEventListener('scroll', handleScroll);
@@ -123,7 +121,7 @@ const NavBar = () => {
                                         </div>
                                         <div>
                                             <p class="text-white font-normal text-sm text-left">Tài khoản</p>
-                                            <p class="text-[#7dc642] font-medium text-sm text-left"> {name != "" ? <div className="text-[#7dc642] font-medium text-sm text-left">{name}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}</p>
+                                            <p class="text-[#7dc642] font-medium text-sm text-left"> {name != "" ? <div className="text-[#7dc642] font-medium text-sm text-left">{name}</div> : <p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>}</p>
                                         </div>
                                     </div>
                                 </RouterButton>
@@ -303,7 +301,7 @@ const NavBar = () => {
                                         </div>
                                         <div className="hidden lg:block">
                                             <p class="text-white font-normal text-sm text-left">Tài khoản</p>
-                                            {name != "" ? <div className="text-[#7dc642] font-medium text-sm text-left">{name}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}
+                                            {name ? <div className="text-[#7dc642] font-medium text-sm text-left">{name}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}
                                         </div>
                                     </div>
                                 </RouterButton>
