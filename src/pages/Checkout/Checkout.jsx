@@ -30,7 +30,6 @@ const Checkout = () => {
     const [userId, setUserId] = useState(null)
     const navigate = useNavigate()
 
-    console.log(paymentState)
     useEffect(() => {
         if (localStorage.user) {
             const userObj = JSON.parse(localStorage.user)
@@ -59,7 +58,6 @@ const Checkout = () => {
             }
         }
     }, [district])
-    // console.log(communeSelect)
     const formatNumber = (number) => {
         return new Intl.NumberFormat('de-DE').format(number);
     };
@@ -276,11 +274,21 @@ const Checkout = () => {
                                         <p className="text-3xl md:text-2xl lg:text-3xl font-bold text-[#7dc642] pb-3 mb-3 border-b border-gray-300">Chi tiết đơn hàng</p>
                                         {/* <div className="w-full flex flex-col gap-3"> */}
                                         <div className="w-full flex flex-col sm:grid sm:grid-cols-2 md:flex md:flex-col gap-3">
-                                            {paymentState.items.map((value, index) => {
+                                            {paymentState.from === 'cart' && paymentState.items.map((value, index) => {
                                                 return (
                                                     <CheckoutItem
                                                         key={index}
                                                         value={value}
+                                                        from={paymentState.from}
+                                                    />
+                                                )
+                                            })}
+                                            {paymentState.from === 'product' && paymentState.items.map((value, index) => {
+                                                return (
+                                                    <CheckoutItem
+                                                        key={index}
+                                                        value={value}
+                                                        from={paymentState.from}
                                                     />
                                                 )
                                             })}
