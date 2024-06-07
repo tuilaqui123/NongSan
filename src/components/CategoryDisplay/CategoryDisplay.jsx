@@ -5,6 +5,7 @@ import bg3 from '../../assets/bg/bg3.png'
 import { useNavigate } from "react-router-dom";
 import _ from 'lodash';
 import { AppContext } from "../../Context/AppContext";
+import { Animator, ScrollContainer, ScrollPage, batch, Fade, FadeIn, FadeOut, Move, MoveIn, MoveOut, Sticky, StickyIn, StickyOut, Zoom, ZoomIn, ZoomOut } from "react-scroll-motion";
 
 const CategoryDisplay = ({ mainColor, themeColor, itemColor, title, value }) => {
     const navigate = useNavigate()
