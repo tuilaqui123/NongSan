@@ -5,12 +5,15 @@ import RegisterRecomment from "../../components/RegisterRecomment/RegisterRecomm
 import News from "../../components/News/News";
 import HotDeal from "../../components/HotDeal/HotDeal";
 import FarmContent from "../../components/FarmContent/FarmContent";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { Animator, ScrollContainer, ScrollPage, batch, Fade, FadeIn, FadeOut, Move, MoveIn, MoveOut, Sticky, StickyIn, StickyOut, Zoom, ZoomIn, ZoomOut } from "react-scroll-motion";
 
 const Home = () => {
     const { items } = useContext(AppContext)
+    useEffect(() => {
+        console.log("hahahahah")
+    }, [])
     return (
         <div>
             <BannerReverse />

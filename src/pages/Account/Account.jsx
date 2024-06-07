@@ -5,7 +5,8 @@ import clsx from "clsx";
 import AccountButton from "./AccountButton";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const Account = () => {
     const [select, setSelect] = useState(1)
@@ -15,8 +16,28 @@ const Account = () => {
         setSelect(choose)
     }
 
+    const handleLogout = () => {
+        Choose(5);
+        localStorage.removeItem("user")
+        localStorage.removeItem("token")
+
+        toast.success("Đăng xuất thành công", {
+            position: "top-right",
+            autoClose: 700,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            onClose: () => {
+                navigate('/trang-chu', {replace: true})
+            }
+        });
+    }
     return (
         <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
+            <ToastContainer/>
             <div className="w-11/12">
                 <div className="w-2/3 mb-5">
                     <Breadcrumb
@@ -74,7 +95,7 @@ const Account = () => {
                             name={"Đăng xuất"}
                             position={5}
                             select={select}
-                            onclick={() => Choose(5)}
+                            onclick={handleLogout}
                         />
                     </div>
                 </div>
