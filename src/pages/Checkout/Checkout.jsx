@@ -197,9 +197,9 @@ const Checkout = () => {
                     <ToastContainer />
                     <div className="w-11/12">
                         <div className="w-2/3 mb-5">
-                            <Breadcrumb
+                            {/* <Breadcrumb
                                 location={"Thanh toán"}
-                            />
+                            /> */}
                         </div>
                         <div className=" w-full h-auto flex flex-row justify-center items-center border border-gray-300 py-[5vh] rounded-xl shadow-2xl">
                             <div className="w-[95%] h-[90%] flex flex-col md:flex-row gap-10 justify-between">

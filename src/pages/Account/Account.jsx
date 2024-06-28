@@ -40,9 +40,9 @@ const Account = () => {
             <ToastContainer/>
             <div className="w-11/12">
                 <div className="w-2/3 mb-5">
-                    <Breadcrumb
+                    {/* <Breadcrumb
                         location={"Tài khoản"}
-                    />
+                    /> */}
                 </div>
             </div>
             <div className="w-full h-auto bg-transparent flex flex-row justify-between gap-6 p-6 rounded-xl relative">

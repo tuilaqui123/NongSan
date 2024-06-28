@@ -73,9 +73,9 @@ const Cart = () => {
         <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
             <div className="w-11/12">
                 <div className="w-2/3 mb-5">
-                    <Breadcrumb
+                    {/* <Breadcrumb
                         location={"Giỏ hàng"}
-                    />
+                    /> */}
                 </div>
                 <div className="w-full border border-gray-300 shadow-2xl flex items-center justify-center p-7 rounded-xl ">
                     <div className="w-full  h-full flex flex-row gap-7">

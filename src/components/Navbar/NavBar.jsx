@@ -258,11 +258,16 @@ const NavBar = () => {
                 <div className="w-full py-3 pt-5 px-3 sm:px-5 flex flex-col md:flex-row  items-center justify-between bg-[#3e3e3e]">
                     <div className="w-full sm:w-2/5 md:w-1/5 flex items-center justify-between sm:justify-center">
                         <i class="fa-solid fa-bars text-white text-3xl sm:hidden cursor-pointer" onClick={() => setSideBar(!sideBar)}></i>
-                        <img
-                            src={logo}
-                            alt="logo"
-                            className="w-2/5 sm:w-full sm:mb-5 md:mb-0"
-                        />
+                        <Link
+                          onClick={() => updateBreadcrumb("Trang chủ", "", 1)}
+                          to={"/trang-chu"}
+                           className="w-2/5 sm:w-full sm:mb-5 md:mb-0"
+                        >
+                            <img
+                                src={logo}
+                                alt="logo"
+                            />
+                        </Link>
                         <div className="sm:hidden scale-125">
                             <RouterButton path={"/gio-hang"}>
                                 <div class="flex flex-row items-center gap-2 cursor-pointer group ">
@@ -293,7 +298,7 @@ const NavBar = () => {
                                 <i class="fa-solid fa-magnifying-glass absolute cursor-pointer hover:bg-[#3e3e3e] mr-5 right-0 text-xl text-[#7dc642]"></i>
                             </div>
                             <div className=" flex flex-row justify-evenly gap-7 w-3/12 lg:gap-5 lg:justify-center sm:w-4/12 ">
-                                <RouterButton path={localStorage.token ? "/tai-khoan" : "/dang-nhap"}>
+                                <RouterButton path={localStorage.token ? "/tai-khoan" : "/dang-nhap"} onClick={() => updateBreadcrumb("Tài khoản", "", 9)}>
                                     <div class="flex flex-row items-center gap-2 cursor-pointer group">
                                         <div className="relative flex items-center justify-center">
                                             <i class="absolute fa-solid fa-circle-user fa-2x text-transparent rounded-full border border-[#7dc642] hover:scale-125 duration-200 group-hover:scale-125"></i>
@@ -305,7 +310,7 @@ const NavBar = () => {
                                         </div>
                                     </div>
                                 </RouterButton>
-                                <RouterButton path={"/gio-hang"}>
+                                <RouterButton path={"/gio-hang"} onClick={() => updateBreadcrumb("Giỏ hàng", "", 8)}>
                                     <div class="flex flex-row items-center gap-2 cursor-pointer group ">
                                         <div className="relative flex items-center justify-center bg-white rounded-full p-2">
                                             <i class="absolute fa-solid fa-circle-user fa-2x text-transparent rounded-full border border-[#7dc642] hover:scale-125 duration-200 group-hover:scale-125"></i>
@@ -326,7 +331,7 @@ const NavBar = () => {
                                     <p
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
-                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 1,
+                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 1,
                                             "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 1,
                                             // "text-lg font-black py-1 text-[#7dc642] border-[#7dc642]": navigateStore === false
                                         })}
@@ -338,7 +343,7 @@ const NavBar = () => {
                                     <p
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
-                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 2,
+                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 2,
                                             "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 2
                                         })}
                                     >Giới thiệu</p>
@@ -350,7 +355,7 @@ const NavBar = () => {
                                         <p
                                             // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                             className={clsx({
-                                                "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 3,
+                                                "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 3,
                                                 "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 3,
                                                 // "text-lg font-black py-1 text-[#7dc642] border-[#7dc642]": navigateStore === true
                                             })}
@@ -390,7 +395,7 @@ const NavBar = () => {
                                     <p
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
-                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 4,
+                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 4,
                                             "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 4
                                         })}
                                     >Trang trại</p>
@@ -401,7 +406,7 @@ const NavBar = () => {
                                     <p
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
-                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 5,
+                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 5,
                                             "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 5
                                         })}
                                     >Blog</p>
@@ -412,7 +417,7 @@ const NavBar = () => {
                                     <p
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
-                                            "text-base font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 6,
+                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 6,
                                             "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 6
                                         })}
                                     >Liên hệ</p>
