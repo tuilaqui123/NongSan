@@ -51,7 +51,7 @@ function App() {
           <Routes>
             <Route>
 
-              <Route path="/" element={<Home />} />
+              <Route index path="/" element={<Home />} />
               <Route path="/trang-chu" element={<Home />} />
 
               <Route path="/gioi-thieu" element={<Introduce />} />
@@ -73,6 +73,7 @@ function App() {
               <Route path="/hoa-don" element={<OrderReceived />} />
 
               <Route path="/trang-trai" element={<Farm />} />
+              <Route path="/trang-trai/:farmID" element={<Farm />} />
 
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:name" element={<BlogDetail />} />

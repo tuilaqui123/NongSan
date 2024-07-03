@@ -7,32 +7,44 @@ import FarmProduct from "./FarmProduct";
 import '../../hiddenScroll.css'
 import FarmInfo from "./FarmInfo";
 import { AppContext } from "../../Context/AppContext";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 
 const Farm = () => {
 
     const { farms, setFarms, fetchFarm } = useContext(AppContext)
 
-    const [preFarm, setPreFarm] = useState([])
+    const [preFarm, setPreFarm] = useState({})
     const [isShow, setIsShow] = useState(false)
 
-    console.log(farms)
+    const params = useParams()
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (params.farmID) setIsShow(true)
+    }, [params.farmID])
 
     function showFarm(value) {
         setPreFarm(value)
-        if (value == preFarm)
-            setIsShow(!isShow)
+        setIsShow(!isShow)
+        navigate(`/trang-trai/${value}`)
+    }
+
+    function closeShow() {
+        setIsShow(false)
+        navigate("/trang-trai")
     }
 
     return (
         <div className="w-full h-auto flex flex-col items-center py-5 mb-20 ">
             <div className="w-11/12">
                 <div className="w-2/3 mb-5">
-                    <Breadcrumb
+                    <Breadcrumb location={location}
                     />
                 </div>
                 <div className="w-full flex flex-col items-center">
-                    <div className="w-full flex flex-col items-center">
+                    <div className="w-full flex flex-col items-center mb-10">
                         <p className="text-3xl md:text-4xl font-black text-center text-[#7dc642] mb-5">CÁC TRANG TRẠI LIÊN KẾT VỚI CHÚNG TÔI</p>
                         <p className="w-full md:w-4/5 text-center text-lg">
                             <span className="block mb-5">
@@ -50,7 +62,8 @@ const Farm = () => {
                     </div>
                     <FarmInfo
                         isShow={isShow}
-                        value={preFarm}
+                        onclick={closeShow}
+                        value={farms.find(farm => farm._id === preFarm)}
                     />
 
                     <div className="w-full grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:mt-10">
@@ -58,7 +71,7 @@ const Farm = () => {
                             return (
                                 <FarmBox
                                     key={index}
-                                    onclick={() => showFarm(value)}
+                                    onclick={() => showFarm(value._id)}
                                     value={value}
                                 />
                             )
@@ -67,9 +80,6 @@ const Farm = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className="w-full mt-32 flex justify-center pr-1">
-                <RecommentItem />
-            </div> */}
         </div>
     );
 }

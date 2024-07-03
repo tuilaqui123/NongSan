@@ -8,7 +8,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import ScrollNavBar from "./ScrollNavBar";
 
 const NavBar = () => {
-    const { breadcrumb, setBreadcrumb, cart, fetchCart } = useContext(AppContext)
+    const { breadcrumb, setBreadcrumb, cart, fetchCart, setIsClick } = useContext(AppContext)
     const [sideBar, setSideBar] = useState(true)
     const [search, setSearch] = useState("")
     const [isPast, setIsPast] = useState(false);
@@ -16,6 +16,7 @@ const NavBar = () => {
     const divRef = useRef(null);
     const navigate = useNavigate()
     const location = useLocation()
+    
     const handleScroll = () => {
         if (divRef.current) {
             const rect = divRef.current.getBoundingClientRect();
@@ -29,19 +30,21 @@ const NavBar = () => {
         }
     };
     const [name, setName] = useState(null)
+    const [email, setEmail] = useState(null)
     useEffect(() => {
         if (localStorage.user) {
             const userObj = JSON.parse(localStorage.user)
             setName(userObj.name || "")
+            setEmail(userObj.email || "")
         }else{
             setName(null)
+            setEmail(null)
         }
     }, [location])
 
     useEffect(() => {
-        // setNavigateStore(false)
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Initial check
+        handleScroll();
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -67,16 +70,20 @@ const NavBar = () => {
         setBreadcrumb(temp)
         setSideBar(!sideBar);
     }
+    const removeAccents = (str) => {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
     function updateBreadcrumb(main, second, child) {
+        const formatPath = removeAccents(second.toLowerCase()).replace(" ", "-")
         const temp = {
             main: main,
             second: second,
             child: child,
             query: {
-                link: "",
+                link: formatPath,
                 category: {
-                    slug: "",
-                    link: ""
+                    slug: second,
+                    link: formatPath
                 },
                 farm: {
                     slug: "",
@@ -85,6 +92,7 @@ const NavBar = () => {
             }
         }
         setBreadcrumb(temp)
+        setIsClick(0)
     }
 
     function handleSearch() {
@@ -102,7 +110,7 @@ const NavBar = () => {
             setNumCartNoAcc(cartNoAccount.length)
         }
     }, [])
-
+    
     return (
         <div className="sticky top-0 z-40 shadow shadow-[#575656]">
             <div className="w-full relative" ref={divRef}>
@@ -121,7 +129,9 @@ const NavBar = () => {
                                         </div>
                                         <div>
                                             <p class="text-white font-normal text-sm text-left">Tài khoản</p>
-                                            <p class="text-[#7dc642] font-medium text-sm text-left"> {name != "" ? <div className="text-[#7dc642] font-medium text-sm text-left">{name}</div> : <p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>}</p>
+                                            <p class="text-[#7dc642] font-medium text-sm text-left"> {(localStorage.user && name != "") ? <div className="text-[#7dc642] font-medium text-sm text-left">{name}</div> : 
+                                                ((localStorage.user && name === "") ? <div className="text-[#7dc642] font-medium text-sm text-left">{email}</div> : <div className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</div> )
+                                            }</p>
                                         </div>
                                     </div>
                                 </RouterButton>
@@ -306,7 +316,9 @@ const NavBar = () => {
                                         </div>
                                         <div className="hidden lg:block">
                                             <p class="text-white font-normal text-sm text-left">Tài khoản</p>
-                                            {name ? <div className="text-[#7dc642] font-medium text-sm text-left">{name}</div> : (<p className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</p>)}
+                                            <p class="text-[#7dc642] font-medium text-sm text-left"> {(localStorage.user && name != "") ? <div className="text-[#7dc642] font-medium text-sm text-left">{name}</div> : 
+                                                ((localStorage.user && name === "") ? <div className="text-[#7dc642] font-medium text-sm text-left">{email}</div> : <div className="text-[#7dc642] font-medium text-sm text-left">Đăng nhập</div> )
+                                            }</p>
                                         </div>
                                     </div>
                                 </RouterButton>
@@ -331,9 +343,8 @@ const NavBar = () => {
                                     <p
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
-                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 1,
-                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 1,
-                                            // "text-lg font-black py-1 text-[#7dc642] border-[#7dc642]": navigateStore === false
+                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 1 && location.pathname != "/trang-chu",
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child === 1 || location.pathname === "/trang-chu",
                                         })}
                                     >Trang chủ</p>
                                 </li>
@@ -343,8 +354,8 @@ const NavBar = () => {
                                     <p
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
-                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 2,
-                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 2
+                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 2 && location.pathname != "/gioi-thieu",
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 2 || location.pathname === "/gioi-thieu"
                                         })}
                                     >Giới thiệu</p>
                                 </li>
@@ -355,9 +366,8 @@ const NavBar = () => {
                                         <p
                                             // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                             className={clsx({
-                                                "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 3,
-                                                "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 3,
-                                                // "text-lg font-black py-1 text-[#7dc642] border-[#7dc642]": navigateStore === true
+                                                "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 3 && (location.pathname != "/cua-hang" && !location.pathname.includes("/cua-hang/san-pham")),
+                                                "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 3 || (location.pathname === "/cua-hang" || location.pathname.includes("/cua-hang/san-pham")),
                                             })}
                                         >Cửa hàng</p>
                                     </li>
@@ -395,8 +405,8 @@ const NavBar = () => {
                                     <p
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
-                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 4,
-                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 4
+                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 4 && location.pathname != "/trang-trai",
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 4 || location.pathname === "/trang-trai"
                                         })}
                                     >Trang trại</p>
                                 </li>
@@ -406,8 +416,8 @@ const NavBar = () => {
                                     <p
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
-                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 5,
-                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 5
+                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 5 && location.pathname != "/blog",
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 5 || location.pathname === "/blog"
                                         })}
                                     >Blog</p>
                                 </li>
@@ -417,8 +427,8 @@ const NavBar = () => {
                                     <p
                                         // className="text-base font-normal text-white py-1 group-hover:text-[#7dc642]"
                                         className={clsx({
-                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 6,
-                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 6
+                                            "text-lg font-normal text-white py-1 group-hover:text-[#7dc642]": breadcrumb.child != 6 && location.pathname != "/lien-he",
+                                            "text-lg font-black py-1 text-[#7dc642] border-b-2 border-[#7dc642]": breadcrumb.child == 6 || location.pathname === "/lien-he"
                                         })}
                                     >Liên hệ</p>
                                 </li>

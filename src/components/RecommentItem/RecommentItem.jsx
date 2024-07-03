@@ -36,12 +36,14 @@ const RecommentItem = ({farm, currItem}) => {
                                 },
                             }}
                             spaceBetween={10}
-                            loop={true}
+                            loop={list.length >= 5}
                             className="mySwiper"
                         >
                             {list.map((ele, index) => {
                                 return (
-                                    <SwiperSlide key={index}> <Item itemColor={"green-800"} value={ele}/> </SwiperSlide>
+                                    <SwiperSlide key={index}> 
+                                        <Item itemColor={"green-800"} value={ele}/> 
+                                    </SwiperSlide>
                                 )
                             })}
                             <SwiperNavControl />

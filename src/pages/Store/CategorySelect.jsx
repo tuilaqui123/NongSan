@@ -3,12 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import _ from 'lodash';
 
-
 const CategorySelect = () => {
-    const [isClick, setIsClick] = useState(0)
     const navigate = useNavigate()
-    const { breadcrumb, setBreadcrumb } = useContext(AppContext);
-
+    const { breadcrumb, setBreadcrumb, isClick, setIsClick} = useContext(AppContext);
+ 
     const removeAccents = (str) => {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     };
@@ -17,7 +15,7 @@ const CategorySelect = () => {
         if (breadcrumb.query.farm.link) return link + "&" + breadcrumb.query.farm.link
         else return link
     }
-
+    
     function AddBreadcrumb(bread, pos) {
         const temp = removeAccents(bread.toLowerCase()).replace(" ", "-")
         if (pos != isClick) {
@@ -61,7 +59,6 @@ const CategorySelect = () => {
             setBreadcrumb(path)
             navigate(`/cua-hang/${breadcrumb.query.farm.link}`);
         }
-
     }
     return (
         <div className="w-full flex flex-col border bg-white border-gray-300 rounded-t-xl overflow-hidden">
@@ -69,27 +66,27 @@ const CategorySelect = () => {
             <ul className="w-full flex flex-col">
                 <li
                     onClick={() => AddBreadcrumb("Thịt tươi", 1)}
-                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === 1 ? "bg-[#3e3e3e] text-white" : ""}`}>
+                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${(isClick === 1 || breadcrumb.query.category.link === "thit-tuoi") ? "bg-[#3e3e3e] text-white" : ""}`}>
                     Thịt tươi
                 </li>
                 <li
                     onClick={() => AddBreadcrumb("Hải sản", 2)}
-                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === 2 ? "bg-[#3e3e3e] text-white" : ""}`}>
+                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${(isClick === 2 || breadcrumb.query.category.link === "hai-san") ? "bg-[#3e3e3e] text-white" : ""}`}>
                     Hải sản
                 </li>
                 <li
                     onClick={() => AddBreadcrumb("Rau củ", 3)}
-                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === 3 ? "bg-[#3e3e3e] text-white" : ""}`}>
+                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${(isClick === 3 || breadcrumb.query.category.link === "rau-cu") ? "bg-[#3e3e3e] text-white" : ""}`}>
                     Rau củ
                 </li>
                 <li
                     onClick={() => AddBreadcrumb("Trái cây", 4)}
-                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === 4 ? "bg-[#3e3e3e] text-white" : ""}`}>
+                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${(isClick === 4 || breadcrumb.query.category.link === "trai-cay") ? "bg-[#3e3e3e] text-white" : ""}`}>
                     Trái cây
                 </li>
                 <li
                     onClick={() => AddBreadcrumb("Gói nguyên liệu", 5)}
-                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${isClick === 5 ? "bg-[#3e3e3e] text-white" : ""}`}>
+                    className={`w-full  pl-3 py-2 font-medium cursor-pointer hover:bg-[#3e3e3e] hover:text-white duration-100 ${(isClick === 5 || breadcrumb.query.category.link === "goi-nguyen-lieu") ? "bg-[#3e3e3e] text-white" : ""}`}>
                     Gói nguyên liệu
                 </li>
             </ul>

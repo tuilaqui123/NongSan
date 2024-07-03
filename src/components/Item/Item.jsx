@@ -3,11 +3,12 @@ import item from '../../assets/image/item.png'
 import StatusTag from "../Tag/StatusTag";
 import ItemTag from "../Tag/ItemTag";
 import RouterButton from "../ButtonComponent/RouterButton";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 
 const Item = ({ itemColor, value }) => {
     const { setBreadcrumb } = useContext(AppContext)
+    const navigate = useNavigate()
 
     function handleBreadcrumb() {
         const temp = {
@@ -16,6 +17,8 @@ const Item = ({ itemColor, value }) => {
         }
 
         setBreadcrumb(temp)
+
+        navigate(`/cua-hang/san-pham/${value._id}`)
     }
     const formatNumber = (number) => {
         return new Intl.NumberFormat('de-DE').format(number);
@@ -23,9 +26,7 @@ const Item = ({ itemColor, value }) => {
     return (
         <>
             {value && (
-                <Link
-                    // path={`/cua-hang/${tag}/${itemName}`}
-                    to={`/cua-hang/san-pham/${value._id}`}
+                <div
                     onClick={handleBreadcrumb}
                 >
                     <div className={`w-ful border border-gray-400 bg-white rounded-lg p-3 hover:bg-${itemColor} group hover:border-none duration-200 cursor-pointer`}>
@@ -53,16 +54,15 @@ const Item = ({ itemColor, value }) => {
                             </div>
                             <div className="flex flex-row items-center justify-between">
                                 <div className="flex flex-row items-end gap-1">
-                                    <p className="text-xl font-bold text-[#3e3e3e] group-hover:text-white duration-100">{formatNumber(value.price - value.price * value.tag)}đ</p>
+                                    <p className="text-xl font-bold text-[#3e3e3e] group-hover:text-white duration-100">{formatNumber(value.price - value.price * value.tag)}đ / {value.unit}</p>
                                     {value.tag != 0 && (
-                                        <p className="line-through text-gray-400 text-base font-medium group-hover:text-white">{formatNumber(value.price)}đ</p>
+                                        <p className="line-through text-gray-400 text-base font-medium group-hover:text-white">{formatNumber(value.price)}đ/ / {value.unit}</p>
                                     )}
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                </Link>
+                </div>
             )}
         </>
 
